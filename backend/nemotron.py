@@ -6,8 +6,7 @@ import sys
 
 invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
 stream = False
-query = "Please give me a 1-2 sentence description ow what natural disaster took place and what damage was caused."
-
+query = "Can you provide a damage assessment of each building based on the mapping provided in mappings/hurricane-harvey_00000003_pre_disaster_mapping.png and images/hurricane-harvey_00000003_pre_disaster.png and images/hurricane-harvey_00000003_post_disaster.png images? You can list it out or put it in json format. Give each building a rating of minor-damage, major-damage, or severe-damage. The number of buildings should match that of the mapping (37) so group as needed."
 kApiKey = "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"
 
 # ext: {mime, media_type}

@@ -62,4 +62,4 @@ def send_to_nvidia_model(image_paths, prompt_text: str):
     return lines
 
 image_paths = list(sys.argv[1:])
-print(send_to_nvidia_model(image_paths, "Can you identify each building in the image and tell me the damage assessment of each? You can list it out or put it in json format."))
+print(send_to_nvidia_model(image_paths, "Can you identify each building in the images and tell me the damage assessment of each based on the mapping provided in hurricane-harvey_00000003_pre_disaster_mapping.png and hurricane-harvey_00000003_pre_disaster.png and hurricane-harvey_00000003_post_disaster.png images? You can list it out or put it in json format. Give each building a rating of no-damage, minor-damage, major-damage, or severe-damage. The number of buildings should match that of the mapping (37) so group as needed."))
