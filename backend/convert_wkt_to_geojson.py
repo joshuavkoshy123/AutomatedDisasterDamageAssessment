@@ -1,7 +1,7 @@
 import json
 
-INPUT_FILE = "../labels/hurricane-harvey_00000003_post_disaster.json"
-OUTPUT_FILE = "output_hurricane-harvey_00000003_post_disaster.geojson"
+INPUT_FILE = "../labels/hurricane-harvey_00000033_post_disaster.json"
+OUTPUT_FILE = "output_hurricane-harvey_000000033_post_disaster.geojson"
 
 
 def wkt_polygon_to_geojson_coords(wkt_str):
@@ -19,12 +19,15 @@ def convert_file_to_geojson(input_path, output_path):
 
     features_out = []
 
+    id = 1
     for item in input_data["features"]["lng_lat"]:
         geometry = {
             "type": "Polygon",
             "coordinates": wkt_polygon_to_geojson_coords(item["wkt"])
         }
 
+        item["properties"].update({"id": id})
+        print(item["properties"])
         feature = {
             "type": "Feature",
             "properties": item["properties"],
@@ -32,6 +35,7 @@ def convert_file_to_geojson(input_path, output_path):
         }
 
         features_out.append(feature)
+        id += 1
 
     geojson = {
         "type": "FeatureCollection",
