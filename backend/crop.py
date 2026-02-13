@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
 
-mapping_path = "../mappings/hurricane-harvey_00000003_pre_disaster_mapping.png"
-pre_path = "../images/hurricane-harvey_00000003_pre_disaster.png"
-post_path = "../images/hurricane-harvey_00000003_post_disaster.png"
+mapping_path = "../mappings/hurricane-harvey_00000023_pre_disaster_mapping.png"
+pre_path = "../images/hurricane-harvey_00000023_pre_disaster.png"
+post_path = "../images/hurricane-harvey_00000023_post_disaster.png"
+id = "00000023"
 
 mapping = cv2.imread(mapping_path)
 pre = cv2.imread(pre_path)
@@ -33,7 +34,7 @@ outlined_post = post.copy()
 cv2.drawContours(outlined_pre, contours, -1, (255, 0, 0), 1)   # blue, 1px
 cv2.drawContours(outlined_post, contours, -1, (255, 0, 0), 1)
 
-cv2.imwrite("outlined_pre.png", outlined_pre)
-cv2.imwrite("outlined_post.png", outlined_post)
+cv2.imwrite(f"outlined_pre_{id}.png", outlined_pre)
+cv2.imwrite(f"outlined_post_{id}.png", outlined_post)
 
-print("Saved outlined_pre.png and outlined_post.png")
+print(f"Saved outlined_pre_{id}.png and outlined_post_{id}.png")
