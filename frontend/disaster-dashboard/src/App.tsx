@@ -8,6 +8,7 @@ import { EvaluationPanel } from './components/EvaluationPanel/EvaluationPanel';
 import { MapView } from './components/MapView/MapView';
 import { ChatBot } from './components/ChatBot/ChatBot';
 import { Overview } from './pages/Overview';
+import { SignIn } from './pages/SignIn';
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   '/': { title: 'Mission Overview', subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
@@ -68,7 +69,14 @@ function App() {
                 <ChatBot />
               </AppLayout>
             }
-          />
+            />
+            <Route
+            path="/login" 
+            element={<AppLayout path="/login">
+                <SignIn />
+              </AppLayout>
+            } />
+          
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
