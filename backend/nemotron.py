@@ -6,7 +6,27 @@ import sys
 
 invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
 stream = False
-query = "Can you provide a damage assessment of each building based on the mapping provided in mappings/hurricane-harvey_00000003_pre_disaster_mapping.png and images/hurricane-harvey_00000003_pre_disaster.png and images/hurricane-harvey_00000003_post_disaster.png images? You can list it out or put it in json format. Give each building a rating of minor-damage, major-damage, or severe-damage. The number of buildings should match that of the mapping (37) so group as needed."
+query = """
+Return ONLY valid JSON (no markdown, no explanation).
+
+Task:
+Using ONLY the provided images (mapping + pre + post), assign each building a damage label.
+
+Output schema:
+{
+  "uid": "00000003",
+  "damage_assessment": {
+    "1": "no-damage|minor-damage|major-damage|severe-damage",
+    ...
+    "37": "no-damage|minor-damage|major-damage|severe-damage"
+  }
+}
+
+Rules:
+- Keys must be strings "1" through "37".
+- You MUST choose ONE of: "no-damage", "minor-damage", "major-damage", "severe-damage" for every building (no "unknown").
+- Base decisions on visible evidence in the images; if uncertain between two labels, choose the LESS severe one.
+"""
 kApiKey = "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"
 
 # ext: {mime, media_type}
