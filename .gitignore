@@ -1,3 +1,13 @@
 backend/.env
 backend/nemotron.py
 backend/old_nemotron.py
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model outputs
+outputs/
+
+# Personal notes
+progressNotes/
