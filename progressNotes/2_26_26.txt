@@ -1,0 +1,4 @@
+-I got Nemotron running locally on our repo with mapping + pre + post images
+-I found that right now the prompt is very sensitive and if we allow "unknown" it outputs a lot of that; if we force a label it produces a pull-per building assessment
+-next step is to standardize the prompt and connect the per-building predictions to FEMA's UID labels for automatic accuracy scoring
+-I started with nemotron and will compare results with other models later on"
