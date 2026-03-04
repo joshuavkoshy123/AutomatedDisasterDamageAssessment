@@ -1,9 +1,47 @@
-import React from 'react';
-import { Box, Card, CardContent, Typography, Chip } from '@mui/material';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import React, { useEffect, useRef } from 'react';
+import { Box, Typography } from '@mui/material';
 import { COLORS } from '../../theme';
-
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { mockBuildings, getDamageColor } from '../../data/mockData';
 export const MapView: React.FC = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (mapInstanceRef.current || !mapRef.current) return;
+
+    const map = L.map(mapRef.current).setView([29.7604, -95.3698], 12);
+    mapInstanceRef.current = map;
+
+    // Satellite tiles — free, no API key needed
+    L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Tiles © Esri' }
+    ).addTo(map);
+    // Convert your Building array to GeoJSON on the fly
+mockBuildings.forEach((building) => {
+  const color = getDamageColor(building.damageLevel);
+  
+  L.circleMarker([building.lat, building.lng], {
+    radius: 10,
+    fillColor: color,
+    color: "#000",
+    weight: 1,
+    fillOpacity: 0.85,
+  })
+  .bindTooltip(building.address, { direction: 'top' })
+  .on("click", () => {
+    console.log("clicked:", building);
+  })
+  .addTo(map);
+});
+    return () => {
+      map.remove();
+      mapInstanceRef.current = null;
+    };
+  }, []);
+
   return (
     <Box sx={{ p: 3, height: '100%' }}>
       <Box sx={{ mb: 3 }}>
@@ -26,56 +64,17 @@ export const MapView: React.FC = () => {
         </Typography>
       </Box>
 
-      <Card
+      {/* Map container — Leaflet owns this div */}
+      <Box
+        ref={mapRef}
         sx={{
           height: 'calc(100vh - 220px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: `repeating-linear-gradient(
-            45deg,
-            ${COLORS.bg.card},
-            ${COLORS.bg.card} 10px,
-            ${COLORS.bg.elevated} 10px,
-            ${COLORS.bg.elevated} 20px
-          )`,
-          border: `2px dashed ${COLORS.bg.border}`,
+          width: '100%',
+          borderRadius: 2,
+          border: `1px solid ${COLORS.bg.border}`,
+          overflow: 'hidden',
         }}
-      >
-        <CardContent sx={{ textAlign: 'center' }}>
-          <MapOutlinedIcon sx={{ fontSize: 64, color: COLORS.text.muted, mb: 2 }} />
-          <Typography
-            sx={{
-              fontFamily: '"Space Mono", monospace',
-              color: COLORS.text.secondary,
-              mb: 1,
-            }}
-          >
-            Geospatial Map — Coming Next Sprint
-          </Typography>
-          <Typography sx={{ fontSize: '0.78rem', color: COLORS.text.muted, mb: 2 }}>
-            Leaflet map with damage overlay markers will render here.
-            <br />
-            Connect to backend API to load building GeoJSON.
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
-            {['Leaflet.js', 'GeoJSON Overlay', 'Pre/Post Toggle', 'Address Search'].map((t) => (
-              <Chip
-                key={t}
-                label={t}
-                size="small"
-                sx={{
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.6rem',
-                  backgroundColor: `${COLORS.accent.cyan}12`,
-                  color: COLORS.accent.cyan,
-                  border: `1px solid ${COLORS.accent.cyan}33`,
-                }}
-              />
-            ))}
-          </Box>
-        </CardContent>
-      </Card>
+      />
     </Box>
   );
 };
