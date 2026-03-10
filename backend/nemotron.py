@@ -14,7 +14,7 @@ import requests
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = "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"  # <-- PUT YOUR KEY HERE (hardcoded per your request)
+NIM_API_KEY = ""  
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 MODEL = "nvidia/nemotron-nano-12b-v2-vl"
