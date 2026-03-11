@@ -67,10 +67,9 @@ export const mockDisasterEvent: DisasterEvent = {
   }
 };
 
-export const getDamageColor = (damageLevel: string): string => ({
-  "no-damage":    "#22c55e",
-  "minor-damage": "#facc15",
-  "major-damage": "#f97316",
-  "destroyed":    "#ef4444",
-  "un-classified":"#94a3b8",
-}[damageLevel] ?? "#94a3b8");
+export const getDamageColor = (subtype: string): string => ({
+  'no-damage':    '#22c55e',
+  'minor-damage': '#facc15',
+  'major-damage': '#f97316',
+  'destroyed':    '#ef4444',
+}[subtype] ?? '#94a3b8');

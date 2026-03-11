@@ -1,50 +1,90 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { COLORS } from '../../theme';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { mockBuildings, getDamageColor } from '../../data/mockData';
+
+const getDamageColor = (subtype: string): string => ({
+  'no-damage':    '#22c55e',
+  'minor-damage': '#facc15',
+  'major-damage': '#f97316',
+  'destroyed':    '#ef4444',
+}[subtype] ?? '#94a3b8');
+
+const TILES = ['000000003', '000000011', '000000018', '000000023', '000000033'];
+
 export const MapView: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
+  const geojsonLayerRef = useRef<L.GeoJSON | null>(null);
 
+  const [imageMode, setImageMode] = useState<'pre' | 'post'>('post');
+  const [activeTile, setActiveTile] = useState('000000003');
+
+  // Init map once
   useEffect(() => {
     if (mapInstanceRef.current || !mapRef.current) return;
 
-    const map = L.map(mapRef.current).setView([29.7604, -95.3698], 12);
+    const map = L.map(mapRef.current).setView([29.760, -95.458], 16);
     mapInstanceRef.current = map;
 
-    // Satellite tiles — free, no API key needed
     L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       { attribution: 'Tiles © Esri' }
     ).addTo(map);
-    // Convert your Building array to GeoJSON on the fly
-mockBuildings.forEach((building) => {
-  const color = getDamageColor(building.damageLevel);
-  
-  L.circleMarker([building.lat, building.lng], {
-    radius: 10,
-    fillColor: color,
-    color: "#000",
-    weight: 1,
-    fillOpacity: 0.85,
-  })
-  .bindTooltip(building.address, { direction: 'top' })
-  .on("click", () => {
-    console.log("clicked:", building);
-  })
-  .addTo(map);
-});
+
     return () => {
       map.remove();
       mapInstanceRef.current = null;
     };
   }, []);
 
+  // Reload GeoJSON when tile or mode changes
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+
+    // Remove old layer
+    if (geojsonLayerRef.current) {
+      geojsonLayerRef.current.remove();
+      geojsonLayerRef.current = null;
+    }
+
+    fetch(`/data/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
+      .then(r => r.json())
+      .then(data => {
+        if (!mapInstanceRef.current) return;
+
+        const layer = L.geoJSON(data, {
+          style: (feature) => ({
+            fillColor: getDamageColor(feature?.properties?.subtype),
+            fillOpacity: 0.5,
+            color: getDamageColor(feature?.properties?.subtype),
+            weight: 2,
+          }),
+          onEachFeature: (feature, layer) => {
+            layer.on('click', () => {
+              console.log('clicked:', feature.properties);
+            });
+          }
+        }).addTo(mapInstanceRef.current);
+
+        geojsonLayerRef.current = layer;
+
+        // Auto-pan map to where the new tile's buildings are
+        const bounds = layer.getBounds();
+        if (bounds.isValid()) {
+          mapInstanceRef.current.fitBounds(bounds, { padding: [40, 40] });
+        }
+      })
+      .catch(err => console.error('Failed to load GeoJSON:', err));
+
+  }, [activeTile, imageMode]);
+
   return (
     <Box sx={{ p: 3, height: '100%' }}>
-      <Box sx={{ mb: 3 }}>
+
+      {/* Header */}
+      <Box sx={{ mb: 2 }}>
         <Typography
           variant="overline"
           sx={{ color: COLORS.accent.cyan, letterSpacing: '0.2em', fontSize: '0.65rem' }}
@@ -64,17 +104,121 @@ mockBuildings.forEach((building) => {
         </Typography>
       </Box>
 
-      {/* Map container — Leaflet owns this div */}
+      {/* Controls Row */}
+      <Box sx={{ display: 'flex', gap: 2, mb: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+
+        {/* Pre/Post Toggle */}
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Typography sx={{ fontSize: '0.65rem', color: COLORS.text.muted, letterSpacing: '0.1em', fontFamily: '"Space Mono", monospace' }}>
+            MODE:
+          </Typography>
+          {(['pre', 'post'] as const).map((mode) => (
+            <Box
+              key={mode}
+              onClick={() => setImageMode(mode)}
+              sx={{
+                px: 2, py: 0.8,
+                borderRadius: 1,
+                cursor: 'pointer',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.7rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                border: `1px solid ${imageMode === mode ? COLORS.accent.cyan : COLORS.bg.border}`,
+                color: imageMode === mode ? COLORS.accent.cyan : COLORS.text.muted,
+                background: imageMode === mode ? `${COLORS.accent.cyan}15` : 'transparent',
+                transition: 'all 0.2s ease',
+                userSelect: 'none',
+                '&:hover': { borderColor: COLORS.accent.cyan, color: COLORS.accent.cyan },
+              }}
+            >
+              {mode === 'pre' ? '◀ Pre' : 'Post ▶'}
+            </Box>
+          ))}
+        </Box>
+
+        {/* Divider */}
+        <Box sx={{ width: '1px', height: 24, background: COLORS.bg.border }} />
+
+        {/* Tile Selector */}
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap' }}>
+          <Typography sx={{ fontSize: '0.65rem', color: COLORS.text.muted, letterSpacing: '0.1em', fontFamily: '"Space Mono", monospace' }}>
+            AREA:
+          </Typography>
+          {TILES.map((tile, index) => (
+            <Box
+              key={tile}
+              onClick={() => setActiveTile(tile)}
+              sx={{
+                px: 1.5, py: 0.6,
+                borderRadius: 1,
+                cursor: 'pointer',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                border: `1px solid ${activeTile === tile ? COLORS.accent.cyan : COLORS.bg.border}`,
+                color: activeTile === tile ? COLORS.accent.cyan : COLORS.text.muted,
+                background: activeTile === tile ? `${COLORS.accent.cyan}15` : 'transparent',
+                transition: 'all 0.2s ease',
+                userSelect: 'none',
+                '&:hover': { borderColor: COLORS.accent.cyan, color: COLORS.accent.cyan },
+              }}
+            >
+              Zone {index + 1}
+            </Box>
+          ))}
+        </Box>
+
+        {/* Active mode badge */}
+        <Box sx={{ ml: 'auto' }}>
+          <Box sx={{
+            px: 1.5, py: 0.5,
+            borderRadius: 1,
+            background: imageMode === 'post' ? '#ef444415' : '#22c55e15',
+            border: `1px solid ${imageMode === 'post' ? '#ef444433' : '#22c55e33'}`,
+          }}>
+            <Typography sx={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.6rem',
+              color: imageMode === 'post' ? '#ef4444' : '#22c55e',
+              letterSpacing: '0.1em',
+            }}>
+              {imageMode === 'post' ? '⚠ POST-DISASTER VIEW' : '✓ PRE-DISASTER VIEW'}
+            </Typography>
+          </Box>
+        </Box>
+
+      </Box>
+
+      {/* Map */}
       <Box
         ref={mapRef}
         sx={{
-          height: 'calc(100vh - 220px)',
+          height: 'calc(100vh - 280px)',
           width: '100%',
           borderRadius: 2,
           border: `1px solid ${COLORS.bg.border}`,
           overflow: 'hidden',
         }}
       />
+
+      {/* Legend */}
+      <Box sx={{ display: 'flex', gap: 2, mt: 1.5, flexWrap: 'wrap' }}>
+        {[
+          { label: 'No Damage',    color: '#22c55e' },
+          { label: 'Minor Damage', color: '#facc15' },
+          { label: 'Major Damage', color: '#f97316' },
+          { label: 'Destroyed',    color: '#ef4444' },
+          { label: 'Unclassified', color: '#94a3b8' },
+        ].map(({ label, color }) => (
+          <Box key={label} sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+            <Box sx={{ width: 10, height: 10, borderRadius: '2px', background: color, opacity: 0.8 }} />
+            <Typography sx={{ fontSize: '0.65rem', color: COLORS.text.muted, fontFamily: '"Space Mono", monospace' }}>
+              {label}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+
     </Box>
   );
 };
