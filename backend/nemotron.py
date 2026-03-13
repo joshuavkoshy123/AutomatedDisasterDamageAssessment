@@ -14,7 +14,7 @@ import requests
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = ""  
+NIM_API_KEY = "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"  
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 MODEL = "nvidia/nemotron-nano-12b-v2-vl"
@@ -343,7 +343,7 @@ def main():
     ap.add_argument(
         "--crops-dir",
         required=True,
-        help=r'Path to crops folder, e.g. "C:\Users\ryan\AutomatedDisasterDamageAssessment\outputs\crops\hurricane-harvey_00000003"'
+        help=r'Path to crops folder, e.g. "C:\Users\ryan\AutomatedDisasterDamageAssessment\outputs\crops\hurricane-harvey_00000011"'
     )
     ap.add_argument(
         "--labels-json",
@@ -367,6 +367,20 @@ def main():
 
     crops_dir = Path(args.crops_dir)
     labels_path = Path(args.labels_json)
+
+    # save stats for resuming
+    stats_file = f"{crops_dir}/_predictions/stats.json"
+
+    correct = 0
+    evaluated = 0
+
+    if os.path.exists(stats_file):
+        with open(stats_file, "r") as f:
+            stats = json.load(f)
+            correct = stats.get("correct", 0)
+            evaluated = stats.get("evaluated", 0)
+
+    print(f"Resuming with correct={correct}, evaluated={evaluated}")
 
     if args.out_dir:
         out_dir = Path(args.out_dir)
@@ -422,8 +436,8 @@ def main():
         print(f"Resume enabled: {len(done_uids)} uid(s) already in results.csv will be skipped.")
 
     # Process
-    correct = 0
-    evaluated = 0
+    # correct = 0
+    # evaluated = 0
 
     for i, uid in enumerate(uids, 1):
         uid = coerce_uid(uid)
@@ -455,6 +469,14 @@ def main():
             evaluated += 1
             if match:
                 correct += 1
+
+        # write updated stats to file
+        with open(stats_file, "w") as f:
+            json.dump({
+                "correct": correct,
+                "evaluated": evaluated,
+                "accuracy": f"{correct/evaluated*100:.2f}%"
+            }, f)
 
         uid_to_pred[uid] = pred
 
