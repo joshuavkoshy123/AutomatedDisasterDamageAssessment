@@ -11,7 +11,7 @@ const getDamageColor = (subtype: string): string => ({
   'destroyed':    '#ef4444',
 }[subtype] ?? '#94a3b8');
 
-const TILES = ['000000003', '000000011', '000000018', '000000023', '000000033'];
+const TILES = ['00000003', '00000011', '00000018', '00000023', '00000033'];
 
 export const MapView: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -19,7 +19,7 @@ export const MapView: React.FC = () => {
   const geojsonLayerRef = useRef<L.GeoJSON | null>(null);
 
   const [imageMode, setImageMode] = useState<'pre' | 'post'>('post');
-  const [activeTile, setActiveTile] = useState('000000003');
+  const [activeTile, setActiveTile] = useState('00000003');
 
   // Init map once
   useEffect(() => {
@@ -49,6 +49,52 @@ export const MapView: React.FC = () => {
       geojsonLayerRef.current = null;
     }
 
+    // Overlay pre and post disaster images on map
+
+    // image dimensions
+    const width = 1024;
+    const height = 1024;
+
+    const correctionLat = -0.00000;
+    const correctionLng =  0.00000;
+
+    // fetch image metadata (top left corner coordinates)
+    fetch(`/data/metadata.json`)
+    .then(r => r.json())
+    .then(data => {
+      // ensure mapInstanceRef.current is not null
+      if (!mapInstanceRef.current) return;
+
+      const image_name = `hurricane-harvey_${activeTile}_${imageMode}_disaster.png`;
+
+      console.log(image_name);
+
+      const img = new Image();
+      img.onload = () => {
+        console.log(img.width, img.height);
+      };
+      img.src = `/images/${image_name}`;
+
+      const coordinates = data[image_name][0];
+
+      const startX = coordinates[0];
+      const pixelWidth = coordinates[1];
+      const startY = coordinates[3];
+      const pixelHeight = coordinates[5];
+
+      const endX = startX + pixelWidth * (width);
+      const endY = startY + pixelHeight * (height);
+
+      const bounds = L.latLngBounds(
+        [endY + correctionLat, startX + correctionLng],  //southwest
+        [startY + correctionLat, endX + correctionLng]  //northeast
+      );
+
+      // Overlay the image
+      L.imageOverlay(`/images/${image_name}`, bounds).addTo(mapInstanceRef.current);
+    })
+    .catch((err => console.error('Failed to load metadata:', err)));
+
     fetch(`/data/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
       .then(r => r.json())
       .then(data => {
@@ -57,9 +103,10 @@ export const MapView: React.FC = () => {
         const layer = L.geoJSON(data, {
           style: (feature) => ({
             fillColor: getDamageColor(feature?.properties?.subtype),
-            fillOpacity: 0.5,
+            //fillOpacity: 0.5,
+            fillOpacity: 0,
             color: getDamageColor(feature?.properties?.subtype),
-            weight: 2,
+            weight: 1,
           }),
           onEachFeature: (feature, layer) => {
             layer.on('click', () => {
