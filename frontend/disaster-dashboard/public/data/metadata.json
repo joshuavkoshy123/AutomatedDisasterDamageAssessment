@@ -1,0 +1,2378 @@
+{
+    "hurricane-harvey_00000466_pre_disaster.png": [
+        [
+            -95.62156441012733,
+            4.5444008829790325e-06,
+            0.0,
+            29.8527939778716,
+            0.0,
+            -4.5444008829790325e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000466_post_disaster.png": [
+        [
+            -95.62156441012733,
+            4.5444008829790325e-06,
+            0.0,
+            29.8527939778716,
+            0.0,
+            -4.5444008829790325e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000127_pre_disaster.png": [
+        [
+            -95.64971863225382,
+            4.544283345764501e-06,
+            0.0,
+            29.836760569580946,
+            0.0,
+            -4.544283345764501e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000127_post_disaster.png": [
+        [
+            -95.64971863225382,
+            4.544283345764501e-06,
+            0.0,
+            29.836760569580946,
+            0.0,
+            -4.544283345764501e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000182_pre_disaster.png": [
+        [
+            -95.67893401925643,
+            4.5432020849722095e-06,
+            0.0,
+            29.73100591820312,
+            0.0,
+            -4.5432020849722095e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000182_post_disaster.png": [
+        [
+            -95.67893401925643,
+            4.5432020849722095e-06,
+            0.0,
+            29.73100591820312,
+            0.0,
+            -4.5432020849722095e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000303_pre_disaster.png": [
+        [
+            -95.5856765805762,
+            4.540946310028463e-06,
+            0.0,
+            29.537983461727677,
+            0.0,
+            -4.540946310028463e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000303_post_disaster.png": [
+        [
+            -95.5856765805762,
+            4.540946310028463e-06,
+            0.0,
+            29.537983461727677,
+            0.0,
+            -4.540946310028463e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000390_pre_disaster.png": [
+        [
+            -95.58630373803894,
+            4.542958759150654e-06,
+            0.0,
+            29.73970147393816,
+            0.0,
+            -4.542958759150654e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000390_post_disaster.png": [
+        [
+            -95.58630373803894,
+            4.542958759150654e-06,
+            0.0,
+            29.73970147393816,
+            0.0,
+            -4.542958759150654e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000023_pre_disaster.png": [
+        [
+            -95.44536488818866,
+            4.542451764578152e-06,
+            0.0,
+            29.751947978896027,
+            0.0,
+            -4.542451764578152e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000023_post_disaster.png": [
+        [
+            -95.44536488818866,
+            4.542451764578152e-06,
+            0.0,
+            29.751947978896027,
+            0.0,
+            -4.542451764578152e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000173_pre_disaster.png": [
+        [
+            -95.64491869045416,
+            4.543713813462635e-06,
+            0.0,
+            29.753259230324364,
+            0.0,
+            -4.543713813462635e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000173_post_disaster.png": [
+        [
+            -95.64491869045416,
+            4.543713813462635e-06,
+            0.0,
+            29.753259230324364,
+            0.0,
+            -4.543713813462635e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000135_pre_disaster.png": [
+        [
+            -95.64545717165548,
+            4.544972383548482e-06,
+            0.0,
+            29.862720005749672,
+            0.0,
+            -4.544972383548482e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000135_post_disaster.png": [
+        [
+            -95.64545717165548,
+            4.544972383556024e-06,
+            0.0,
+            29.862720005749672,
+            0.0,
+            -4.544972383556024e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000368_pre_disaster.png": [
+        [
+            -95.56214874826861,
+            4.543486122893485e-06,
+            0.0,
+            29.761740320408567,
+            0.0,
+            -4.543486122893485e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000368_post_disaster.png": [
+        [
+            -95.56214874826861,
+            4.543486122893485e-06,
+            0.0,
+            29.761740320408567,
+            0.0,
+            -4.543486122893485e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000096_pre_disaster.png": [
+        [
+            -95.64488865541917,
+            4.544389720839785e-06,
+            0.0,
+            29.841169620316975,
+            0.0,
+            -4.544389720839785e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000096_post_disaster.png": [
+        [
+            -95.64488865541917,
+            4.544389720847326e-06,
+            0.0,
+            29.841169620316975,
+            0.0,
+            -4.544389720847326e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000003_pre_disaster.png": [
+        [
+            -95.45938466397384,
+            4.542983580595567e-06,
+            0.0,
+            29.761972716090632,
+            0.0,
+            -4.542983580595567e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000003_post_disaster.png": [
+        [
+            -95.45938466397384,
+            4.542983580595567e-06,
+            0.0,
+            29.761972716090632,
+            0.0,
+            -4.542983580595567e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000476_pre_disaster.png": [
+        [
+            -95.62178983305519,
+            4.544633870872902e-06,
+            0.0,
+            29.861413829993644,
+            0.0,
+            -4.544633870872902e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000476_post_disaster.png": [
+        [
+            -95.62178983305519,
+            4.544633870872902e-06,
+            0.0,
+            29.861413829993644,
+            0.0,
+            -4.544633870872902e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000150_pre_disaster.png": [
+        [
+            -95.66937814583676,
+            4.544206837710947e-06,
+            0.0,
+            29.832052862431038,
+            0.0,
+            -4.544206837710947e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000150_post_disaster.png": [
+        [
+            -95.66937814583676,
+            4.544206837710947e-06,
+            0.0,
+            29.832052862431038,
+            0.0,
+            -4.544206837710947e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000304_pre_disaster.png": [
+        [
+            -95.58657160382559,
+            4.541209715214231e-06,
+            0.0,
+            29.484593228710484,
+            0.0,
+            -4.541209715214231e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000304_post_disaster.png": [
+        [
+            -95.58657160382559,
+            4.541209715214231e-06,
+            0.0,
+            29.484593228710484,
+            0.0,
+            -4.541209715214231e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000420_pre_disaster.png": [
+        [
+            -95.54140188170646,
+            4.542403714739214e-06,
+            0.0,
+            29.72331435676724,
+            0.0,
+            -4.542403714739214e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000420_post_disaster.png": [
+        [
+            -95.54140188170646,
+            4.542403714739214e-06,
+            0.0,
+            29.72331435676724,
+            0.0,
+            -4.542403714739214e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000328_pre_disaster.png": [
+        [
+            -95.54169753353571,
+            4.541316635570803e-06,
+            0.0,
+            29.5560997920464,
+            0.0,
+            -4.541316635570803e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000328_post_disaster.png": [
+        [
+            -95.54169753353571,
+            4.541316635570803e-06,
+            0.0,
+            29.5560997920464,
+            0.0,
+            -4.541316635570803e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000252_pre_disaster.png": [
+        [
+            -95.64082322676434,
+            4.545998057120206e-06,
+            0.0,
+            29.96364647643149,
+            0.0,
+            -4.545998057120206e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000252_post_disaster.png": [
+        [
+            -95.64082322676434,
+            4.545998057120206e-06,
+            0.0,
+            29.96364647643149,
+            0.0,
+            -4.545998057120206e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000143_pre_disaster.png": [
+        [
+            -95.6792646616933,
+            4.544226609582057e-06,
+            0.0,
+            29.831852937115517,
+            0.0,
+            -4.544226609582057e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000143_post_disaster.png": [
+        [
+            -95.6792646616933,
+            4.544226609589601e-06,
+            0.0,
+            29.831852937115517,
+            0.0,
+            -4.544226609589601e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000407_pre_disaster.png": [
+        [
+            -95.60695931874132,
+            4.54392622547979e-06,
+            0.0,
+            29.773807441115576,
+            0.0,
+            -4.54392622547979e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000407_post_disaster.png": [
+        [
+            -95.60695931874132,
+            4.54392622547979e-06,
+            0.0,
+            29.773807441115576,
+            0.0,
+            -4.54392622547979e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000131_pre_disaster.png": [
+        [
+            -95.64028521295204,
+            4.5447290813746425e-06,
+            0.0,
+            29.85419870903172,
+            0.0,
+            -4.5447290813746425e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000131_post_disaster.png": [
+        [
+            -95.64028521295204,
+            4.5447290813821845e-06,
+            0.0,
+            29.85419870903172,
+            0.0,
+            -4.5447290813821845e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000340_pre_disaster.png": [
+        [
+            -95.6109034272455,
+            4.541567407933078e-06,
+            0.0,
+            29.559076535884447,
+            0.0,
+            -4.541567407933078e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000340_post_disaster.png": [
+        [
+            -95.6109034272455,
+            4.541567407933078e-06,
+            0.0,
+            29.559076535884447,
+            0.0,
+            -4.541567407933078e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000415_pre_disaster.png": [
+        [
+            -95.58719015938657,
+            4.543885392966035e-06,
+            0.0,
+            29.774195170615204,
+            0.0,
+            -4.543885392966035e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000415_post_disaster.png": [
+        [
+            -95.58719015938657,
+            4.5438853929735705e-06,
+            0.0,
+            29.774195170615204,
+            0.0,
+            -4.5438853929735705e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000355_pre_disaster.png": [
+        [
+            -95.59718612103048,
+            4.544021854410631e-06,
+            0.0,
+            29.77831333880829,
+            0.0,
+            -4.544021854410631e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000355_post_disaster.png": [
+        [
+            -95.59718612103048,
+            4.544021854410631e-06,
+            0.0,
+            29.77831333880829,
+            0.0,
+            -4.544021854410631e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000298_pre_disaster.png": [
+        [
+            -95.59643893600571,
+            4.541228560344048e-06,
+            0.0,
+            29.48440126953502,
+            0.0,
+            -4.541228560344048e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000298_post_disaster.png": [
+        [
+            -95.59643893600571,
+            4.541228560344048e-06,
+            0.0,
+            29.48440126953502,
+            0.0,
+            -4.541228560344048e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000211_pre_disaster.png": [
+        [
+            -95.64997352870463,
+            4.543839636573365e-06,
+            0.0,
+            29.757472199767353,
+            0.0,
+            -4.543839636573365e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000211_post_disaster.png": [
+        [
+            -95.64997352870463,
+            4.543839636573365e-06,
+            0.0,
+            29.757472199767353,
+            0.0,
+            -4.543839636573365e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000294_pre_disaster.png": [
+        [
+            -95.56618389316033,
+            4.540486639647883e-06,
+            0.0,
+            29.459074466777412,
+            0.0,
+            -4.540486639647883e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000294_post_disaster.png": [
+        [
+            -95.56618389316033,
+            4.540486639647883e-06,
+            0.0,
+            29.459074466777412,
+            0.0,
+            -4.540486639647883e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000341_pre_disaster.png": [
+        [
+            -95.56651016625563,
+            4.540829016985739e-06,
+            0.0,
+            29.47202472513061,
+            0.0,
+            -4.540829016985739e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000341_post_disaster.png": [
+        [
+            -95.56651016625563,
+            4.540829016993261e-06,
+            0.0,
+            29.47202472513061,
+            0.0,
+            -4.540829016993261e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000297_pre_disaster.png": [
+        [
+            -95.5425989023332,
+            4.541580368425708e-06,
+            0.0,
+            29.502715262349216,
+            0.0,
+            -4.541580368425708e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000297_post_disaster.png": [
+        [
+            -95.5425989023332,
+            4.541580368425708e-06,
+            0.0,
+            29.502715262349216,
+            0.0,
+            -4.541580368425708e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000428_pre_disaster.png": [
+        [
+            -95.54183692483139,
+            4.542865912706257e-06,
+            0.0,
+            29.740561879769132,
+            0.0,
+            -4.542865912706257e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000428_post_disaster.png": [
+        [
+            -95.54183692483139,
+            4.542865912706257e-06,
+            0.0,
+            29.740561879769132,
+            0.0,
+            -4.542865912706257e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000468_pre_disaster.png": [
+        [
+            -95.59674093166291,
+            4.5435580972734035e-06,
+            0.0,
+            29.76106666315293,
+            0.0,
+            -4.5435580972734035e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000468_post_disaster.png": [
+        [
+            -95.59674093166291,
+            4.5435580972734035e-06,
+            0.0,
+            29.76106666315293,
+            0.0,
+            -4.5435580972734035e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000112_pre_disaster.png": [
+        [
+            -95.64062583466989,
+            4.545078815982541e-06,
+            0.0,
+            29.867128972460023,
+            0.0,
+            -4.545078815982541e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000112_post_disaster.png": [
+        [
+            -95.64062583466989,
+            4.545078815982541e-06,
+            0.0,
+            29.867128972460023,
+            0.0,
+            -4.545078815982541e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000202_pre_disaster.png": [
+        [
+            -95.63560055581311,
+            4.544274125084126e-06,
+            0.0,
+            29.77501503825253,
+            0.0,
+            -4.544274125084126e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000202_post_disaster.png": [
+        [
+            -95.63560055581311,
+            4.544274125084126e-06,
+            0.0,
+            29.77501503825253,
+            0.0,
+            -4.544274125084126e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000164_pre_disaster.png": [
+        [
+            -95.67870480033172,
+            4.5429703315967495e-06,
+            0.0,
+            29.72238263387578,
+            0.0,
+            -4.5429703315967495e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000164_post_disaster.png": [
+        [
+            -95.67870480033172,
+            4.5429703315967495e-06,
+            0.0,
+            29.72238263387578,
+            0.0,
+            -4.5429703315967495e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000227_pre_disaster.png": [
+        [
+            -95.58196648080592,
+            4.541543239001353e-06,
+            0.0,
+            29.497638985471486,
+            0.0,
+            -4.541543239001353e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000227_post_disaster.png": [
+        [
+            -95.58196648080592,
+            4.541543239001353e-06,
+            0.0,
+            29.497638985471486,
+            0.0,
+            -4.541543239001353e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000192_pre_disaster.png": [
+        [
+            -95.62620569808283,
+            4.546200810336689e-06,
+            0.0,
+            29.972559762621426,
+            0.0,
+            -4.546200810336689e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000192_post_disaster.png": [
+        [
+            -95.62620569808283,
+            4.546200810336689e-06,
+            0.0,
+            29.972559762621426,
+            0.0,
+            -4.546200810336689e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000161_pre_disaster.png": [
+        [
+            -95.63110937370392,
+            4.5447286641197794e-06,
+            0.0,
+            29.792360416772365,
+            0.0,
+            -4.5447286641197794e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000161_post_disaster.png": [
+        [
+            -95.63110937370392,
+            4.5447286641197794e-06,
+            0.0,
+            29.792360416772365,
+            0.0,
+            -4.5447286641197794e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000122_pre_disaster.png": [
+        [
+            -95.67064081122409,
+            4.5454896756207225e-06,
+            0.0,
+            29.879462727216477,
+            0.0,
+            -4.5454896756207225e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000122_post_disaster.png": [
+        [
+            -95.67064081122409,
+            4.545489675619153e-06,
+            0.0,
+            29.879462727216477,
+            0.0,
+            -4.545489675619153e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000483_pre_disaster.png": [
+        [
+            -95.53812712060041,
+            4.542809154546812e-06,
+            0.0,
+            29.74754617723822,
+            0.0,
+            -4.542809154546812e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000483_post_disaster.png": [
+        [
+            -95.53812712060041,
+            4.542809154546812e-06,
+            0.0,
+            29.74754617723822,
+            0.0,
+            -4.542809154546812e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000186_pre_disaster.png": [
+        [
+            -95.66525481426143,
+            4.54433337620981e-06,
+            0.0,
+            29.77442143706595,
+            0.0,
+            -4.54433337620981e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000186_post_disaster.png": [
+        [
+            -95.66525481426143,
+            4.54433337620981e-06,
+            0.0,
+            29.77442143706595,
+            0.0,
+            -4.54433337620981e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000416_pre_disaster.png": [
+        [
+            -95.57214255442229,
+            4.543622680240013e-06,
+            0.0,
+            29.765860526003756,
+            0.0,
+            -4.543622680240013e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000416_post_disaster.png": [
+        [
+            -95.57214255442229,
+            4.543622680240013e-06,
+            0.0,
+            29.765860526003756,
+            0.0,
+            -4.543622680240013e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000064_pre_disaster.png": [
+        [
+            -95.63432101116764,
+            4.541558001041226e-06,
+            0.0,
+            29.54742891827987,
+            0.0,
+            -4.541558001041226e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000064_post_disaster.png": [
+        [
+            -95.63432101116764,
+            4.541558001041226e-06,
+            0.0,
+            29.54742891827987,
+            0.0,
+            -4.541558001041226e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000097_pre_disaster.png": [
+        [
+            -95.63971800258987,
+            4.54414676733045e-06,
+            0.0,
+            29.8326482058556,
+            0.0,
+            -4.54414676733045e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000097_post_disaster.png": [
+        [
+            -95.63971800258987,
+            4.54414676733045e-06,
+            0.0,
+            29.8326482058556,
+            0.0,
+            -4.54414676733045e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000516_pre_disaster.png": [
+        [
+            -95.59547796866683,
+            4.544311570773197e-06,
+            0.0,
+            29.97740859428886,
+            0.0,
+            -4.544311570773197e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000516_post_disaster.png": [
+        [
+            -95.59547796866683,
+            4.544311570773197e-06,
+            0.0,
+            29.97740859428886,
+            0.0,
+            -4.544311570773197e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000162_pre_disaster.png": [
+        [
+            -95.63088368446688,
+            4.544496344441562e-06,
+            0.0,
+            29.783736877964607,
+            0.0,
+            -4.544496344441562e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000162_post_disaster.png": [
+        [
+            -95.63088368446688,
+            4.544496344441562e-06,
+            0.0,
+            29.783736877964607,
+            0.0,
+            -4.544496344441562e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000230_pre_disaster.png": [
+        [
+            -95.64402818862497,
+            4.544939049156172e-06,
+            0.0,
+            29.986843101842062,
+            0.0,
+            -4.544939049156172e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000230_post_disaster.png": [
+        [
+            -95.64402818862497,
+            4.544939049156172e-06,
+            0.0,
+            29.986843101842062,
+            0.0,
+            -4.544939049156172e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000324_pre_disaster.png": [
+        [
+            -95.60597467903258,
+            4.54090436677444e-06,
+            0.0,
+            29.471258752099384,
+            0.0,
+            -4.54090436677444e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000324_post_disaster.png": [
+        [
+            -95.60597467903258,
+            4.54090436677444e-06,
+            0.0,
+            29.471258752099384,
+            0.0,
+            -4.54090436677444e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000166_pre_disaster.png": [
+        [
+            -95.65525634513143,
+            4.544197632589299e-06,
+            0.0,
+            29.77030834682436,
+            0.0,
+            -4.544197632589299e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000166_post_disaster.png": [
+        [
+            -95.65525634513143,
+            4.544197632589299e-06,
+            0.0,
+            29.77030834682436,
+            0.0,
+            -4.544197632589299e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000105_pre_disaster.png": [
+        [
+            -95.63545401408862,
+            4.544835436682905e-06,
+            0.0,
+            29.858607480121254,
+            0.0,
+            -4.544835436682905e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000105_post_disaster.png": [
+        [
+            -95.63545401408862,
+            4.544835436682905e-06,
+            0.0,
+            29.858607480121254,
+            0.0,
+            -4.544835436682905e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000011_pre_disaster.png": [
+        [
+            -95.48345611632084,
+            4.542345385626673e-06,
+            0.0,
+            29.735640633060886,
+            0.0,
+            -4.542345385626673e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000011_post_disaster.png": [
+        [
+            -95.48345611632084,
+            4.542345385626673e-06,
+            0.0,
+            29.735640633060886,
+            0.0,
+            -4.542345385626673e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000062_pre_disaster.png": [
+        [
+            -95.63903167779817,
+            4.541337832080508e-06,
+            0.0,
+            29.538700916080128,
+            0.0,
+            -4.541337832080508e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000062_post_disaster.png": [
+        [
+            -95.63903167779817,
+            4.541337832080508e-06,
+            0.0,
+            29.538700916080128,
+            0.0,
+            -4.541337832080508e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000485_pre_disaster.png": [
+        [
+            -95.52824514063714,
+            4.542788091276956e-06,
+            0.0,
+            29.747735105926115,
+            0.0,
+            -4.542788091276956e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000485_post_disaster.png": [
+        [
+            -95.52824514063714,
+            4.542788091276956e-06,
+            0.0,
+            29.747735105926115,
+            0.0,
+            -4.542788091276956e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000331_pre_disaster.png": [
+        [
+            -95.56135987284841,
+            4.540591201025218e-06,
+            0.0,
+            29.46348611451741,
+            0.0,
+            -4.540591201025218e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000331_post_disaster.png": [
+        [
+            -95.56135987284841,
+            4.540591201025218e-06,
+            0.0,
+            29.46348611451741,
+            0.0,
+            -4.540591201025218e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000120_pre_disaster.png": [
+        [
+            -95.66949280910438,
+            4.5443233149617605e-06,
+            0.0,
+            29.836362866213754,
+            0.0,
+            -4.5443233149617605e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000120_post_disaster.png": [
+        [
+            -95.66949280910438,
+            4.5443233149617605e-06,
+            0.0,
+            29.836362866213754,
+            0.0,
+            -4.5443233149617605e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000063_pre_disaster.png": [
+        [
+            -95.64441578496954,
+            4.541806214990836e-06,
+            0.0,
+            29.555863241129018,
+            0.0,
+            -4.541806214990836e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000063_post_disaster.png": [
+        [
+            -95.64441578496954,
+            4.541806214990836e-06,
+            0.0,
+            29.555863241129018,
+            0.0,
+            -4.541806214990836e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000339_pre_disaster.png": [
+        [
+            -95.57144331385364,
+            4.540838545223269e-06,
+            0.0,
+            29.471929617526527,
+            0.0,
+            -4.540838545223269e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000339_post_disaster.png": [
+        [
+            -95.57144331385364,
+            4.540838545223269e-06,
+            0.0,
+            29.471929617526527,
+            0.0,
+            -4.540838545223269e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000465_pre_disaster.png": [
+        [
+            -95.6120135154723,
+            4.544052373423047e-06,
+            0.0,
+            29.77802166119621,
+            0.0,
+            -4.544052373423047e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000465_post_disaster.png": [
+        [
+            -95.6120135154723,
+            4.544052373423047e-06,
+            0.0,
+            29.77802166119621,
+            0.0,
+            -4.544052373423047e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000036_pre_disaster.png": [
+        [
+            -95.64119506828666,
+            4.542860628266832e-06,
+            0.0,
+            29.532793109295547,
+            0.0,
+            -4.542860628266832e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000036_post_disaster.png": [
+        [
+            -95.64119506828666,
+            4.542860628266832e-06,
+            0.0,
+            29.532793109295547,
+            0.0,
+            -4.542860628266832e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000342_pre_disaster.png": [
+        [
+            -95.5716613650456,
+            4.541066961919608e-06,
+            0.0,
+            29.480563073965833,
+            0.0,
+            -4.541066961919608e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000342_post_disaster.png": [
+        [
+            -95.5716613650456,
+            4.541066961919608e-06,
+            0.0,
+            29.480563073965833,
+            0.0,
+            -4.541066961919608e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000308_pre_disaster.png": [
+        [
+            -95.57155232756419,
+            4.54095273938495e-06,
+            0.0,
+            29.476246347330445,
+            0.0,
+            -4.54095273938495e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000308_post_disaster.png": [
+        [
+            -95.57155232756419,
+            4.54095273938495e-06,
+            0.0,
+            29.476246347330445,
+            0.0,
+            -4.54095273938495e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000479_pre_disaster.png": [
+        [
+            -95.58663596552432,
+            4.543306031730425e-06,
+            0.0,
+            29.75263663408787,
+            0.0,
+            -4.543306031730425e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000479_post_disaster.png": [
+        [
+            -95.58663596552432,
+            4.543306031730425e-06,
+            0.0,
+            29.75263663408787,
+            0.0,
+            -4.543306031730425e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000458_pre_disaster.png": [
+        [
+            -95.62684069102046,
+            4.5440826096354485e-06,
+            0.0,
+            29.77772832371949,
+            0.0,
+            -4.5440826096354485e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000458_post_disaster.png": [
+        [
+            -95.62684069102046,
+            4.5440826096354485e-06,
+            0.0,
+            29.77772832371949,
+            0.0,
+            -4.5440826096354485e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000310_pre_disaster.png": [
+        [
+            -95.56661897139081,
+            4.540943199439378e-06,
+            0.0,
+            29.476341471581836,
+            0.0,
+            -4.540943199439378e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000310_post_disaster.png": [
+        [
+            -95.56661897139081,
+            4.540943199439378e-06,
+            0.0,
+            29.476341471581836,
+            0.0,
+            -4.540943199439378e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000360_pre_disaster.png": [
+        [
+            -95.58235850893216,
+            4.543991052660718e-06,
+            0.0,
+            29.77860335646787,
+            0.0,
+            -4.543991052660718e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000360_post_disaster.png": [
+        [
+            -95.58235850893216,
+            4.543991052660718e-06,
+            0.0,
+            29.77860335646787,
+            0.0,
+            -4.543991052660718e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000223_pre_disaster.png": [
+        [
+            -95.63514882253611,
+            4.543810013092154e-06,
+            0.0,
+            29.75776796491111,
+            0.0,
+            -4.543810013092154e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000223_post_disaster.png": [
+        [
+            -95.63514882253611,
+            4.543810013092154e-06,
+            0.0,
+            29.75776796491111,
+            0.0,
+            -4.543810013092154e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000394_pre_disaster.png": [
+        [
+            -95.60179404807839,
+            4.543684161925239e-06,
+            0.0,
+            29.76528134597883,
+            0.0,
+            -4.543684161925239e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000394_post_disaster.png": [
+        [
+            -95.60179404807839,
+            4.543684161925239e-06,
+            0.0,
+            29.76528134597883,
+            0.0,
+            -4.543684161925239e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000250_pre_disaster.png": [
+        [
+            -95.63383122666528,
+            4.5438832945930226e-06,
+            0.0,
+            29.886193162005135,
+            0.0,
+            -4.5438832945930226e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000250_post_disaster.png": [
+        [
+            -95.63383122666528,
+            4.5438832945930226e-06,
+            0.0,
+            29.886193162005135,
+            0.0,
+            -4.5438832945930226e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000326_pre_disaster.png": [
+        [
+            -95.60104169875413,
+            4.54089505755576e-06,
+            0.0,
+            29.471355137730722,
+            0.0,
+            -4.54089505755576e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000326_post_disaster.png": [
+        [
+            -95.60104169875413,
+            4.54089505755576e-06,
+            0.0,
+            29.471355137730722,
+            0.0,
+            -4.54089505755576e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000093_pre_disaster.png": [
+        [
+            -95.63949129071689,
+            4.543914043489439e-06,
+            0.0,
+            29.824027982148113,
+            0.0,
+            -4.543914043489439e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000093_post_disaster.png": [
+        [
+            -95.63949129071689,
+            4.543914043489439e-06,
+            0.0,
+            29.824027982148113,
+            0.0,
+            -4.543914043489439e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000033_pre_disaster.png": [
+        [
+            -95.65106717171112,
+            4.542879065519615e-06,
+            0.0,
+            29.532596798484786,
+            0.0,
+            -4.542879065519615e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000033_post_disaster.png": [
+        [
+            -95.65106717171112,
+            4.542879065519615e-06,
+            0.0,
+            29.532596798484786,
+            0.0,
+            -4.542879065519615e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000103_pre_disaster.png": [
+        [
+            -95.62983109083827,
+            4.54412649231273e-06,
+            0.0,
+            29.83284517606789,
+            0.0,
+            -4.54412649231273e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000103_post_disaster.png": [
+        [
+            -95.62983109083827,
+            4.544126492320269e-06,
+            0.0,
+            29.83284517606789,
+            0.0,
+            -4.544126492320269e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000504_pre_disaster.png": [
+        [
+            -95.51339686153905,
+            4.544782358949289e-06,
+            0.0,
+            30.01174702265889,
+            0.0,
+            -4.544782358949289e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000504_post_disaster.png": [
+        [
+            -95.51339686153905,
+            4.544782358949289e-06,
+            0.0,
+            30.01174702265889,
+            0.0,
+            -4.544782358949289e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000018_pre_disaster.png": [
+        [
+            -95.38617002293283,
+            4.5424316412367235e-06,
+            0.0,
+            29.757340952690797,
+            0.0,
+            -4.5424316412367235e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000018_post_disaster.png": [
+        [
+            -95.38617002293283,
+            4.5424316412367235e-06,
+            0.0,
+            29.757340952690797,
+            0.0,
+            -4.5424316412367235e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000424_pre_disaster.png": [
+        [
+            -95.57730543499747,
+            4.543864788256856e-06,
+            0.0,
+            29.774387928896115,
+            0.0,
+            -4.543864788256856e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000424_post_disaster.png": [
+        [
+            -95.57730543499747,
+            4.543864788256856e-06,
+            0.0,
+            29.774387928896115,
+            0.0,
+            -4.543864788256856e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000456_pre_disaster.png": [
+        [
+            -95.58081089914036,
+            4.542370413587127e-06,
+            0.0,
+            29.718239063596066,
+            0.0,
+            -4.542370413587127e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000456_post_disaster.png": [
+        [
+            -95.58081089914036,
+            4.54237041359466e-06,
+            0.0,
+            29.718239063596066,
+            0.0,
+            -4.54237041359466e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000498_pre_disaster.png": [
+        [
+            -95.6160580944792,
+            4.543808683131053e-06,
+            0.0,
+            29.831342159225336,
+            0.0,
+            -4.543808683131053e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000498_post_disaster.png": [
+        [
+            -95.6160580944792,
+            4.543808683131053e-06,
+            0.0,
+            29.831342159225336,
+            0.0,
+            -4.543808683131053e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000179_pre_disaster.png": [
+        [
+            -95.65871838319258,
+            4.542700362902391e-06,
+            0.0,
+            29.714157052157862,
+            0.0,
+            -4.542700362902391e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000179_post_disaster.png": [
+        [
+            -95.65871838319258,
+            4.542700362902391e-06,
+            0.0,
+            29.714157052157862,
+            0.0,
+            -4.542700362902391e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000185_pre_disaster.png": [
+        [
+            -95.67399388927669,
+            4.543192501948074e-06,
+            0.0,
+            29.73110569236073,
+            0.0,
+            -4.543192501948074e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000185_post_disaster.png": [
+        [
+            -95.67399388927669,
+            4.543192501948074e-06,
+            0.0,
+            29.73110569236073,
+            0.0,
+            -4.543192501948074e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000155_pre_disaster.png": [
+        [
+            -95.64571226640778,
+            4.544526277653962e-06,
+            0.0,
+            29.783441357777583,
+            0.0,
+            -4.544526277653962e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000155_post_disaster.png": [
+        [
+            -95.64571226640778,
+            4.544526277653962e-06,
+            0.0,
+            29.783441357777583,
+            0.0,
+            -4.544526277653962e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000068_pre_disaster.png": [
+        [
+            -95.65888267397777,
+            4.541489450314112e-06,
+            0.0,
+            29.542622983504373,
+            0.0,
+            -4.541489450314112e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000068_post_disaster.png": [
+        [
+            -95.65888267397777,
+            4.541489450314112e-06,
+            0.0,
+            29.542622983504373,
+            0.0,
+            -4.541489450314112e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000460_pre_disaster.png": [
+        [
+            -95.62189832356896,
+            4.544072562317273e-06,
+            0.0,
+            29.777826287302357,
+            0.0,
+            -4.544072562317273e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000460_post_disaster.png": [
+        [
+            -95.62189832356896,
+            4.544072562317273e-06,
+            0.0,
+            29.777826287302357,
+            0.0,
+            -4.544072562317273e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000453_pre_disaster.png": [
+        [
+            -95.6115657915333,
+            4.543588472412164e-06,
+            0.0,
+            29.76077518816839,
+            0.0,
+            -4.543588472412164e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000453_post_disaster.png": [
+        [
+            -95.6115657915333,
+            4.543588472412164e-06,
+            0.0,
+            29.76077518816839,
+            0.0,
+            -4.543588472412164e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000378_pre_disaster.png": [
+        [
+            -95.54732316820623,
+            4.543454805817255e-06,
+            0.0,
+            29.762026265719513,
+            0.0,
+            -4.543454805817255e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000378_post_disaster.png": [
+        [
+            -95.54732316820623,
+            4.543454805817255e-06,
+            0.0,
+            29.762026265719513,
+            0.0,
+            -4.543454805817255e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000044_pre_disaster.png": [
+        [
+            -95.65095452566814,
+            4.542764292455019e-06,
+            0.0,
+            29.528280147899455,
+            0.0,
+            -4.542764292455019e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000044_post_disaster.png": [
+        [
+            -95.65095452566814,
+            4.542764292455019e-06,
+            0.0,
+            29.528280147899455,
+            0.0,
+            -4.542764292455019e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000246_pre_disaster.png": [
+        [
+            -95.55729448237535,
+            4.541495245967623e-06,
+            0.0,
+            29.49811502299843,
+            0.0,
+            -4.541495245967623e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000246_post_disaster.png": [
+        [
+            -95.55729448237535,
+            4.541495245967623e-06,
+            0.0,
+            29.49811502299843,
+            0.0,
+            -4.541495245967623e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000445_pre_disaster.png": [
+        [
+            -95.55215571521421,
+            4.5433495166775466e-06,
+            0.0,
+            29.757619307855588,
+            0.0,
+            -4.5433495166775466e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000445_post_disaster.png": [
+        [
+            -95.55215571521421,
+            4.5433495166775466e-06,
+            0.0,
+            29.75761930785558,
+            0.0,
+            -4.5433495166775466e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000510_pre_disaster.png": [
+        [
+            -95.59178717035428,
+            4.544222264775026e-06,
+            0.0,
+            29.84906888818128,
+            0.0,
+            -4.544222264775026e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000510_post_disaster.png": [
+        [
+            -95.59178717035428,
+            4.544222264775026e-06,
+            0.0,
+            29.84906888818128,
+            0.0,
+            -4.544222264775026e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000133_pre_disaster.png": [
+        [
+            -95.67880456454913,
+            4.543760893038548e-06,
+            0.0,
+            29.814613028532182,
+            0.0,
+            -4.543760893038548e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000133_post_disaster.png": [
+        [
+            -95.67880456454913,
+            4.543760893038548e-06,
+            0.0,
+            29.814613028532182,
+            0.0,
+            -4.543760893038548e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000370_pre_disaster.png": [
+        [
+            -95.57763697224699,
+            4.5442126773531574e-06,
+            0.0,
+            29.787323113034837,
+            0.0,
+            -4.5442126773531574e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000370_post_disaster.png": [
+        [
+            -95.57763697224699,
+            4.5442126773531574e-06,
+            0.0,
+            29.787323113034837,
+            0.0,
+            -4.5442126773531574e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000283_pre_disaster.png": [
+        [
+            -95.56727230058407,
+            4.541628889732869e-06,
+            0.0,
+            29.502241883766605,
+            0.0,
+            -4.541628889732869e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000283_post_disaster.png": [
+        [
+            -95.56727230058407,
+            4.541628889732869e-06,
+            0.0,
+            29.502241883766605,
+            0.0,
+            -4.541628889732869e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000058_pre_disaster.png": [
+        [
+            -95.64452823791655,
+            4.541921067446342e-06,
+            0.0,
+            29.56017830571165,
+            0.0,
+            -4.541921067446342e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000058_post_disaster.png": [
+        [
+            -95.64452823791655,
+            4.541921067446342e-06,
+            0.0,
+            29.56017830571165,
+            0.0,
+            -4.541921067446342e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000305_pre_disaster.png": [
+        [
+            -95.63401970210705,
+            4.544800729096582e-06,
+            0.0,
+            29.9827343512328,
+            0.0,
+            -4.544800729096582e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000305_post_disaster.png": [
+        [
+            -95.63401970210705,
+            4.544800729096582e-06,
+            0.0,
+            29.9827343512328,
+            0.0,
+            -4.544800729096582e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000078_pre_disaster.png": [
+        [
+            -95.63899626861087,
+            4.54199657641941e-06,
+            0.0,
+            29.62662634075102,
+            0.0,
+            -4.54199657641941e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000078_post_disaster.png": [
+        [
+            -95.63899626861087,
+            4.54199657641941e-06,
+            0.0,
+            29.62662634075102,
+            0.0,
+            -4.54199657641941e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000259_pre_disaster.png": [
+        [
+            -95.60181405932764,
+            4.541695504745334e-06,
+            0.0,
+            29.501571475751817,
+            0.0,
+            -4.541695504745334e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000259_post_disaster.png": [
+        [
+            -95.60181405932764,
+            4.541695504745334e-06,
+            0.0,
+            29.501571475751817,
+            0.0,
+            -4.541695504745334e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000287_pre_disaster.png": [
+        [
+            -95.56735783542176,
+            4.542398726203866e-06,
+            0.0,
+            29.594461784865597,
+            0.0,
+            -4.542398726203866e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000287_post_disaster.png": [
+        [
+            -95.56735783542176,
+            4.542398726203866e-06,
+            0.0,
+            29.594461784865597,
+            0.0,
+            -4.542398726203866e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000353_pre_disaster.png": [
+        [
+            -95.5821371335364,
+            4.543759188690347e-06,
+            0.0,
+            29.769979924274118,
+            0.0,
+            -4.543759188690347e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000353_post_disaster.png": [
+        [
+            -95.5821371335364,
+            4.543759188690347e-06,
+            0.0,
+            29.769979924274118,
+            0.0,
+            -4.543759188690347e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000163_pre_disaster.png": [
+        [
+            -95.63571355047333,
+            4.5443902249744675e-06,
+            0.0,
+            29.779326798583927,
+            0.0,
+            -4.5443902249744675e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000163_post_disaster.png": [
+        [
+            -95.63571355047333,
+            4.5443902249744675e-06,
+            0.0,
+            29.779326798583927,
+            0.0,
+            -4.5443902249744675e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000364_pre_disaster.png": [
+        [
+            -95.56709056065823,
+            4.543496499141598e-06,
+            0.0,
+            29.76164463663322,
+            0.0,
+            -4.543496499141598e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000364_post_disaster.png": [
+        [
+            -95.56709056065823,
+            4.543496499141598e-06,
+            0.0,
+            29.76164463663322,
+            0.0,
+            -4.543496499141598e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000441_pre_disaster.png": [
+        [
+            -95.6259405653765,
+            4.54315497977491e-06,
+            0.0,
+            29.74323573405702,
+            0.0,
+            -4.54315497977491e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000441_post_disaster.png": [
+        [
+            -95.6259405653765,
+            4.54315497977491e-06,
+            0.0,
+            29.74323573405702,
+            0.0,
+            -4.54315497977491e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000225_pre_disaster.png": [
+        [
+            -95.586900809025,
+            4.5415527436931364e-06,
+            0.0,
+            29.497543229642943,
+            0.0,
+            -4.5415527436931364e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000225_post_disaster.png": [
+        [
+            -95.586900809025,
+            4.5415527436931364e-06,
+            0.0,
+            29.497543229642943,
+            0.0,
+            -4.5415527436931364e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000037_pre_disaster.png": [
+        [
+            -95.6362589798632,
+            4.54285136260477e-06,
+            0.0,
+            29.532890990172355,
+            0.0,
+            -4.54285136260477e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000037_post_disaster.png": [
+        [
+            -95.6362589798632,
+            4.54285136260477e-06,
+            0.0,
+            29.532890990172355,
+            0.0,
+            -4.54285136260477e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000377_pre_disaster.png": [
+        [
+            -95.54216345539773,
+            4.543212861596369e-06,
+            0.0,
+            29.75349748871195,
+            0.0,
+            -4.543212861596369e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000377_post_disaster.png": [
+        [
+            -95.54216345539773,
+            4.543212861596369e-06,
+            0.0,
+            29.75349748871195,
+            0.0,
+            -4.543212861596369e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000314_pre_disaster.png": [
+        [
+            -95.54173633465481,
+            4.540666811176838e-06,
+            0.0,
+            29.468180691897583,
+            0.0,
+            -4.540666811176838e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000314_post_disaster.png": [
+        [
+            -95.54173633465481,
+            4.540666811176838e-06,
+            0.0,
+            29.468180691897583,
+            0.0,
+            -4.540666811176838e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000301_pre_disaster.png": [
+        [
+            -95.59150528189616,
+            4.541219153438209e-06,
+            0.0,
+            29.484497340456713,
+            0.0,
+            -4.541219153438209e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000301_post_disaster.png": [
+        [
+            -95.59150528189616,
+            4.541219153438209e-06,
+            0.0,
+            29.484497340456713,
+            0.0,
+            -4.541219153438209e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000254_pre_disaster.png": [
+        [
+            -95.62693207976783,
+            4.542200405596854e-06,
+            0.0,
+            29.518353199152408,
+            0.0,
+            -4.542200405596854e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000254_post_disaster.png": [
+        [
+            -95.62693207976783,
+            4.542200405596854e-06,
+            0.0,
+            29.518353199152408,
+            0.0,
+            -4.542200405596854e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000139_pre_disaster.png": [
+        [
+            -95.67065514781174,
+            4.544808048846228e-06,
+            0.0,
+            29.791568398491354,
+            0.0,
+            -4.544808048846228e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000139_post_disaster.png": [
+        [
+            -95.67065514781174,
+            4.544808048846228e-06,
+            0.0,
+            29.791568398491354,
+            0.0,
+            -4.544808048846228e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000464_pre_disaster.png": [
+        [
+            -95.62706596693322,
+            4.544314804500917e-06,
+            0.0,
+            29.786351439149556,
+            0.0,
+            -4.544314804500917e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000464_post_disaster.png": [
+        [
+            -95.62706596693322,
+            4.544314804500917e-06,
+            0.0,
+            29.786351439149556,
+            0.0,
+            -4.544314804500917e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000191_pre_disaster.png": [
+        [
+            -95.65372223144033,
+            4.544040925983169e-06,
+            0.0,
+            29.890105811982803,
+            0.0,
+            -4.544040925983169e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000191_post_disaster.png": [
+        [
+            -95.65372223144033,
+            4.544040925983169e-06,
+            0.0,
+            29.890105811982803,
+            0.0,
+            -4.544040925983169e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000276_pre_disaster.png": [
+        [
+            -95.62515152674905,
+            4.541022158415667e-06,
+            0.0,
+            29.537210525219884,
+            0.0,
+            -4.541022158415667e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ],
+    "hurricane-harvey_00000276_post_disaster.png": [
+        [
+            -95.62515152674905,
+            4.541022158415667e-06,
+            0.0,
+            29.537210525219884,
+            0.0,
+            -4.541022158415667e-06
+        ],
+        "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]"
+    ]
+}
