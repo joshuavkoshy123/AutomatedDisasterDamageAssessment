@@ -22,7 +22,7 @@ def fetch_image(file_path: str):
 # returns model response to query (used by chatbot)
 @app.get("/query/")
 def query_model(q: str = ""):
-    # get model response from nemotron.py (this could be the results.csv for now)
+    # get model response from nemotron (could be called from a new nemotron script with the query as a parameter)
     response = "MODEL RESPONSE"
     return {"response": response}
 
