@@ -14,7 +14,7 @@ import requests
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = "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"  
+NIM_API_KEY = os.getenv("NEMOTRON_API_KEY")
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 MODEL = "nvidia/nemotron-nano-12b-v2-vl"
