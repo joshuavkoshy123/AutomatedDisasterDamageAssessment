@@ -7,7 +7,7 @@ import time
 import base64
 import argparse
 from pathlib import Path
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Tuple, Optional, List, NamedTuple
 
 import requests
 
@@ -107,17 +107,88 @@ def coerce_uid(s: str) -> str:
 # Crop pairing
 # =========================
 UID_RE = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.I)
+BUILDING_FILE_RE = re.compile(r"^building_(\d+)\.(jpg|jpeg|png|webp)$", re.I)
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 
-def scan_crops_folder(folder: Path) -> Dict[str, Dict[str, Path]]:
-    """
-    Return: { uid: {"pre": Path, "post": Path} }
-    We search for UID in filename; then decide pre/post by keywords.
-    """
-    if not folder.exists():
-        die(f"Crops folder not found: {folder}")
 
+class CropRecord(NamedTuple):
+    uid: str
+    pre: Path
+    post: Path
+    expected: Optional[str] = None
+
+
+class LabelRecord(NamedTuple):
+    index: int
+    uid: str
+    expected: Optional[str]
+
+
+def infer_kind_from_name(path: Path) -> Optional[str]:
+    name = path.stem.lower()
+    parts = re.split(r"[^a-z0-9]+", name)
+    for part in parts:
+        if part in {"pre", "before"}:
+            return "pre"
+        if part in {"post", "after"}:
+            return "post"
+    return None
+
+
+def scene_prefix_from_labels(labels_json: Path) -> str:
+    data = read_json(labels_json)
+    img_name = ((data.get("metadata") or {}).get("img_name") or labels_json.stem)
+    stem = Path(img_name).stem
+    for suffix in ["_post_disaster", "_pre_disaster", "_post", "_pre"]:
+        if stem.endswith(suffix):
+            return stem[: -len(suffix)]
+    return stem
+
+
+def load_label_records(labels_json: Path) -> List[LabelRecord]:
+    if not labels_json.exists():
+        die(f"Labels JSON not found: {labels_json}")
+
+    data = read_json(labels_json)
+    features = (data.get("features") or {}).get("xy") or (data.get("features") or {}).get("lng_lat") or []
+    records: List[LabelRecord] = []
+    for index, feature in enumerate(features):
+        props = feature.get("properties", {})
+        uid = str(props.get("uid", "")).strip()
+        subtype = props.get("subtype")
+        expected = normalize_label(subtype) if subtype else None
+        if uid:
+            records.append(LabelRecord(index=index, uid=uid, expected=expected))
+    return records
+
+
+def resolve_building_crops_dirs(folder: Path, labels_json: Path) -> Optional[Tuple[Path, Path]]:
+    scene_prefix = scene_prefix_from_labels(labels_json)
+
+    if folder.name.endswith("_pre_disaster"):
+        pre_dir = folder
+        post_dir = folder.with_name(folder.name.replace("_pre_disaster", "_post_disaster"))
+        return (pre_dir, post_dir) if post_dir.exists() else None
+
+    if folder.name.endswith("_post_disaster"):
+        post_dir = folder
+        pre_dir = folder.with_name(folder.name.replace("_post_disaster", "_pre_disaster"))
+        return (pre_dir, post_dir) if pre_dir.exists() else None
+
+    pre_dir = folder / f"{scene_prefix}_pre_disaster"
+    post_dir = folder / f"{scene_prefix}_post_disaster"
+    if pre_dir.exists() and post_dir.exists():
+        return pre_dir, post_dir
+
+    return None
+
+
+def scan_uid_named_crops(folder: Path) -> Dict[str, CropRecord]:
+    """
+    Support legacy crop outputs where filenames contain UID + pre/post.
+    """
     pairs: Dict[str, Dict[str, Path]] = {}
-    images = [p for p in folder.rglob("*") if p.is_file() and p.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]]
+    images = [p for p in folder.rglob("*") if p.is_file() and p.suffix.lower() in IMAGE_EXTS]
 
     for p in images:
         m = UID_RE.search(p.name)
@@ -144,8 +215,71 @@ def scan_crops_folder(folder: Path) -> Dict[str, Dict[str, Path]]:
         pairs[uid][kind] = p
 
     
-    ready = {uid: d for uid, d in pairs.items() if "pre" in d and "post" in d}
+    ready = {
+        uid: CropRecord(uid=uid, pre=data["pre"], post=data["post"])
+        for uid, data in pairs.items()
+        if "pre" in data and "post" in data
+    }
     return ready
+
+
+def scan_building_crops(folder: Path, labels_json: Path) -> Dict[str, CropRecord]:
+    pair_dirs = resolve_building_crops_dirs(folder, labels_json)
+    if not pair_dirs:
+        return {}
+
+    pre_dir, post_dir = pair_dirs
+    if not pre_dir.exists() or not post_dir.exists():
+        return {}
+
+    label_records = load_label_records(labels_json)
+    by_index = {record.index: record for record in label_records}
+
+    pre_files: Dict[int, Path] = {}
+    post_files: Dict[int, Path] = {}
+
+    for path in pre_dir.iterdir():
+        if not path.is_file() or path.suffix.lower() not in IMAGE_EXTS:
+            continue
+        m = BUILDING_FILE_RE.match(path.name)
+        if m:
+            pre_files[int(m.group(1))] = path
+
+    for path in post_dir.iterdir():
+        if not path.is_file() or path.suffix.lower() not in IMAGE_EXTS:
+            continue
+        m = BUILDING_FILE_RE.match(path.name)
+        if m:
+            post_files[int(m.group(1))] = path
+
+    ready: Dict[str, CropRecord] = {}
+    for index in sorted(set(pre_files) & set(post_files)):
+        record = by_index.get(index)
+        if not record:
+            continue
+        ready[record.uid] = CropRecord(
+            uid=record.uid,
+            pre=pre_files[index],
+            post=post_files[index],
+            expected=record.expected,
+        )
+    return ready
+
+
+def scan_crops_folder(folder: Path, labels_json: Path) -> Dict[str, CropRecord]:
+    """
+    Supports:
+      - building_crops/<scene>_pre_disaster + <scene>_post_disaster with building_<index>.png
+      - legacy UID-based crop folders/files
+    """
+    if not folder.exists():
+        die(f"Crops folder not found: {folder}")
+
+    building_ready = scan_building_crops(folder, labels_json)
+    if building_ready:
+        return building_ready
+
+    return scan_uid_named_crops(folder)
 
 # =========================
 # Ground-truth mapping
@@ -196,14 +330,20 @@ def build_prompt(uid: str) -> str:
         "major-damage: large roof damage, missing sections, structural failure\n"
         "severe-damage: building collapsed, mostly destroyed, or missing\n\n"
 
+        "Important decision rules:\n"
+        "- Judge damage ONLY by visible change from PRE to POST.\n"
+        "- Do NOT call damage based on shadows, blur, crop edges, different lighting, or low resolution.\n"
+        "- Do NOT assume roof loss unless the POST image clearly shows new missing structure compared with PRE.\n"
+        "- If PRE and POST look materially the same, output no-damage.\n"
+        "- If evidence is weak or ambiguous, output no-damage.\n\n"
+
         "Focus on visual evidence such as:\n"
         "- roof condition changes\n"
         "- debris around the structure\n"
         "- missing building sections\n"
         "- collapse or footprint deformation\n\n"
 
-        "If the crop is unclear or partially off-center, use the best visible evidence.\n\n"
-        "If you are unsure, default to a damage designation one lower \n"
+        "If the crop is unclear or partially off-center, rely only on clear visible evidence.\n\n"
 
         "Return ONLY a JSON object in this format:\n"
         '{"uid":"' + uid + '","subtype":"LABEL"}\n\n'
@@ -222,7 +362,9 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
 
     content = [
         {"type": "text", "text": build_prompt(uid)},
+        {"type": "text", "text": "PRE-DISASTER IMAGE"},
         {"type": "image_url", "image_url": {"url": base64_data_url(pre_img)}},
+        {"type": "text", "text": "POST-DISASTER IMAGE"},
         {"type": "image_url", "image_url": {"url": base64_data_url(post_img)}},
     ]
 
@@ -232,8 +374,8 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": content},
         ],
-        "max_tokens": 512,
-        "temperature": 0.2,
+        "max_tokens": 256,
+        "temperature": 0.0,
         "top_p": 1,
         "stream": False,
     }
@@ -394,11 +536,11 @@ def main():
     labels_json_obj = read_json(labels_path)
 
     # Discover crop pairs
-    ready = scan_crops_folder(crops_dir)
+    ready = scan_crops_folder(crops_dir, labels_path)
     if not ready:
         die(
             f"No complete (pre+post) crop pairs found in {crops_dir}. "
-            "Expected filenames to contain UID and 'pre'/'post'."
+            "Expected either building_crops scene folders or filenames containing UID and 'pre'/'post'."
         )
 
     uids = sorted(ready.keys())
@@ -447,10 +589,10 @@ def main():
             print(f"[{i}/{total}] UID={uid} ... SKIP (resume)")
             continue
 
-        pre_path = ready[uid]["pre"]
-        post_path = ready[uid]["post"]
+        pre_path = ready[uid].pre
+        post_path = ready[uid].post
 
-        expected = gt.get(uid, "UNKNOWN")
+        expected = ready[uid].expected or gt.get(uid, "UNKNOWN")
 
       
         now = time.time()
