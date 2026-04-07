@@ -11,17 +11,19 @@ def read_root():
 @app.get("/files/{file_path:path}")
 def fetch_geojson(file_path: str):
     # make sure filepath correctly fetches GeoJSON file in backend/GeoJSON directory (confirm path)
-    return FileResponse(f"../images/{file_path}")
+    #return FileResponse(f"./GeoJSON/output_{file_path}")
+    return {"response": file_path}
 
 # returns pre or post disaster image at specified path
 @app.get("/images/{file_path:path}")
 def fetch_image(file_path: str):
     # make sure filepath correctly fetches image file in images directory (confirm path)
-    return FileResponse(f"../images/{file_path}")
+    #return FileResponse(f"../images/{file_path}")
+    return {"response": file_path}
 
 # returns model response to query (used by chatbot)
 @app.get("/query/")
-def query_model(q: str = ""):
+def query_model(q: str = "", img: str | None = None):
     # get model response from nemotron (could be called from a new nemotron script with the query as a parameter)
     response = "MODEL RESPONSE"
     return {"response": response}
