@@ -1,11 +1,15 @@
+from io import BytesIO
 import json
 import os
+from urllib.parse import urlparse
+
+import requests
 from PIL import Image
 
 # -----------------------------
 # CONFIG
 # -----------------------------
-IMAGE_DIR = "../images"
+#IMAGE_DIR = "../images"
 GEOJSON_DIR = "GeoJSON"
 METADATA_FILE = "metadata.json"
 OUTPUT_DIR = "../building_crops"
@@ -35,90 +39,99 @@ def geo_to_pixel(lon, lat, startX, pixelWidth, startY, pixelHeight):
 # -----------------------------
 # PROCESS EACH IMAGE
 # -----------------------------
-for image_name in image_names:
+#for image_name in image_names:
+with open('image_urls.txt', 'r') as urls:
+    for url in urls:
 
-    # create image path
-    image_path = os.path.join(IMAGE_DIR, image_name)
+        # create image path
+        image_name = os.path.basename(urlparse(url).path)
 
-    # skip if image does not exist
-    if not os.path.exists(image_path):
-        continue
+        name, ext = os.path.splitext(image_name)
 
-    print("Processing:", image_name)
+        clean_name = "_".join(name.split("_")[:4])  # adjust based on your pattern
 
-    # Load image
-    image = Image.open(image_path)
+        image_name = clean_name + ext
 
-    # store image dimensions
-    width, height = image.size
+        # skip if image does not exist
+        # if not os.path.exists(url):
+        #     continue
 
-    # Get affine transform
-    transform = metadata[image_name][0]
+        print("Processing:", image_name)
 
-    startX = transform[0]
-    pixelWidth = transform[1]
-    startY = transform[3]
-    pixelHeight = transform[5]
+        # Load image
+        response = requests.get(url)
+        image = Image.open(BytesIO(response.content))
 
-    # Determine GeoJSON file
-    base_name = image_name.replace(".png", "")
-    geojson_path = os.path.join(GEOJSON_DIR, "output_" + base_name + ".geojson")
+        # store image dimensions
+        width, height = image.size
 
-    if not os.path.exists(geojson_path):
-        print("Missing GeoJSON:", geojson_path)
-        continue
+        # Get affine transform
+        transform = metadata[image_name][0]
 
-    with open(geojson_path) as f:
-        geojson = json.load(f)
+        startX = transform[0]
+        pixelWidth = transform[1]
+        startY = transform[3]
+        pixelHeight = transform[5]
 
-    # -----------------------------
-    # PROCESS BUILDINGS
-    # -----------------------------
-    for i, feature in enumerate(geojson["features"]):
+        # Determine GeoJSON file
+        base_name = image_name.replace(".png", "")
+        geojson_path = os.path.join(GEOJSON_DIR, "output_" + base_name + ".geojson")
 
-        coords = feature["geometry"]["coordinates"][0]
-
-        pixel_coords = []
-
-        # convert GeoJSON latitude/longitude into pixel coordinates
-        for lon, lat in coords:
-            x, y = geo_to_pixel(
-                lon, lat,
-                startX, pixelWidth,
-                startY, pixelHeight
-            )
-            pixel_coords.append((x, y))
-
-        # store x and y coordinates
-        xs = [p[0] for p in pixel_coords]
-        ys = [p[1] for p in pixel_coords]
-
-        # apply padding
-        minX = int(min(xs)) - PADDING
-        maxX = int(max(xs)) + PADDING
-        minY = int(min(ys)) - PADDING
-        maxY = int(max(ys)) + PADDING
-
-        # Clip to image bounds
-        minX = max(0, minX)
-        minY = max(0, minY)
-        maxX = min(width, maxX)
-        maxY = min(height, maxY)
-
-        # skip invalid crops
-        if maxX <= minX or maxY <= minY:
+        if not os.path.exists(geojson_path):
+            print("Missing GeoJSON:", geojson_path)
             continue
 
-        # crop image
-        crop = image.crop((minX, minY, maxX, maxY))
+        with open(geojson_path) as f:
+            geojson = json.load(f)
 
-        # add to output directory
-        tile_output_dir = os.path.join(OUTPUT_DIR, base_name)
-        os.makedirs(tile_output_dir, exist_ok=True)
+        # -----------------------------
+        # PROCESS BUILDINGS
+        # -----------------------------
+        for i, feature in enumerate(geojson["features"]):
 
-        output_name = f"building_{i}.png"
-        output_path = os.path.join(tile_output_dir, output_name)
+            coords = feature["geometry"]["coordinates"][0]
 
-        crop.save(output_path)
+            pixel_coords = []
+
+            # convert GeoJSON latitude/longitude into pixel coordinates
+            for lon, lat in coords:
+                x, y = geo_to_pixel(
+                    lon, lat,
+                    startX, pixelWidth,
+                    startY, pixelHeight
+                )
+                pixel_coords.append((x, y))
+
+            # store x and y coordinates
+            xs = [p[0] for p in pixel_coords]
+            ys = [p[1] for p in pixel_coords]
+
+            # apply padding
+            minX = int(min(xs)) - PADDING
+            maxX = int(max(xs)) + PADDING
+            minY = int(min(ys)) - PADDING
+            maxY = int(max(ys)) + PADDING
+
+            # Clip to image bounds
+            minX = max(0, minX)
+            minY = max(0, minY)
+            maxX = min(width, maxX)
+            maxY = min(height, maxY)
+
+            # skip invalid crops
+            if maxX <= minX or maxY <= minY:
+                continue
+
+            # crop image
+            crop = image.crop((minX, minY, maxX, maxY))
+
+            # add to output directory
+            tile_output_dir = os.path.join(OUTPUT_DIR, base_name)
+            os.makedirs(tile_output_dir, exist_ok=True)
+
+            output_name = f"building_{i}.png"
+            output_path = os.path.join(tile_output_dir, output_name)
+
+            crop.save(output_path)
 
 print("Done.")
