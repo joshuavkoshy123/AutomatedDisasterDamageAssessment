@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
+from nemotron import answer_query
 
 app = FastAPI()
 
@@ -22,8 +23,7 @@ def fetch_image(file_path: str):
 # returns model response to query (used by chatbot)
 @app.get("/query/")
 def query_model(q: str = ""):
-    # get model response from nemotron (could be called from a new nemotron script with the query as a parameter)
-    response = "MODEL RESPONSE"
+    response = answer_query(q)
     return {"response": response}
 
 # gets overall stats or stats for a specific disaster site is disaster id is provided. Will retrieve data from SQL db (don't worry about this for now, we will implement later).
