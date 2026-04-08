@@ -12,19 +12,20 @@ def read_root():
 @app.get("/files/{file_path:path}")
 def fetch_geojson(file_path: str):
     # make sure filepath correctly fetches GeoJSON file in backend/GeoJSON directory (confirm path)
-    return FileResponse(f"../images/{file_path}")
+    #return FileResponse(f"./GeoJSON/output_{file_path}")
+    return {"response": file_path}
 
 # returns pre or post disaster image at specified path
 @app.get("/images/{file_path:path}")
 def fetch_image(file_path: str):
     # make sure filepath correctly fetches image file in images directory (confirm path)
-    return FileResponse(f"../images/{file_path}")
+    #return FileResponse(f"../images/{file_path}")
+    return {"response": file_path}
 
 # returns model response to query (used by chatbot)
 @app.get("/query/")
 def query_model(q: str = ""):
     response = answer_query(q)
-    return {"response": response}
 
 # gets overall stats or stats for a specific disaster site is disaster id is provided. Will retrieve data from SQL db (don't worry about this for now, we will implement later).
 @app.get("/stats/")

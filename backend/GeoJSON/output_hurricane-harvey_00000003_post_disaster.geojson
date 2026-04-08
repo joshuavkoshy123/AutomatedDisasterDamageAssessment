@@ -6,7 +6,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "major-damage",
-        "uid": "4f994029-6628-438a-9aba-b5c3241cda6b"
+        "uid": "4f994029-6628-438a-9aba-b5c3241cda6b",
+        "id": 1
       },
       "geometry": {
         "type": "Polygon",
@@ -53,7 +54,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "6ffd4931-2eef-4066-a43d-181c1ee279e3"
+        "uid": "6ffd4931-2eef-4066-a43d-181c1ee279e3",
+        "id": 2
       },
       "geometry": {
         "type": "Polygon",
@@ -96,7 +98,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "8d64bc46-4a78-4d76-8936-5150c7084ca8"
+        "uid": "8d64bc46-4a78-4d76-8936-5150c7084ca8",
+        "id": 3
       },
       "geometry": {
         "type": "Polygon",
@@ -147,7 +150,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "f28146ee-4813-4006-81ba-5636c24d14af"
+        "uid": "f28146ee-4813-4006-81ba-5636c24d14af",
+        "id": 4
       },
       "geometry": {
         "type": "Polygon",
@@ -186,7 +190,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "9bc75a7c-eb60-48c3-8b5b-c98dded9e428"
+        "uid": "9bc75a7c-eb60-48c3-8b5b-c98dded9e428",
+        "id": 5
       },
       "geometry": {
         "type": "Polygon",
@@ -281,7 +286,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "a7c78e7b-bf31-43f8-b324-0b311b23205f"
+        "uid": "a7c78e7b-bf31-43f8-b324-0b311b23205f",
+        "id": 6
       },
       "geometry": {
         "type": "Polygon",
@@ -360,7 +366,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "63ef12ea-d780-4814-bb91-ea33cf0d6353"
+        "uid": "63ef12ea-d780-4814-bb91-ea33cf0d6353",
+        "id": 7
       },
       "geometry": {
         "type": "Polygon",
@@ -423,7 +430,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "d99c8528-f9b1-42f2-b996-1d6d6f4902e1"
+        "uid": "d99c8528-f9b1-42f2-b996-1d6d6f4902e1",
+        "id": 8
       },
       "geometry": {
         "type": "Polygon",
@@ -490,7 +498,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "major-damage",
-        "uid": "03623244-1d89-426c-9f1e-9d313124ec7b"
+        "uid": "03623244-1d89-426c-9f1e-9d313124ec7b",
+        "id": 9
       },
       "geometry": {
         "type": "Polygon",
@@ -613,7 +622,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "44521f03-0b69-4282-a1c3-83eef7afc3e7"
+        "uid": "44521f03-0b69-4282-a1c3-83eef7afc3e7",
+        "id": 10
       },
       "geometry": {
         "type": "Polygon",
@@ -648,7 +658,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "21bf79ae-52ec-469c-b0dd-ca96d68235a9"
+        "uid": "21bf79ae-52ec-469c-b0dd-ca96d68235a9",
+        "id": 11
       },
       "geometry": {
         "type": "Polygon",
@@ -683,7 +694,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "b118abe7-b5b1-450c-a7e2-36d471c3b693"
+        "uid": "b118abe7-b5b1-450c-a7e2-36d471c3b693",
+        "id": 12
       },
       "geometry": {
         "type": "Polygon",
@@ -718,7 +730,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "abca6560-e04a-449f-9f9f-848a6556cc0e"
+        "uid": "abca6560-e04a-449f-9f9f-848a6556cc0e",
+        "id": 13
       },
       "geometry": {
         "type": "Polygon",
@@ -753,7 +766,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "f4ce8cda-e80b-42e8-b483-302360d7e6e0"
+        "uid": "f4ce8cda-e80b-42e8-b483-302360d7e6e0",
+        "id": 14
       },
       "geometry": {
         "type": "Polygon",
@@ -788,7 +802,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "e3f3dd1e-b4f8-4a45-be42-dcf1ff6f092c"
+        "uid": "e3f3dd1e-b4f8-4a45-be42-dcf1ff6f092c",
+        "id": 15
       },
       "geometry": {
         "type": "Polygon",
@@ -823,7 +838,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "61a92788-0592-41e7-93af-9a59633c4a74"
+        "uid": "61a92788-0592-41e7-93af-9a59633c4a74",
+        "id": 16
       },
       "geometry": {
         "type": "Polygon",
@@ -858,7 +874,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "68489c40-a780-4875-b436-ebca404f3f22"
+        "uid": "68489c40-a780-4875-b436-ebca404f3f22",
+        "id": 17
       },
       "geometry": {
         "type": "Polygon",
@@ -893,7 +910,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "6b615879-85bc-4a1f-922b-f02719902421"
+        "uid": "6b615879-85bc-4a1f-922b-f02719902421",
+        "id": 18
       },
       "geometry": {
         "type": "Polygon",
@@ -928,7 +946,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "4467c793-2f36-4415-a3fd-c1245636c1b3"
+        "uid": "4467c793-2f36-4415-a3fd-c1245636c1b3",
+        "id": 19
       },
       "geometry": {
         "type": "Polygon",
@@ -963,7 +982,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "fe70a31b-87d7-4370-9360-ce586ffd1047"
+        "uid": "fe70a31b-87d7-4370-9360-ce586ffd1047",
+        "id": 20
       },
       "geometry": {
         "type": "Polygon",
@@ -1002,7 +1022,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "6edaaabd-fe22-4f1e-87f2-2c324a2315de"
+        "uid": "6edaaabd-fe22-4f1e-87f2-2c324a2315de",
+        "id": 21
       },
       "geometry": {
         "type": "Polygon",
@@ -1037,7 +1058,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "5192912f-a120-455c-9bf9-ac7d8231b696"
+        "uid": "5192912f-a120-455c-9bf9-ac7d8231b696",
+        "id": 22
       },
       "geometry": {
         "type": "Polygon",
@@ -1072,7 +1094,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "16731f39-b796-4de0-9925-b1dccc9dcbe8"
+        "uid": "16731f39-b796-4de0-9925-b1dccc9dcbe8",
+        "id": 23
       },
       "geometry": {
         "type": "Polygon",
@@ -1107,7 +1130,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "c4a161fe-1329-4f56-97eb-48b931cd7643"
+        "uid": "c4a161fe-1329-4f56-97eb-48b931cd7643",
+        "id": 24
       },
       "geometry": {
         "type": "Polygon",
@@ -1142,7 +1166,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "fa595f54-9ed8-445b-aace-847b8975b36d"
+        "uid": "fa595f54-9ed8-445b-aace-847b8975b36d",
+        "id": 25
       },
       "geometry": {
         "type": "Polygon",
@@ -1177,7 +1202,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "93f6f688-13f6-45e7-8e1d-5265ba28e936"
+        "uid": "93f6f688-13f6-45e7-8e1d-5265ba28e936",
+        "id": 26
       },
       "geometry": {
         "type": "Polygon",
@@ -1212,7 +1238,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "ead5e4f9-0326-4540-b7f2-17513acf0e88"
+        "uid": "ead5e4f9-0326-4540-b7f2-17513acf0e88",
+        "id": 27
       },
       "geometry": {
         "type": "Polygon",
@@ -1247,7 +1274,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "6bc0c2bc-1af9-4307-9cee-1b0aa628b394"
+        "uid": "6bc0c2bc-1af9-4307-9cee-1b0aa628b394",
+        "id": 28
       },
       "geometry": {
         "type": "Polygon",
@@ -1282,7 +1310,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "7a3b0d29-c51c-4b80-9ba7-46113e94ba9c"
+        "uid": "7a3b0d29-c51c-4b80-9ba7-46113e94ba9c",
+        "id": 29
       },
       "geometry": {
         "type": "Polygon",
@@ -1321,7 +1350,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "8c435808-f83e-4170-acdf-0fea4552e8ba"
+        "uid": "8c435808-f83e-4170-acdf-0fea4552e8ba",
+        "id": 30
       },
       "geometry": {
         "type": "Polygon",
@@ -1388,7 +1418,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "18cf09ef-34d0-4452-870b-f8c726482bf9"
+        "uid": "18cf09ef-34d0-4452-870b-f8c726482bf9",
+        "id": 31
       },
       "geometry": {
         "type": "Polygon",
@@ -1507,7 +1538,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "92d45daf-5d1b-4fb1-bf12-cadbbe65dbcb"
+        "uid": "92d45daf-5d1b-4fb1-bf12-cadbbe65dbcb",
+        "id": 32
       },
       "geometry": {
         "type": "Polygon",
@@ -1554,7 +1586,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "a1fa9e2c-b262-4f4c-808d-401e1dcd9ddc"
+        "uid": "a1fa9e2c-b262-4f4c-808d-401e1dcd9ddc",
+        "id": 33
       },
       "geometry": {
         "type": "Polygon",
@@ -1605,7 +1638,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "001fbd6c-83af-44c6-84ac-b11e23f9eb94"
+        "uid": "001fbd6c-83af-44c6-84ac-b11e23f9eb94",
+        "id": 34
       },
       "geometry": {
         "type": "Polygon",
@@ -1652,7 +1686,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "minor-damage",
-        "uid": "0122a35c-035b-4a85-950c-5acabe42224d"
+        "uid": "0122a35c-035b-4a85-950c-5acabe42224d",
+        "id": 35
       },
       "geometry": {
         "type": "Polygon",
@@ -1707,7 +1742,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "977e9bb6-1d41-436d-b3f3-4308f3a0cadb"
+        "uid": "977e9bb6-1d41-436d-b3f3-4308f3a0cadb",
+        "id": 36
       },
       "geometry": {
         "type": "Polygon",
@@ -1738,7 +1774,8 @@
       "properties": {
         "feature_type": "building",
         "subtype": "no-damage",
-        "uid": "fe71823d-66f5-4b88-879e-80015beed59f"
+        "uid": "fe71823d-66f5-4b88-879e-80015beed59f",
+        "id": 37
       },
       "geometry": {
         "type": "Polygon",

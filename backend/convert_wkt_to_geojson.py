@@ -1,8 +1,10 @@
 import json
+from pathlib import Path
 
-INPUT_FILE = "../labels/hurricane-harvey_00000033_post_disaster.json"
-OUTPUT_FILE = "output_hurricane-harvey_000000033_post_disaster.geojson"
-
+INPUT_FILE = "../labels/hurricane-harvey_00000003_post_disaster.json"
+OUTPUT_FILE = "output_hurricane-harvey_000000003_post_disaster.geojson"
+INPUT_DIR = Path("../labels")
+OUTPUT_DIR = "./GeoJSON"
 
 def wkt_polygon_to_geojson_coords(wkt_str):
     coords_text = wkt_str.replace("POLYGON ((", "").replace("))", "")
@@ -49,4 +51,6 @@ def convert_file_to_geojson(input_path, output_path):
 
 
 if __name__ == "__main__":
-    convert_file_to_geojson(INPUT_FILE, OUTPUT_FILE)
+    for file in INPUT_DIR.iterdir():
+        if file.is_file():
+            convert_file_to_geojson(f"../labels/{file.name}", f"./GeoJSON/output_{file.stem}.geojson")
