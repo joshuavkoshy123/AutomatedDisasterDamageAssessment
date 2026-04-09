@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+psycopg2-binary
+opencv-python
+numpy
+requests
+python-dotenv
+google-genai
+cloudinary
