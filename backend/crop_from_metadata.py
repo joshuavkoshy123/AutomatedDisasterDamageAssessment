@@ -39,7 +39,6 @@ def geo_to_pixel(lon, lat, startX, pixelWidth, startY, pixelHeight):
 # -----------------------------
 # PROCESS EACH IMAGE
 # -----------------------------
-#for image_name in image_names:
 with open('image_urls.txt', 'r') as urls:
     for url in urls:
 
@@ -56,10 +55,15 @@ with open('image_urls.txt', 'r') as urls:
         # if not os.path.exists(url):
         #     continue
 
+        print("URL: ", url)
         print("Processing:", image_name)
 
         # Load image
-        response = requests.get(url)
+        response = requests.get(url.strip())
+
+        print(response.status_code)
+        print(response.headers.get("Content-Type"))
+
         image = Image.open(BytesIO(response.content))
 
         # store image dimensions
@@ -84,9 +88,9 @@ with open('image_urls.txt', 'r') as urls:
         with open(geojson_path) as f:
             geojson = json.load(f)
 
-        # -----------------------------
-        # PROCESS BUILDINGS
-        # -----------------------------
+        # # -----------------------------
+        # # PROCESS BUILDINGS
+        # # -----------------------------
         for i, feature in enumerate(geojson["features"]):
 
             coords = feature["geometry"]["coordinates"][0]
