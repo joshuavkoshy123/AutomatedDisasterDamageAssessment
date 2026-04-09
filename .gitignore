@@ -1,4 +1,5 @@
 backend/.env
+progressNotes/
 backend/nemotron.py
 backend/old_nemotron.py
 backend/image_urls.txt
