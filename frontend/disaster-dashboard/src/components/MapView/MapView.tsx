@@ -11,6 +11,7 @@ const getDamageColor = (subtype: string): string => ({
   'destroyed':    '#ef4444',
 }[subtype] ?? '#94a3b8');
 
+const API_URL = 'http://localhost:8000';
 const TILES = ['00000003', '00000011', '00000018', '00000023', '00000033'];
 
 export const MapView: React.FC = () => {
@@ -59,7 +60,7 @@ export const MapView: React.FC = () => {
     const correctionLng =  0.00000;
 
     // fetch image metadata (top left corner coordinates)
-    fetch(`/data/metadata.json`)
+    fetch(`${API_URL}/data/metadata.json`)
     .then(r => r.json())
     .then(data => {
       // ensure mapInstanceRef.current is not null
@@ -73,7 +74,7 @@ export const MapView: React.FC = () => {
       img.onload = () => {
         console.log(img.width, img.height);
       };
-      img.src = `/images/${image_name}`;
+      img.src = `${API_URL}/images/${image_name}`;
 
       const coordinates = data[image_name][0];
 
@@ -91,11 +92,11 @@ export const MapView: React.FC = () => {
       );
 
       // Overlay the image
-      L.imageOverlay(`/images/${image_name}`, bounds).addTo(mapInstanceRef.current);
+      L.imageOverlay(`${API_URL}/images/${image_name}`, bounds).addTo(mapInstanceRef.current);
     })
     .catch((err => console.error('Failed to load metadata:', err)));
 
-    fetch(`/data/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
+    fetch(`${API_URL}/files/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
       .then(r => r.json())
       .then(data => {
         if (!mapInstanceRef.current) return;

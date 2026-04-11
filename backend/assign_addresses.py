@@ -43,8 +43,10 @@ def read_json(path: Path) -> dict:
 
 def write_json(path: Path, obj: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
         json.dump(obj, f, indent=2)
+    tmp.replace(path)
 
 
 def parse_polygon_wkt_lng_lat(wkt: str) -> List[Tuple[float, float]]:
@@ -206,6 +208,7 @@ def enrich_records(
     cache_path: Path,
     email: Optional[str],
     min_interval_s: float,
+    progress_every: int,
 ) -> List[dict]:
     cache = load_cache(cache_path)
     enriched: List[dict] = []
@@ -256,7 +259,7 @@ def enrich_records(
         }
         enriched.append(row)
 
-        if index % 50 == 0 or index == len(records):
+        if index % max(progress_every, 1) == 0 or index == len(records):
             print(f"[PROGRESS] enriched {index}/{len(records)} buildings")
 
     return enriched
@@ -265,15 +268,19 @@ def enrich_records(
 def write_csv(path: Path, rows: List[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
-        with path.open("w", encoding="utf-8", newline="") as f:
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        with tmp.open("w", encoding="utf-8", newline="") as f:
             f.write("")
+        tmp.replace(path)
         return
 
     fieldnames = list(rows[0].keys())
-    with path.open("w", encoding="utf-8", newline="") as f:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
+    tmp.replace(path)
 
 
 def main() -> None:
@@ -311,6 +318,12 @@ def main() -> None:
         default=1.1,
         help="Minimum delay between reverse-geocoding requests.",
     )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=10,
+        help="Print progress every N buildings (default: 10).",
+    )
     args = parser.parse_args()
 
     label_paths = list(REPO_ROOT.glob(args.labels_glob))
@@ -325,6 +338,7 @@ def main() -> None:
         cache_path=Path(args.cache_json),
         email=args.email,
         min_interval_s=max(args.min_interval_s, 0.0),
+        progress_every=max(args.progress_every, 1),
     )
 
     write_csv(Path(args.out_csv), rows)

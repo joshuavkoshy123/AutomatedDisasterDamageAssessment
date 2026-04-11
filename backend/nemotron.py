@@ -131,6 +131,32 @@ def read_results_csv(csv_path: Path) -> List[dict]:
         return list(csv.DictReader(f))
 
 
+def load_existing_run_state(csv_path: Path) -> Tuple[set[str], Dict[str, str], int, int]:
+    done_uids: set[str] = set()
+    uid_to_pred: Dict[str, str] = {}
+    correct = 0
+    evaluated = 0
+
+    rows = read_results_csv(csv_path)
+    for row in rows:
+        uid = coerce_uid(row.get("uid", ""))
+        if not uid:
+            continue
+        predicted = normalize_label(row.get("predicted", "")) or row.get("predicted", "").strip()
+        expected = normalize_label(row.get("expected", "")) or row.get("expected", "").strip()
+        match = str(row.get("match", "")).strip().lower() == "true"
+
+        done_uids.add(uid)
+        if predicted:
+            uid_to_pred[uid] = predicted
+        if expected and expected != "UNKNOWN" and predicted and predicted != "ERROR":
+            evaluated += 1
+            if match:
+                correct += 1
+
+    return done_uids, uid_to_pred, correct, evaluated
+
+
 def read_stats_json(stats_path: Path) -> dict:
     if not stats_path.exists():
         return {}
@@ -782,26 +808,13 @@ def main():
     crops_dir = Path(args.crops_dir)
     labels_path = Path(args.labels_json)
 
-    # save stats for resuming
-    stats_file = f"{crops_dir}/_predictions/stats.json"
-
-    correct = 0
-    evaluated = 0
-
-    if os.path.exists(stats_file):
-        with open(stats_file, "r") as f:
-            stats = json.load(f)
-            correct = stats.get("correct", 0)
-            evaluated = stats.get("evaluated", 0)
-
-    print(f"Resuming with correct={correct}, evaluated={evaluated}")
-
     if args.out_dir:
         out_dir = Path(args.out_dir)
     else:
         out_dir = crops_dir / "_predictions"
 
     ensure_dir(out_dir)
+    stats_file = out_dir / "stats.json"
 
     # Load ground truth
     gt = load_ground_truth(labels_path)
@@ -820,21 +833,17 @@ def main():
 
     # Resume support
     csv_path = out_dir / "results.csv"
-    done_uids = set()
-    if args.resume and csv_path.exists():
-        with csv_path.open("r", encoding="utf-8") as f:
-            for line in f:
-                if line.startswith("uid,"):
-                    continue
-                parts = line.strip().split(",")
-                if parts and parts[0]:
-                    done_uids.add(parts[0].strip().strip('"'))
+    done_uids: set[str] = set()
+    uid_to_pred: Dict[str, str] = {}
+    correct = 0
+    evaluated = 0
+    if csv_path.exists():
+        done_uids, uid_to_pred, correct, evaluated = load_existing_run_state(csv_path)
+
+    print(f"Existing cached results: {len(done_uids)} building(s), correct={correct}, evaluated={evaluated}")
 
     # Initialize RPM limiter
     last_call_ts = 0.0
-
-    # Results accumulators
-    uid_to_pred: Dict[str, str] = {}
 
     # CSV header
     header = [
@@ -848,10 +857,6 @@ def main():
     print(f"RPM_LIMIT={RPM_LIMIT} => MIN_INTERVAL_S={MIN_INTERVAL_S:.3f}s")
     if args.resume:
         print(f"Resume enabled: {len(done_uids)} uid(s) already in results.csv will be skipped.")
-
-    # Process
-    # correct = 0
-    # evaluated = 0
 
     for i, uid in enumerate(uids, 1):
         uid = coerce_uid(uid)
@@ -885,7 +890,7 @@ def main():
                 correct += 1
 
         # write updated stats to file
-        with open(stats_file, "w") as f:
+        with stats_file.open("w", encoding="utf-8") as f:
             json.dump({
                 "correct": correct,
                 "evaluated": evaluated,
