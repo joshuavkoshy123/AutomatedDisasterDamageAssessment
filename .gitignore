@@ -2,4 +2,10 @@ backend/.env
 progressNotes/
 backend/old_nemotron.py
 backend/image_urls.txt
+<<<<<<< HEAD
 backend/_pycache_
+=======
+__pycache__/
+*.pyc
+outputs/addresses/address_cache.json
+>>>>>>> c42218f6ef382f6120f5ea26bef82de6ea4bfda0
