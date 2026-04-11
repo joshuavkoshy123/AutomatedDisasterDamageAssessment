@@ -11,7 +11,7 @@ const getDamageColor = (subtype: string): string => ({
   'destroyed':    '#ef4444',
 }[subtype] ?? '#94a3b8');
 
-const API_URL = 'http://localhost:8000';
+const API_URL = '';
 const TILES = ['00000003', '00000011', '00000018', '00000023', '00000033'];
 
 export const MapView: React.FC = () => {
@@ -96,7 +96,7 @@ export const MapView: React.FC = () => {
     })
     .catch((err => console.error('Failed to load metadata:', err)));
 
-    fetch(`${API_URL}/files/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
+    fetch(`${API_URL}/data/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
       .then(r => r.json())
       .then(data => {
         if (!mapInstanceRef.current) return;
