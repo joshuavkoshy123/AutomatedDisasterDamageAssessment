@@ -3,3 +3,6 @@ progressNotes/
 backend/nemotron.py
 backend/old_nemotron.py
 backend/image_urls.txt
+__pycache__/
+*.pyc
+outputs/addresses/address_cache.json

@@ -6,8 +6,10 @@ import json
 import time
 import base64
 import argparse
+import csv
 from pathlib import Path
-from typing import Dict, Tuple, Optional, List, NamedTuple
+from collections import Counter
+from typing import Dict, Tuple, Optional, List, NamedTuple, Any
 
 import requests
 
@@ -34,6 +36,9 @@ ALLOWED = ["no-damage", "minor-damage", "major-damage", "severe-damage"]
 
 
 SYSTEM_PROMPT = "/no_think"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_RESULTS_CSV = REPO_ROOT / "building_crops" / "_predictions" / "results.csv"
+DEFAULT_STATS_JSON = REPO_ROOT / "building_crops" / "_predictions" / "stats.json"
 
 # =========================
 # Helpers
@@ -102,6 +107,299 @@ def extract_json_from_text(text: str) -> Optional[dict]:
 
 def coerce_uid(s: str) -> str:
     return s.strip()
+
+
+def maybe_float(value: str) -> Optional[float]:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def extract_scene_id(path_str: str) -> Optional[str]:
+    if not path_str:
+        return None
+    match = re.search(r"(hurricane-harvey_\d+)", path_str.replace("\\", "/"))
+    return match.group(1) if match else None
+
+
+def read_results_csv(csv_path: Path) -> List[dict]:
+    if not csv_path.exists():
+        return []
+
+    with csv_path.open("r", encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def load_existing_run_state(csv_path: Path) -> Tuple[set[str], Dict[str, str], int, int]:
+    done_uids: set[str] = set()
+    uid_to_pred: Dict[str, str] = {}
+    correct = 0
+    evaluated = 0
+
+    rows = read_results_csv(csv_path)
+    for row in rows:
+        uid = coerce_uid(row.get("uid", ""))
+        if not uid:
+            continue
+        predicted = normalize_label(row.get("predicted", "")) or row.get("predicted", "").strip()
+        expected = normalize_label(row.get("expected", "")) or row.get("expected", "").strip()
+        match = str(row.get("match", "")).strip().lower() == "true"
+
+        done_uids.add(uid)
+        if predicted:
+            uid_to_pred[uid] = predicted
+        if expected and expected != "UNKNOWN" and predicted and predicted != "ERROR":
+            evaluated += 1
+            if match:
+                correct += 1
+
+    return done_uids, uid_to_pred, correct, evaluated
+
+
+def read_stats_json(stats_path: Path) -> dict:
+    if not stats_path.exists():
+        return {}
+    return read_json(stats_path)
+
+
+def build_assessment_summary(rows: List[dict], stats: dict) -> dict:
+    predicted_counts: Counter[str] = Counter()
+    expected_counts: Counter[str] = Counter()
+    scene_counts: Dict[str, Counter[str]] = {}
+    mismatches: List[dict] = []
+    rows_by_uid: Dict[str, dict] = {}
+
+    for row in rows:
+        uid = coerce_uid(row.get("uid", ""))
+        if not uid:
+            continue
+
+        predicted = normalize_label(row.get("predicted", "")) or row.get("predicted", "").strip().lower() or "unknown"
+        expected = normalize_label(row.get("expected", "")) or row.get("expected", "").strip().lower() or "unknown"
+        scene_id = extract_scene_id(row.get("pre_path", "")) or extract_scene_id(row.get("post_path", ""))
+        latency = maybe_float(row.get("latency_s", ""))
+        match = str(row.get("match", "")).strip().lower() == "true"
+
+        row_copy = dict(row)
+        row_copy["uid"] = uid
+        row_copy["predicted"] = predicted
+        row_copy["expected"] = expected
+        row_copy["scene_id"] = scene_id
+        row_copy["latency_s"] = latency
+        row_copy["match"] = match
+        rows_by_uid[uid] = row_copy
+
+        predicted_counts[predicted] += 1
+        expected_counts[expected] += 1
+        if scene_id:
+            scene_counts.setdefault(scene_id, Counter())
+            scene_counts[scene_id][predicted] += 1
+
+        if not match:
+            mismatches.append(row_copy)
+
+    avg_latency = None
+    latency_values = [row["latency_s"] for row in rows_by_uid.values() if row.get("latency_s") is not None]
+    if latency_values:
+        avg_latency = sum(latency_values) / len(latency_values)
+
+    return {
+        "total_rows": len(rows_by_uid),
+        "stats": stats,
+        "predicted_counts": dict(predicted_counts),
+        "expected_counts": dict(expected_counts),
+        "scene_counts": {scene: dict(counter) for scene, counter in scene_counts.items()},
+        "mismatches": mismatches,
+        "rows_by_uid": rows_by_uid,
+        "avg_latency_s": avg_latency,
+    }
+
+
+def format_counter(counter: Dict[str, int]) -> str:
+    ordered_labels = ALLOWED + ["unknown"]
+    parts = [f"{label}={counter.get(label, 0)}" for label in ordered_labels if counter.get(label, 0)]
+    return ", ".join(parts) if parts else "none"
+
+
+def answer_query_deterministic(query: str, summary: dict) -> Optional[str]:
+    q = query.lower().strip()
+    if not q:
+        return "Ask about the disaster assessment results, for example: overall accuracy, damage counts, scene-specific counts, or a building UID."
+
+    rows_by_uid = summary["rows_by_uid"]
+    stats = summary["stats"] or {}
+    predicted_counts = summary["predicted_counts"]
+    expected_counts = summary["expected_counts"]
+    scene_counts = summary["scene_counts"]
+    mismatches = summary["mismatches"]
+    total_rows = summary["total_rows"]
+    avg_latency_s = summary["avg_latency_s"]
+
+    uid_match = UID_RE.search(query)
+    if uid_match:
+        uid = uid_match.group(0)
+        row = rows_by_uid.get(uid)
+        if not row:
+            return f"I couldn't find building {uid} in the current assessment results."
+
+        pieces = [
+            f"Building {uid}: predicted={row['predicted']}",
+            f"expected={row['expected']}",
+            f"match={row['match']}",
+        ]
+        if row.get("scene_id"):
+            pieces.append(f"scene={row['scene_id']}")
+        if row.get("pre_path"):
+            pieces.append(f"pre={row['pre_path']}")
+        if row.get("post_path"):
+            pieces.append(f"post={row['post_path']}")
+        return ", ".join(pieces)
+
+    scene_match = re.search(r"(hurricane-harvey_\d+|000000\d+)", q)
+    if scene_match:
+        scene_key = scene_match.group(1)
+        if scene_key.startswith("000000"):
+            scene_key = f"hurricane-harvey_{scene_key}"
+        counter = scene_counts.get(scene_key)
+        if not counter:
+            return f"I couldn't find any rows for {scene_key} in the current assessment results."
+        return f"{scene_key}: {format_counter(counter)}."
+
+    if "accuracy" in q or "correct" in q:
+        correct = stats.get("correct", 0)
+        evaluated = stats.get("evaluated", total_rows)
+        accuracy = stats.get("accuracy")
+        if accuracy:
+            return f"Current accuracy is {accuracy} ({correct}/{evaluated})."
+        if evaluated:
+            return f"Current accuracy is {correct / evaluated * 100:.2f}% ({correct}/{evaluated})."
+        return "I don't have any evaluated rows yet."
+
+    if "expected" in q and ("count" in q or "distribution" in q or "labels" in q):
+        return f"Expected label distribution: {format_counter(expected_counts)}."
+
+    if "predicted" in q and ("count" in q or "distribution" in q or "labels" in q):
+        return f"Predicted label distribution: {format_counter(predicted_counts)}."
+
+    if "how many" in q or "count" in q or "distribution" in q:
+        return (
+            f"There are {total_rows} assessed buildings. "
+            f"Predicted counts: {format_counter(predicted_counts)}. "
+            f"Expected counts: {format_counter(expected_counts)}."
+        )
+
+    if "mismatch" in q or "wrong" in q or "incorrect" in q:
+        if not mismatches:
+            return "There are no mismatches in the current results."
+        examples = ", ".join(
+            f"{row['uid']} ({row['expected']} -> {row['predicted']})"
+            for row in mismatches[:5]
+        )
+        return f"There are {len(mismatches)} mismatches. Examples: {examples}."
+
+    if "latency" in q or "speed" in q:
+        if avg_latency_s is None:
+            return "I don't have latency data yet."
+        return f"Average model latency is {avg_latency_s:.2f} seconds across {total_rows} rows."
+
+    return None
+
+
+def build_query_context(summary: dict) -> str:
+    lines = [
+        "You are answering questions about disaster-assessment results from a local dataset.",
+        f"Total assessed buildings: {summary['total_rows']}",
+        f"Predicted label counts: {format_counter(summary['predicted_counts'])}",
+        f"Expected label counts: {format_counter(summary['expected_counts'])}",
+    ]
+
+    stats = summary["stats"] or {}
+    if stats:
+        lines.append(
+            f"Accuracy summary: correct={stats.get('correct', 0)}, evaluated={stats.get('evaluated', 0)}, accuracy={stats.get('accuracy', 'unknown')}"
+        )
+
+    if summary["scene_counts"]:
+        lines.append("Scene-level predicted counts:")
+        for scene, counter in sorted(summary["scene_counts"].items()):
+            lines.append(f"- {scene}: {format_counter(counter)}")
+
+    if summary["mismatches"]:
+        lines.append("Example mismatches:")
+        for row in summary["mismatches"][:10]:
+            lines.append(f"- {row['uid']}: expected={row['expected']}, predicted={row['predicted']}, scene={row.get('scene_id')}")
+
+    return "\n".join(lines)
+
+
+def call_text_model(system_prompt: str, user_prompt: str) -> str:
+    headers = {
+        "Authorization": f"Bearer {NIM_API_KEY}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+    payload = {
+        "model": MODEL,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        "max_tokens": 512,
+        "temperature": 0.0,
+        "top_p": 1,
+        "stream": False,
+    }
+
+    r = requests.post(
+        INVOKE_URL,
+        headers=headers,
+        json=payload,
+        timeout=(CONNECT_TIMEOUT_S, READ_TIMEOUT_S),
+    )
+    r.raise_for_status()
+    j = r.json()
+    return str(j["choices"][0]["message"]["content"]).strip()
+
+
+def answer_query(
+    query: str,
+    results_csv: Path | None = None,
+    stats_json: Path | None = None,
+) -> str:
+    results_path = results_csv or DEFAULT_RESULTS_CSV
+    stats_path = stats_json or DEFAULT_STATS_JSON
+
+    rows = read_results_csv(results_path)
+    stats = read_stats_json(stats_path)
+    if not rows:
+        return f"I couldn't find any assessment rows at {results_path}."
+
+    summary = build_assessment_summary(rows, stats)
+    deterministic = answer_query_deterministic(query, summary)
+    if deterministic:
+        return deterministic
+
+    context = build_query_context(summary)
+    if not NIM_API_KEY:
+        return (
+            "I can answer basic stats from the current assessment results, but the NVIDIA API key is not set for open-ended chat responses. "
+            f"Current snapshot: {summary['total_rows']} buildings, predicted counts {format_counter(summary['predicted_counts'])}."
+        )
+
+    system_prompt = (
+        "Answer questions about disaster assessment results using only the provided dataset context. "
+        "Be concise, factual, and do not invent counts or buildings that are not in the context."
+    )
+    user_prompt = f"Dataset context:\n{context}\n\nQuestion:\n{query}"
+    try:
+        return call_text_model(system_prompt, user_prompt)
+    except requests.exceptions.RequestException as exc:
+        return (
+            "I couldn't reach the model for an open-ended response. "
+            f"Current snapshot: {summary['total_rows']} buildings, predicted counts {format_counter(summary['predicted_counts'])}. "
+            f"Model error: {type(exc).__name__}."
+        )
 
 # =========================
 # Crop pairing
@@ -510,26 +808,13 @@ def main():
     crops_dir = Path(args.crops_dir)
     labels_path = Path(args.labels_json)
 
-    # save stats for resuming
-    stats_file = f"{crops_dir}/_predictions/stats.json"
-
-    correct = 0
-    evaluated = 0
-
-    if os.path.exists(stats_file):
-        with open(stats_file, "r") as f:
-            stats = json.load(f)
-            correct = stats.get("correct", 0)
-            evaluated = stats.get("evaluated", 0)
-
-    print(f"Resuming with correct={correct}, evaluated={evaluated}")
-
     if args.out_dir:
         out_dir = Path(args.out_dir)
     else:
         out_dir = crops_dir / "_predictions"
 
     ensure_dir(out_dir)
+    stats_file = out_dir / "stats.json"
 
     # Load ground truth
     gt = load_ground_truth(labels_path)
@@ -548,21 +833,17 @@ def main():
 
     # Resume support
     csv_path = out_dir / "results.csv"
-    done_uids = set()
-    if args.resume and csv_path.exists():
-        with csv_path.open("r", encoding="utf-8") as f:
-            for line in f:
-                if line.startswith("uid,"):
-                    continue
-                parts = line.strip().split(",")
-                if parts and parts[0]:
-                    done_uids.add(parts[0].strip().strip('"'))
+    done_uids: set[str] = set()
+    uid_to_pred: Dict[str, str] = {}
+    correct = 0
+    evaluated = 0
+    if csv_path.exists():
+        done_uids, uid_to_pred, correct, evaluated = load_existing_run_state(csv_path)
+
+    print(f"Existing cached results: {len(done_uids)} building(s), correct={correct}, evaluated={evaluated}")
 
     # Initialize RPM limiter
     last_call_ts = 0.0
-
-    # Results accumulators
-    uid_to_pred: Dict[str, str] = {}
 
     # CSV header
     header = [
@@ -576,10 +857,6 @@ def main():
     print(f"RPM_LIMIT={RPM_LIMIT} => MIN_INTERVAL_S={MIN_INTERVAL_S:.3f}s")
     if args.resume:
         print(f"Resume enabled: {len(done_uids)} uid(s) already in results.csv will be skipped.")
-
-    # Process
-    # correct = 0
-    # evaluated = 0
 
     for i, uid in enumerate(uids, 1):
         uid = coerce_uid(uid)
@@ -613,7 +890,7 @@ def main():
                 correct += 1
 
         # write updated stats to file
-        with open(stats_file, "w") as f:
+        with stats_file.open("w", encoding="utf-8") as f:
             json.dump({
                 "correct": correct,
                 "evaluated": evaluated,
