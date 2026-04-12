@@ -7,3 +7,6 @@ requests
 python-dotenv
 google-genai
 cloudinary
+pathlib
+json
+argparse

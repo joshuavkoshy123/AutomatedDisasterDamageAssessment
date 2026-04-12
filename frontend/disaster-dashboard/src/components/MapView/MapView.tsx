@@ -50,86 +50,124 @@ export const MapView: React.FC = () => {
 
   // Reload GeoJSON when tile or mode changes
   useEffect(() => {
-    if (!mapInstanceRef.current) return;
-
-    // Remove old layer
-    if (geojsonLayerRef.current) {
-      geojsonLayerRef.current.remove();
-      geojsonLayerRef.current = null;
-    }
-
-    // Overlay pre and post disaster images on map
-
-    // image dimensions
-    const width = 1024;
-    const height = 1024;
-
-    const correctionLat = -0.00000;
-    const correctionLng =  0.00000;
-
-    // fetch image metadata (top left corner coordinates)
-    fetch('/data/metadata.json')
-    .then(r => r.json())
-    .then(data => {
+    for (let tile of TILES) {
       if (!mapInstanceRef.current) return;
 
-      const image_name = `hurricane-harvey_${activeTile}_${imageMode}_disaster.png`;
-      const imageUrl = cloudinaryUrlsRef.current[image_name];
-      if (!imageUrl) {
-        console.error('No cloudinary URL found for', image_name);
-        return;
+      // Remove old layer
+      if (geojsonLayerRef.current) {
+        geojsonLayerRef.current.remove();
+        geojsonLayerRef.current = null;
       }
 
-      const coordinates = data[image_name][0];
+      // Overlay pre and post disaster images on map
 
-      const startX = coordinates[0];
-      const pixelWidth = coordinates[1];
-      const startY = coordinates[3];
-      const pixelHeight = coordinates[5];
+      // image dimensions
+      const width = 1024;
+      const height = 1024;
 
-      const endX = startX + pixelWidth * (width);
-      const endY = startY + pixelHeight * (height);
+      const correctionLat = -0.00000;
+      const correctionLng =  0.00000;
 
-      const bounds = L.latLngBounds(
-        [endY + correctionLat, startX + correctionLng],  //southwest
-        [startY + correctionLat, endX + correctionLng]  //northeast
-      );
-
-      L.imageOverlay(imageUrl, bounds).addTo(mapInstanceRef.current);
-    })
-    .catch((err => console.error('Failed to load metadata:', err)));
-
-    fetch(`/data/output_hurricane-harvey_${activeTile}_${imageMode}_disaster.geojson`)
+      // fetch image metadata (top left corner coordinates)
+      fetch('/data/metadata.json')
       .then(r => r.json())
       .then(data => {
         if (!mapInstanceRef.current) return;
 
-        const layer = L.geoJSON(data, {
-          style: (feature) => ({
-            fillColor: getDamageColor(feature?.properties?.subtype),
-            //fillOpacity: 0.5,
-            fillOpacity: 0,
-            color: getDamageColor(feature?.properties?.subtype),
-            weight: 1,
-          }),
-          onEachFeature: (feature, layer) => {
-            layer.on('click', () => {
-              console.log('clicked:', feature.properties);
-            });
-          }
-        }).addTo(mapInstanceRef.current);
-
-        geojsonLayerRef.current = layer;
-
-        // Auto-pan map to where the new tile's buildings are
-        const bounds = layer.getBounds();
-        if (bounds.isValid()) {
-          mapInstanceRef.current.fitBounds(bounds, { padding: [40, 40] });
+        const image_name = `hurricane-harvey_${tile}_${imageMode}_disaster.png`;
+        const imageUrl = cloudinaryUrlsRef.current[image_name];
+        if (!imageUrl) {
+          console.error('No cloudinary URL found for', image_name);
+          return;
         }
-      })
-      .catch(err => console.error('Failed to load GeoJSON:', err));
 
-  }, [activeTile, imageMode]);
+        const coordinates = data[image_name][0];
+
+        const startX = coordinates[0];
+        const pixelWidth = coordinates[1];
+        const startY = coordinates[3];
+        const pixelHeight = coordinates[5];
+
+        const endX = startX + pixelWidth * (width);
+        const endY = startY + pixelHeight * (height);
+
+        const bounds = L.latLngBounds(
+          [endY + correctionLat, startX + correctionLng],  //southwest
+          [startY + correctionLat, endX + correctionLng]  //northeast
+        );
+
+        L.imageOverlay(imageUrl, bounds).addTo(mapInstanceRef.current);
+      })
+      .catch((err => console.error('Failed to load metadata:', err)));
+
+      fetch(`/data/output_hurricane-harvey_${tile}_${imageMode}_disaster.geojson`)
+        .then(r => r.json())
+        .then(data => {
+          // ensure mapInstanceRef.current is not null
+          if (!mapInstanceRef.current) return;
+
+        //   const image_name = `hurricane-harvey_${tile}_${imageMode}_disaster.png`;
+
+        //   console.log(image_name);
+
+        //   const img = new Image();
+        //   img.onload = () => {
+        //     console.log(img.width, img.height);
+        //   };
+        //   img.src = `${API_URL}/images/${image_name}`;
+
+        //   const coordinates = data[image_name][0];
+
+        //   const startX = coordinates[0];
+        //   const pixelWidth = coordinates[1];
+        //   const startY = coordinates[3];
+        //   const pixelHeight = coordinates[5];
+
+        //   const endX = startX + pixelWidth * (width);
+        //   const endY = startY + pixelHeight * (height);
+
+        //   const bounds = L.latLngBounds(
+        //     [endY + correctionLat, startX + correctionLng],  //southwest
+        //     [startY + correctionLat, endX + correctionLng]  //northeast
+        //   );
+
+        //   // Overlay the image
+        //   L.imageOverlay(`${API_URL}/images/${image_name}`, bounds).addTo(mapInstanceRef.current);
+        // })
+        // .catch((err => console.error('Failed to load metadata:', err)));
+
+        // fetch(`${API_URL}/files/output_hurricane-harvey_${tile}_${imageMode}_disaster.geojson`)
+        //   .then(r => r.json())
+        //   .then(data => {
+        //     if (!mapInstanceRef.current) return;
+
+            const layer = L.geoJSON(data, {
+              style: (feature) => ({
+                fillColor: getDamageColor(feature?.properties?.subtype),
+                fillOpacity: 0.5,
+                color: getDamageColor(feature?.properties?.subtype),
+                weight: 1,
+              }),
+              onEachFeature: (feature, layer) => {
+                layer.on('click', () => {
+                  console.log('clicked:', feature.properties);
+                });
+              }
+            }).addTo(mapInstanceRef.current);
+
+            geojsonLayerRef.current = layer;
+
+            // Auto-pan map to where the new tile's buildings are
+            const bounds = layer.getBounds();
+            if (bounds.isValid()) {
+              mapInstanceRef.current.fitBounds(bounds, { padding: [40, 40] });
+            }
+          })
+          .catch(err => console.error('Failed to load GeoJSON:', err));
+
+    }
+
+    }, [imageMode]);
 
   return (
     <Box sx={{ p: 3, height: '100%' }}>

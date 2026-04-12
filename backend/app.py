@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+import uvicorn
 from nemotron import answer_query
 
 app = FastAPI()
@@ -28,5 +30,4 @@ def get_stats(disaster_id: str | None = None):
     return {"disaster_id": disaster_id, "accuracy": accuracy, "num_no_damage": num_no_damage, "num_minor_damage": num_minor_damage, "num_major_damage": num_major_damage, "num_severe_damage": num_severe_damage}
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
