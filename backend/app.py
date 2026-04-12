@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
-from nemotron import answer_query
+from backend.nemotron import answer_query
 
 app = FastAPI()
 
