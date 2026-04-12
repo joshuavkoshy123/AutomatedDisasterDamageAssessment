@@ -50,14 +50,16 @@ export const MapView: React.FC = () => {
 
   // Reload GeoJSON when tile or mode changes
   useEffect(() => {
-    for (let tile of TILES) {
-      if (!mapInstanceRef.current) return;
 
-      // Remove old layer
-      if (geojsonLayerRef.current) {
-        geojsonLayerRef.current.remove();
-        geojsonLayerRef.current = null;
-      }
+    if (!mapInstanceRef.current) return;
+
+    // Remove old layer
+    if (geojsonLayerRef.current) {
+      geojsonLayerRef.current.remove();
+      geojsonLayerRef.current = null;
+    }
+
+    for (let tile of TILES) {
 
       // Overlay pre and post disaster images on map
 
@@ -105,6 +107,12 @@ export const MapView: React.FC = () => {
         .then(data => {
           // ensure mapInstanceRef.current is not null
           if (!mapInstanceRef.current) return;
+
+          // // Remove old layer
+          // if (geojsonLayerRef.current) {
+          //   geojsonLayerRef.current.remove();
+          //   geojsonLayerRef.current = null;
+          // }
 
         //   const image_name = `hurricane-harvey_${tile}_${imageMode}_disaster.png`;
 
