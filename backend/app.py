@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
 from nemotron import answer_query
-import os
 
 app = FastAPI()
 
@@ -13,27 +12,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# always equals this backend/ directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-# returns pre or post disaster GeoJSON at specified path
-@app.get("/data/metadata.json")
-def fetch_metadata():
-    return FileResponse(os.path.join(BASE_DIR, "metadata.json"))
-
-@app.get("/files/{file_path:path}")
-def fetch_geojson(file_path: str):
-    return FileResponse(os.path.join(BASE_DIR, "GeoJSON", file_path))
-
-# returns pre or post disaster image at specified path
-@app.get("/images/{file_path:path}")
-def fetch_image(file_path: str):
-    return FileResponse(os.path.join(BASE_DIR, "..", "images", file_path))
 
 # returns model response to query (used by chatbot)
 @app.get("/query/")
