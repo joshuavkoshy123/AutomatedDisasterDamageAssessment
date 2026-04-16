@@ -237,33 +237,7 @@ export const MapView: React.FC = () => {
         {/* Divider */}
         <Box sx={{ width: '1px', height: 24, background: COLORS.bg.border }} />
 
-        {/* Tile Selector */}
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap' }}>
-          <Typography sx={{ fontSize: '0.65rem', color: COLORS.text.muted, letterSpacing: '0.1em', fontFamily: '"Space Mono", monospace' }}>
-            AREA:
-          </Typography>
-          {TILES.map((tile, index) => (
-            <Box
-              key={tile}
-              onClick={() => setActiveTile(tile)}
-              sx={{
-                px: 1.5, py: 0.6,
-                borderRadius: 1,
-                cursor: 'pointer',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '0.65rem',
-                border: `1px solid ${activeTile === tile ? COLORS.accent.cyan : COLORS.bg.border}`,
-                color: activeTile === tile ? COLORS.accent.cyan : COLORS.text.muted,
-                background: activeTile === tile ? `${COLORS.accent.cyan}15` : 'transparent',
-                transition: 'all 0.2s ease',
-                userSelect: 'none',
-                '&:hover': { borderColor: COLORS.accent.cyan, color: COLORS.accent.cyan },
-              }}
-            >
-              Zone {index + 1}
-            </Box>
-          ))}
-        </Box>
+      
 
         {/* Active mode badge */}
         <Box sx={{ ml: 'auto' }}>
