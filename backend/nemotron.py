@@ -16,7 +16,8 @@ import requests
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = os.getenv("NEMOTRON_API_KEY")
+NIM_API_KEY = "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"
+
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 MODEL = "nvidia/nemotron-nano-12b-v2-vl"
@@ -118,6 +119,25 @@ def normalize_damage_present(value: Any) -> Optional[bool]:
     if s in {"no", "false", "0", "no-damage", "none", "absent"}:
         return False
     return None
+
+
+def normalize_impact_level(value: Any) -> Optional[str]:
+    if value is None:
+        return None
+    s = str(value).strip().lower().replace("_", "-").replace(" ", "-")
+    mapping = {
+        "none": "none",
+        "no": "none",
+        "no-impact": "none",
+        "limited": "limited",
+        "minor": "limited",
+        "low": "limited",
+        "serious": "serious",
+        "severe": "serious",
+        "major": "serious",
+        "high": "serious",
+    }
+    return mapping.get(s)
 
 
 def evidence_is_weak(value: Any) -> bool:
@@ -650,21 +670,58 @@ def build_damage_presence_prompt(uid: str) -> str:
         "1) PRE-DISASTER image (before hurricane)\n"
         "2) POST-DISASTER image (after hurricane)\n\n"
 
-        "Your task is to decide whether there is any visible NEW damage in POST compared with PRE.\n\n"
+        "Your task is to decide how much visible NEW disaster impact appears in POST compared with PRE.\n\n"
 
-        "Choose EXACTLY ONE answer for damage_present:\n"
-        "yes\n"
-        "no\n\n"
+        "Choose EXACTLY ONE answer for impact_level:\n"
+        "none\n"
+        "limited\n"
+        "serious\n\n"
 
         "Important decision rules:\n"
         "- Judge damage ONLY by visible change from PRE to POST.\n"
         "- Do NOT call damage based on shadows, blur, crop edges, different lighting, vegetation, or low resolution.\n"
-        "- If PRE and POST look materially the same, output no.\n"
-        "- If evidence is weak or ambiguous, output no.\n"
-        "- Use yes only when there is clear visible new building damage in POST.\n\n"
+        "- Visible floodwater around, surrounding, or encroaching on the building footprint counts as relevant disaster-impact evidence.\n"
+        "- An intact-looking roof does NOT automatically mean no-damage if the building or surrounding lot is clearly flooded in POST.\n"
+        "- You do NOT need to see roof failure for impact_level=serious.\n"
+        "- Use none when PRE and POST look materially the same.\n"
+        "- Use none when evidence is weak or ambiguous.\n"
+        "- Use limited for subtle or localized change that may indicate only minor damage.\n"
+        "- Use serious only for clear, substantial disaster impact such as obvious flooding around the building area, major debris, missing roof sections, or structural failure.\n\n"
 
         "Return ONLY a JSON object in this format:\n"
-        '{"uid":"' + uid + '","damage_present":"yes_or_no","evidence":"short phrase"}\n\n'
+        '{"uid":"' + uid + '","impact_level":"none_or_limited_or_serious","evidence":"short phrase"}\n\n'
+
+        "Do not include explanations or additional text."
+    )
+
+
+def build_full_classification_prompt(uid: str) -> str:
+    return (
+        "You are analyzing hurricane damage using satellite imagery.\n\n"
+
+        "You will receive TWO images of the SAME building:\n"
+        "1) PRE-DISASTER image (before hurricane)\n"
+        "2) POST-DISASTER image (after hurricane)\n\n"
+
+        "Classify the final damage label conservatively.\n\n"
+
+        "Choose EXACTLY ONE damage label:\n"
+        "no-damage\n"
+        "minor-damage\n"
+        "major-damage\n"
+        "destroyed\n\n"
+
+        "Important decision rules:\n"
+        "- Judge damage ONLY by visible change from PRE to POST.\n"
+        "- Do NOT call damage based on shadows, blur, crop edges, different lighting, vegetation, or low resolution.\n"
+        "- Use no-damage when PRE and POST look materially the same or the evidence is weak.\n"
+        "- Flood context matters: visible inundation around the building can support major-damage even when the roof remains mostly intact.\n"
+        "- If POST shows widespread flooding around the building footprint, lot, or immediate access area and PRE does not, major-damage is allowed.\n"
+        "- Use minor-damage for limited, localized visible change.\n"
+        "- Use destroyed only for collapse or near-total destruction.\n\n"
+
+        "Return ONLY a JSON object in this format:\n"
+        '{"uid":"' + uid + '","subtype":"LABEL","evidence":"short phrase"}\n\n'
 
         "Do not include explanations or additional text."
     )
@@ -687,16 +744,18 @@ def build_severity_prompt(uid: str) -> str:
         "destroyed\n\n"
 
         "Damage definitions:\n"
-        "minor-damage: limited new damage such as a small roof patch change, light debris, or localized impact\n"
-        "major-damage: clear substantial damage such as large roof sections missing, major structural breakage, or extensive debris directly affecting the building\n"
+        "minor-damage: limited new damage such as a small roof patch change, light debris, localized impact, or shallow flooding with limited visible impact\n"
+        "major-damage: clear substantial damage such as large roof sections missing, major structural breakage, extensive debris directly affecting the building, or obvious significant flooding surrounding, isolating, or entering the structure area\n"
         "destroyed: collapse, near-total destruction, or most of the structure missing\n\n"
 
         "Important decision rules:\n"
         "- Judge damage ONLY by visible change from PRE to POST.\n"
         "- Do NOT call damage based on shadows, blur, crop edges, different lighting, or low resolution.\n"
         "- Do NOT assume roof loss unless the POST image clearly shows new missing structure compared with PRE.\n"
+        "- Flood context matters: visible inundation around the building can support major-damage even when the roof remains mostly intact.\n"
+        "- If POST shows widespread flooding around the building footprint, lot, or immediate access area and PRE does not, prefer major-damage over no-damage.\n"
         "- If there is clear change but it is limited, prefer minor-damage over major-damage.\n"
-        "- Use major-damage only when the roof or structure has a substantial clearly visible new failure.\n"
+        "- Use major-damage when there is either substantial structural failure OR clearly serious flooding affecting the structure area.\n"
         "- Use destroyed only for collapse or near-total destruction.\n"
         "- If the damage is visible but limited, choose minor-damage.\n\n"
 
@@ -704,7 +763,9 @@ def build_severity_prompt(uid: str) -> str:
         "- roof condition changes\n"
         "- debris around the structure\n"
         "- missing building sections\n"
-        "- collapse or footprint deformation\n\n"
+        "- collapse or footprint deformation\n"
+        "- floodwater surrounding the building or covering the lot\n"
+        "- inundation that clearly appears new in POST compared with PRE\n\n"
 
         "If the crop is unclear or partially off-center, rely only on clear visible evidence.\n\n"
 
@@ -789,12 +850,28 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
     if status != 200 or not parsed_presence:
         return ("ERROR", status, raw_presence, latency_presence)
 
-    damage_present = normalize_damage_present(parsed_presence.get("damage_present"))
-    if damage_present is not True:
+    impact_level = normalize_impact_level(parsed_presence.get("impact_level"))
+    if impact_level == "none":
         return ("no-damage", 200, raw_presence, latency_presence)
 
-    if evidence_is_weak(parsed_presence.get("evidence")):
+    if impact_level is None or evidence_is_weak(parsed_presence.get("evidence")):
         return ("no-damage", 200, raw_presence, latency_presence)
+
+    if impact_level == "limited":
+        classify_prompt = build_full_classification_prompt(uid)
+        parsed_classify, cls_status, raw_classify, latency_classify = call_structured_model(pre_img, post_img, classify_prompt)
+        combined_latency = latency_presence + latency_classify
+        combined_raw = f"{raw_presence} || {raw_classify}"
+
+        if cls_status != 200 or not parsed_classify:
+            return ("ERROR", cls_status, combined_raw, combined_latency)
+
+        pred = normalize_label(str(parsed_classify.get("subtype", "")))
+        if not pred:
+            return ("no-damage", 200, combined_raw, combined_latency)
+        if pred == "minor-damage" and evidence_is_weak(parsed_classify.get("evidence")):
+            return ("no-damage", 200, combined_raw, combined_latency)
+        return (pred, 200, combined_raw, combined_latency)
 
     severity_prompt = build_severity_prompt(uid)
     parsed_severity, sev_status, raw_severity, latency_severity = call_structured_model(pre_img, post_img, severity_prompt)
@@ -806,7 +883,7 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
 
     pred = normalize_label(str(parsed_severity.get("subtype", "")))
     if not pred or pred == "no-damage":
-        return ("minor-damage", 200, combined_raw, combined_latency)
+        return ("major-damage", 200, combined_raw, combined_latency)
 
     if pred == "minor-damage" and evidence_is_weak(parsed_severity.get("evidence")):
         return ("no-damage", 200, combined_raw, combined_latency)
