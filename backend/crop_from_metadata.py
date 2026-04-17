@@ -19,6 +19,8 @@ DEFAULT_URLS_FILE = ROOT / "image_urls.txt"
 DEFAULT_OUTPUT_DIR = ROOT / "building_crops"
 
 PADDING = 30
+CONTEXT_SCALE = 0.75
+MIN_CROP_SIZE = 192
 REQUEST_TIMEOUT_S = 60
 SCENE_RE = re.compile(r"(hurricane-harvey_\d+)_(pre|post)_disaster", re.IGNORECASE)
 
@@ -109,6 +111,38 @@ def clip_box(
     return min_x, min_y, max_x, max_y
 
 
+def build_context_box(
+    xs: List[float],
+    ys: List[float],
+    width: int,
+    height: int,
+    base_padding: int,
+    context_scale: float,
+    min_crop_size: int,
+) -> Tuple[int, int, int, int]:
+    min_x = min(xs)
+    max_x = max(xs)
+    min_y = min(ys)
+    max_y = max(ys)
+
+    bbox_w = max_x - min_x
+    bbox_h = max_y - min_y
+    dynamic_padding = max(base_padding, int(max(bbox_w, bbox_h) * context_scale))
+
+    center_x = (min_x + max_x) / 2.0
+    center_y = (min_y + max_y) / 2.0
+    side = max(min_crop_size, int(max(bbox_w, bbox_h) + (2 * dynamic_padding)))
+    half = side / 2.0
+
+    box = (
+        int(round(center_x - half)),
+        int(round(center_y - half)),
+        int(round(center_x + half)),
+        int(round(center_y + half)),
+    )
+    return clip_box(box[0], box[1], box[2], box[3], width, height)
+
+
 def resolve_scene_geojson(scene_id: str, kind: str) -> Path:
     return GEOJSON_DIR / f"output_{scene_id}_{kind}_disaster.geojson"
 
@@ -137,6 +171,9 @@ def crop_scene(
     scene_images: SceneImages,
     metadata: dict,
     output_root: Path,
+    base_padding: int,
+    context_scale: float,
+    min_crop_size: int,
 ) -> Tuple[int, int]:
     pre_geojson_path = resolve_scene_geojson(scene_id, "pre")
     post_geojson_path = resolve_scene_geojson(scene_id, "post")
@@ -211,21 +248,23 @@ def crop_scene(
         post_xs = [p[0] for p in post_pixels]
         post_ys = [p[1] for p in post_pixels]
 
-        pre_box = clip_box(
-            int(min(pre_xs)) - PADDING,
-            int(min(pre_ys)) - PADDING,
-            int(max(pre_xs)) + PADDING,
-            int(max(pre_ys)) + PADDING,
+        pre_box = build_context_box(
+            pre_xs,
+            pre_ys,
             pre_width,
             pre_height,
+            base_padding,
+            context_scale,
+            min_crop_size,
         )
-        post_box = clip_box(
-            int(min(post_xs)) - PADDING,
-            int(min(post_ys)) - PADDING,
-            int(max(post_xs)) + PADDING,
-            int(max(post_ys)) + PADDING,
+        post_box = build_context_box(
+            post_xs,
+            post_ys,
             post_width,
             post_height,
+            base_padding,
+            context_scale,
+            min_crop_size,
         )
 
         if pre_box[2] <= pre_box[0] or pre_box[3] <= pre_box[1]:
@@ -250,6 +289,19 @@ def main() -> None:
     parser.add_argument("--urls-file", type=str, default=str(DEFAULT_URLS_FILE))
     parser.add_argument("--metadata-file", type=str, default=str(METADATA_FILE))
     parser.add_argument("--output-dir", type=str, default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument("--padding", type=int, default=PADDING, help="Minimum padding in pixels around each building footprint.")
+    parser.add_argument(
+        "--context-scale",
+        type=float,
+        default=CONTEXT_SCALE,
+        help="Extra context added relative to the larger footprint dimension.",
+    )
+    parser.add_argument(
+        "--min-crop-size",
+        type=int,
+        default=MIN_CROP_SIZE,
+        help="Minimum square crop size in pixels.",
+    )
     parser.add_argument(
         "--scene",
         action="append",
@@ -285,7 +337,15 @@ def main() -> None:
 
         print(f"[{index}/{total}] {scene_id} ... downloading + cropping")
         try:
-            saved, skipped = crop_scene(scene_id, scene_urls[scene_id], metadata, output_root)
+            saved, skipped = crop_scene(
+                scene_id,
+                scene_urls[scene_id],
+                metadata,
+                output_root,
+                args.padding,
+                args.context_scale,
+                args.min_crop_size,
+            )
         except Exception as exc:
             print(f"[{index}/{total}] {scene_id} ... ERROR {type(exc).__name__}: {exc}")
             continue
