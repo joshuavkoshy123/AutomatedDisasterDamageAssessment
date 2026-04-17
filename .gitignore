@@ -2,7 +2,11 @@ backend/.env
 progressNotes/
 backend/old_nemotron.py
 backend/image_urls.txt
+image_urls.txt
 backend/_pycache_
 __pycache__/
 *.pyc
 outputs/addresses/address_cache.json
+building_crops/*_pre_disaster/
+building_crops/*_post_disaster/
+building_crops/_predictions/hurricane-harvey_*/

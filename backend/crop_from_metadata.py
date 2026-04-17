@@ -1,141 +1,299 @@
-from io import BytesIO
+from __future__ import annotations
+
+import argparse
 import json
-import os
-from urllib.parse import urlparse
+import re
+from io import BytesIO
+from pathlib import Path
+from typing import Dict, Iterable, List, NamedTuple, Optional, Tuple
 
 import requests
 from PIL import Image
 
-# -----------------------------
-# CONFIG
-# -----------------------------
-#IMAGE_DIR = "../images"
-GEOJSON_DIR = "GeoJSON"
-METADATA_FILE = "metadata.json"
-OUTPUT_DIR = "../building_crops"
 
-image_names = ["hurricane-harvey_00000003_pre_disaster.png", "hurricane-harvey_00000003_post_disaster.png", "hurricane-harvey_00000011_pre_disaster.png", "hurricane-harvey_00000011_post_disaster.png", "hurricane-harvey_00000018_pre_disaster.png", "hurricane-harvey_00000018_post_disaster.png", "hurricane-harvey_00000023_pre_disaster.png", "hurricane-harvey_00000023_post_disaster.png", "hurricane-harvey_00000033_pre_disaster.png", "hurricane-harvey_00000033_post_disaster.png"]
+ROOT = Path(__file__).resolve().parents[1]
+BACKEND_DIR = ROOT / "backend"
+GEOJSON_DIR = BACKEND_DIR / "GeoJSON"
+METADATA_FILE = BACKEND_DIR / "metadata.json"
+DEFAULT_URLS_FILE = ROOT / "image_urls.txt"
+DEFAULT_OUTPUT_DIR = ROOT / "building_crops"
 
-# add padding around cropped images
 PADDING = 30
+REQUEST_TIMEOUT_S = 60
+SCENE_RE = re.compile(r"(hurricane-harvey_\d+)_(pre|post)_disaster", re.IGNORECASE)
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# -----------------------------
-# LOAD METADATA
-# -----------------------------
-with open(METADATA_FILE) as f:
-    metadata = json.load(f)
+class SceneImages(NamedTuple):
+    pre_url: str
+    post_url: str
 
-# -----------------------------
-# GEO → PIXEL CONVERSION
-# -----------------------------
-# Convert geolocation to pixel coordinate
-def geo_to_pixel(lon, lat, startX, pixelWidth, startY, pixelHeight):
-    x = (lon - startX) / pixelWidth
-    y = (lat - startY) / pixelHeight
+
+def read_json(path: Path) -> dict:
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def geo_to_pixel(
+    lon: float,
+    lat: float,
+    start_x: float,
+    pixel_width: float,
+    start_y: float,
+    pixel_height: float,
+) -> Tuple[float, float]:
+    x = (lon - start_x) / pixel_width
+    y = (lat - start_y) / pixel_height
     return x, y
 
-# -----------------------------
-# PROCESS EACH IMAGE
-# -----------------------------
-with open('image_urls.txt', 'r') as urls:
+
+def extract_urls(lines: Iterable[str]) -> List[str]:
+    urls: List[str] = []
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            continue
+        if not line.startswith("http://") and not line.startswith("https://"):
+            continue
+        urls.append(line)
+    return urls
+
+
+def scene_and_kind_from_url(url: str) -> Optional[Tuple[str, str]]:
+    match = SCENE_RE.search(url)
+    if not match:
+        return None
+    return match.group(1), match.group(2).lower()
+
+
+def load_scene_urls(urls_file: Path) -> Dict[str, SceneImages]:
+    if not urls_file.exists():
+        raise FileNotFoundError(f"URLs file not found: {urls_file}")
+
+    urls = extract_urls(urls_file.read_text(encoding="utf-8").splitlines())
+    per_scene: Dict[str, Dict[str, str]] = {}
+
     for url in urls:
+        scene_info = scene_and_kind_from_url(url)
+        if not scene_info:
+            continue
+        scene_id, kind = scene_info
+        per_scene.setdefault(scene_id, {})
+        per_scene[scene_id][kind] = url
 
-        # create image path
-        image_name = os.path.basename(urlparse(url).path)
+    complete: Dict[str, SceneImages] = {}
+    for scene_id, data in per_scene.items():
+        if "pre" in data and "post" in data:
+            complete[scene_id] = SceneImages(pre_url=data["pre"], post_url=data["post"])
 
-        name, ext = os.path.splitext(image_name)
+    return dict(sorted(complete.items()))
 
-        clean_name = "_".join(name.split("_")[:4])  # adjust based on your pattern
 
-        image_name = clean_name + ext
+def download_image(url: str) -> Image.Image:
+    response = requests.get(url, timeout=REQUEST_TIMEOUT_S)
+    response.raise_for_status()
+    return Image.open(BytesIO(response.content)).convert("RGB")
 
-        # skip if image does not exist
-        # if not os.path.exists(url):
-        #     continue
 
-        print("URL: ", url)
-        print("Processing:", image_name)
+def clip_box(
+    min_x: int,
+    min_y: int,
+    max_x: int,
+    max_y: int,
+    width: int,
+    height: int,
+) -> Tuple[int, int, int, int]:
+    min_x = max(0, min_x)
+    min_y = max(0, min_y)
+    max_x = min(width, max_x)
+    max_y = min(height, max_y)
+    return min_x, min_y, max_x, max_y
 
-        # Load image
-        response = requests.get(url.strip())
 
-        print(response.status_code)
-        print(response.headers.get("Content-Type"))
+def resolve_scene_geojson(scene_id: str, kind: str) -> Path:
+    return GEOJSON_DIR / f"output_{scene_id}_{kind}_disaster.geojson"
 
-        image = Image.open(BytesIO(response.content))
 
-        # store image dimensions
-        width, height = image.size
+def resolve_metadata_key(metadata: dict, scene_id: str, kind: str) -> Optional[str]:
+    prefix = f"{scene_id}_{kind}_disaster"
+    for key in metadata.keys():
+        if key.startswith(prefix):
+            return key
+    return None
 
-        # Get affine transform
-        transform = metadata[image_name][0]
 
-        startX = transform[0]
-        pixelWidth = transform[1]
-        startY = transform[3]
-        pixelHeight = transform[5]
+def scene_already_cropped(output_root: Path, scene_id: str) -> bool:
+    pre_dir = output_root / f"{scene_id}_pre_disaster"
+    post_dir = output_root / f"{scene_id}_post_disaster"
+    return (
+        pre_dir.exists()
+        and post_dir.exists()
+        and any(pre_dir.iterdir())
+        and any(post_dir.iterdir())
+    )
 
-        # Determine GeoJSON file
-        base_name = image_name.replace(".png", "")
-        geojson_path = os.path.join(GEOJSON_DIR, "output_" + base_name + ".geojson")
 
-        if not os.path.exists(geojson_path):
-            print("Missing GeoJSON:", geojson_path)
+def crop_scene(
+    scene_id: str,
+    scene_images: SceneImages,
+    metadata: dict,
+    output_root: Path,
+) -> Tuple[int, int]:
+    pre_geojson_path = resolve_scene_geojson(scene_id, "pre")
+    post_geojson_path = resolve_scene_geojson(scene_id, "post")
+    if not pre_geojson_path.exists() or not post_geojson_path.exists():
+        raise FileNotFoundError(f"Missing GeoJSON for {scene_id}")
+
+    pre_key = resolve_metadata_key(metadata, scene_id, "pre")
+    post_key = resolve_metadata_key(metadata, scene_id, "post")
+    if not pre_key or not post_key:
+        raise KeyError(f"Missing metadata transform for {scene_id}")
+
+    pre_transform = metadata[pre_key][0]
+    post_transform = metadata[post_key][0]
+
+    pre_img = download_image(scene_images.pre_url)
+    post_img = download_image(scene_images.post_url)
+    pre_width, pre_height = pre_img.size
+    post_width, post_height = post_img.size
+
+    pre_geojson = read_json(pre_geojson_path)
+    post_geojson = read_json(post_geojson_path)
+    pre_features = pre_geojson.get("features", [])
+    post_features = post_geojson.get("features", [])
+    if len(pre_features) != len(post_features):
+        raise ValueError(
+            f"Feature count mismatch for {scene_id}: pre={len(pre_features)} post={len(post_features)}"
+        )
+
+    pre_dir = output_root / f"{scene_id}_pre_disaster"
+    post_dir = output_root / f"{scene_id}_post_disaster"
+    pre_dir.mkdir(parents=True, exist_ok=True)
+    post_dir.mkdir(parents=True, exist_ok=True)
+
+    saved = 0
+    skipped = 0
+
+    for idx, (pre_feature, post_feature) in enumerate(zip(pre_features, post_features)):
+        pre_coords = (pre_feature.get("geometry") or {}).get("coordinates", [])
+        post_coords = (post_feature.get("geometry") or {}).get("coordinates", [])
+        if not pre_coords or not post_coords:
+            skipped += 1
             continue
 
-        with open(geojson_path) as f:
-            geojson = json.load(f)
+        pre_ring = pre_coords[0]
+        post_ring = post_coords[0]
 
-        # # -----------------------------
-        # # PROCESS BUILDINGS
-        # # -----------------------------
-        for i, feature in enumerate(geojson["features"]):
+        pre_pixels = [
+            geo_to_pixel(
+                lon,
+                lat,
+                pre_transform[0],
+                pre_transform[1],
+                pre_transform[3],
+                pre_transform[5],
+            )
+            for lon, lat in pre_ring
+        ]
+        post_pixels = [
+            geo_to_pixel(
+                lon,
+                lat,
+                post_transform[0],
+                post_transform[1],
+                post_transform[3],
+                post_transform[5],
+            )
+            for lon, lat in post_ring
+        ]
 
-            coords = feature["geometry"]["coordinates"][0]
+        pre_xs = [p[0] for p in pre_pixels]
+        pre_ys = [p[1] for p in pre_pixels]
+        post_xs = [p[0] for p in post_pixels]
+        post_ys = [p[1] for p in post_pixels]
 
-            pixel_coords = []
+        pre_box = clip_box(
+            int(min(pre_xs)) - PADDING,
+            int(min(pre_ys)) - PADDING,
+            int(max(pre_xs)) + PADDING,
+            int(max(pre_ys)) + PADDING,
+            pre_width,
+            pre_height,
+        )
+        post_box = clip_box(
+            int(min(post_xs)) - PADDING,
+            int(min(post_ys)) - PADDING,
+            int(max(post_xs)) + PADDING,
+            int(max(post_ys)) + PADDING,
+            post_width,
+            post_height,
+        )
 
-            # convert GeoJSON latitude/longitude into pixel coordinates
-            for lon, lat in coords:
-                x, y = geo_to_pixel(
-                    lon, lat,
-                    startX, pixelWidth,
-                    startY, pixelHeight
-                )
-                pixel_coords.append((x, y))
+        if pre_box[2] <= pre_box[0] or pre_box[3] <= pre_box[1]:
+            skipped += 1
+            continue
+        if post_box[2] <= post_box[0] or post_box[3] <= post_box[1]:
+            skipped += 1
+            continue
 
-            # store x and y coordinates
-            xs = [p[0] for p in pixel_coords]
-            ys = [p[1] for p in pixel_coords]
+        pre_crop = pre_img.crop(pre_box)
+        post_crop = post_img.crop(post_box)
 
-            # apply padding
-            minX = int(min(xs)) - PADDING
-            maxX = int(max(xs)) + PADDING
-            minY = int(min(ys)) - PADDING
-            maxY = int(max(ys)) + PADDING
+        pre_crop.save(pre_dir / f"building_{idx}.png")
+        post_crop.save(post_dir / f"building_{idx}.png")
+        saved += 1
 
-            # Clip to image bounds
-            minX = max(0, minX)
-            minY = max(0, minY)
-            maxX = min(width, maxX)
-            maxY = min(height, maxY)
+    return saved, skipped
 
-            # skip invalid crops
-            if maxX <= minX or maxY <= minY:
-                continue
 
-            # crop image
-            crop = image.crop((minX, minY, maxX, maxY))
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Crop Cloudinary-hosted disaster scenes into building crops.")
+    parser.add_argument("--urls-file", type=str, default=str(DEFAULT_URLS_FILE))
+    parser.add_argument("--metadata-file", type=str, default=str(METADATA_FILE))
+    parser.add_argument("--output-dir", type=str, default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument(
+        "--scene",
+        action="append",
+        default=[],
+        help="Specific scene id to crop, e.g. hurricane-harvey_00000370. Repeat for multiple scenes.",
+    )
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Skip scenes that already have both pre and post crop folders with content.",
+    )
+    args = parser.parse_args()
 
-            # add to output directory
-            tile_output_dir = os.path.join(OUTPUT_DIR, base_name)
-            os.makedirs(tile_output_dir, exist_ok=True)
+    urls_file = Path(args.urls_file)
+    metadata_file = Path(args.metadata_file)
+    output_root = Path(args.output_dir)
 
-            output_name = f"building_{i}.png"
-            output_path = os.path.join(tile_output_dir, output_name)
+    metadata = read_json(metadata_file)
+    scene_urls = load_scene_urls(urls_file)
 
-            crop.save(output_path)
+    requested_scenes = list(args.scene) if args.scene else list(scene_urls.keys())
+    missing_scenes = [scene for scene in requested_scenes if scene not in scene_urls]
+    if missing_scenes:
+        raise SystemExit(f"ERROR: missing URL pairs for scene(s): {', '.join(missing_scenes)}")
 
-print("Done.")
+    total = len(requested_scenes)
+    print(f"[INFO] found {total} scene(s) with pre/post URLs in {urls_file}")
+
+    for index, scene_id in enumerate(requested_scenes, 1):
+        if args.skip_existing and scene_already_cropped(output_root, scene_id):
+            print(f"[{index}/{total}] {scene_id} ... SKIP existing crops")
+            continue
+
+        print(f"[{index}/{total}] {scene_id} ... downloading + cropping")
+        try:
+            saved, skipped = crop_scene(scene_id, scene_urls[scene_id], metadata, output_root)
+        except Exception as exc:
+            print(f"[{index}/{total}] {scene_id} ... ERROR {type(exc).__name__}: {exc}")
+            continue
+
+        print(f"[{index}/{total}] {scene_id} ... DONE saved={saved} skipped={skipped}")
+
+    print(f"[DONE] output root: {output_root}")
+
+
+if __name__ == "__main__":
+    main()

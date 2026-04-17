@@ -32,7 +32,7 @@ MAX_RETRIES = 3
 RETRY_BACKOFF_S = 2.0
 
 # Labels we will output
-ALLOWED = ["no-damage", "minor-damage", "major-damage", "severe-damage"]
+ALLOWED = ["no-damage", "minor-damage", "major-damage", "destroyed"]
 
 
 SYSTEM_PROMPT = "/no_think"
@@ -85,7 +85,10 @@ def normalize_label(s: str) -> Optional[str]:
     s = s.replace("nodamage", "no-damage")
     s = s.replace("minor", "minor-damage") if s == "minor" else s
     s = s.replace("major", "major-damage") if s == "major" else s
-    s = s.replace("severe", "severe-damage") if s == "severe" else s
+    s = s.replace("destroy", "destroyed") if s == "destroy" else s
+    s = s.replace("destroyed-damage", "destroyed")
+    s = s.replace("severe", "destroyed") if s == "severe" else s
+    s = s.replace("severe-damage", "destroyed")
     return s if s in ALLOWED else None
 
 def extract_json_from_text(text: str) -> Optional[dict]:
@@ -104,6 +107,39 @@ def extract_json_from_text(text: str) -> Optional[dict]:
         return json.loads(block)
     except Exception:
         return None
+
+
+def normalize_damage_present(value: Any) -> Optional[bool]:
+    if value is None:
+        return None
+    s = str(value).strip().lower()
+    if s in {"yes", "true", "1", "damage", "present"}:
+        return True
+    if s in {"no", "false", "0", "no-damage", "none", "absent"}:
+        return False
+    return None
+
+
+def evidence_is_weak(value: Any) -> bool:
+    if value is None:
+        return True
+    text = str(value).strip().lower()
+    if not text:
+        return True
+
+    weak_markers = {
+        "unclear",
+        "unknown",
+        "ambiguous",
+        "possible",
+        "maybe",
+        "cannot tell",
+        "hard to tell",
+        "low confidence",
+        "none",
+        "n/a",
+    }
+    return text in weak_markers
 
 def coerce_uid(s: str) -> str:
     return s.strip()
@@ -606,7 +642,7 @@ def load_ground_truth(labels_json: Path) -> Dict[str, str]:
 # =========================
 # Model call
 # =========================
-def build_prompt(uid: str) -> str:
+def build_damage_presence_prompt(uid: str) -> str:
     return (
         "You are analyzing hurricane damage using satellite imagery.\n\n"
 
@@ -614,26 +650,55 @@ def build_prompt(uid: str) -> str:
         "1) PRE-DISASTER image (before hurricane)\n"
         "2) POST-DISASTER image (after hurricane)\n\n"
 
-        "Your task is to compare them and classify the building damage.\n\n"
+        "Your task is to decide whether there is any visible NEW damage in POST compared with PRE.\n\n"
+
+        "Choose EXACTLY ONE answer for damage_present:\n"
+        "yes\n"
+        "no\n\n"
+
+        "Important decision rules:\n"
+        "- Judge damage ONLY by visible change from PRE to POST.\n"
+        "- Do NOT call damage based on shadows, blur, crop edges, different lighting, vegetation, or low resolution.\n"
+        "- If PRE and POST look materially the same, output no.\n"
+        "- If evidence is weak or ambiguous, output no.\n"
+        "- Use yes only when there is clear visible new building damage in POST.\n\n"
+
+        "Return ONLY a JSON object in this format:\n"
+        '{"uid":"' + uid + '","damage_present":"yes_or_no","evidence":"short phrase"}\n\n'
+
+        "Do not include explanations or additional text."
+    )
+
+
+def build_severity_prompt(uid: str) -> str:
+    return (
+        "You are analyzing hurricane damage using satellite imagery.\n\n"
+
+        "You will receive TWO images of the SAME building:\n"
+        "1) PRE-DISASTER image (before hurricane)\n"
+        "2) POST-DISASTER image (after hurricane)\n\n"
+
+        "Assume there IS visible new damage in POST compared with PRE.\n"
+        "Your task is to classify the damage severity conservatively.\n\n"
 
         "Choose EXACTLY ONE damage label:\n"
-        "no-damage\n"
         "minor-damage\n"
         "major-damage\n"
-        "severe-damage\n\n"
+        "destroyed\n\n"
 
         "Damage definitions:\n"
-        "no-damage: building appears unchanged between images\n"
-        "minor-damage: small roof damage, discoloration, minor debris\n"
-        "major-damage: large roof damage, missing sections, structural failure\n"
-        "severe-damage: building collapsed, mostly destroyed, or missing\n\n"
+        "minor-damage: limited new damage such as a small roof patch change, light debris, or localized impact\n"
+        "major-damage: clear substantial damage such as large roof sections missing, major structural breakage, or extensive debris directly affecting the building\n"
+        "destroyed: collapse, near-total destruction, or most of the structure missing\n\n"
 
         "Important decision rules:\n"
         "- Judge damage ONLY by visible change from PRE to POST.\n"
         "- Do NOT call damage based on shadows, blur, crop edges, different lighting, or low resolution.\n"
         "- Do NOT assume roof loss unless the POST image clearly shows new missing structure compared with PRE.\n"
-        "- If PRE and POST look materially the same, output no-damage.\n"
-        "- If evidence is weak or ambiguous, output no-damage.\n\n"
+        "- If there is clear change but it is limited, prefer minor-damage over major-damage.\n"
+        "- Use major-damage only when the roof or structure has a substantial clearly visible new failure.\n"
+        "- Use destroyed only for collapse or near-total destruction.\n"
+        "- If the damage is visible but limited, choose minor-damage.\n\n"
 
         "Focus on visual evidence such as:\n"
         "- roof condition changes\n"
@@ -644,13 +709,25 @@ def build_prompt(uid: str) -> str:
         "If the crop is unclear or partially off-center, rely only on clear visible evidence.\n\n"
 
         "Return ONLY a JSON object in this format:\n"
-        '{"uid":"' + uid + '","subtype":"LABEL"}\n\n'
+        '{"uid":"' + uid + '","subtype":"LABEL","evidence":"short phrase"}\n\n'
 
         "Do not include explanations or additional text."
     )
-def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, float]:
+
+
+def build_multimodal_content(prompt: str, pre_img: Path, post_img: Path) -> List[dict]:
+    return [
+        {"type": "text", "text": prompt},
+        {"type": "text", "text": "PRE-DISASTER IMAGE"},
+        {"type": "image_url", "image_url": {"url": base64_data_url(pre_img)}},
+        {"type": "text", "text": "POST-DISASTER IMAGE"},
+        {"type": "image_url", "image_url": {"url": base64_data_url(post_img)}},
+    ]
+
+
+def call_structured_model(pre_img: Path, post_img: Path, prompt: str) -> Tuple[Optional[dict], int, str, float]:
     """
-    Returns: (pred_label, http_status_or_-1, raw_text, latency_s)
+    Returns: (parsed_json, http_status_or_-1, raw_text, latency_s)
     """
     headers = {
         "Authorization": f"Bearer {NIM_API_KEY}",
@@ -658,19 +735,11 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
         "Accept": "application/json",
     }
 
-    content = [
-        {"type": "text", "text": build_prompt(uid)},
-        {"type": "text", "text": "PRE-DISASTER IMAGE"},
-        {"type": "image_url", "image_url": {"url": base64_data_url(pre_img)}},
-        {"type": "text", "text": "POST-DISASTER IMAGE"},
-        {"type": "image_url", "image_url": {"url": base64_data_url(post_img)}},
-    ]
-
     payload = {
         "model": MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": content},
+            {"role": "user", "content": build_multimodal_content(prompt, pre_img, post_img)},
         ],
         "max_tokens": 256,
         "temperature": 0.0,
@@ -691,26 +760,16 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
             latency = time.time() - start
             status = r.status_code
 
-            # Non-200 -> return raw for debugging
             if status != 200:
-                return ("ERROR", status, r.text[:2000], latency)
+                return (None, status, r.text[:2000], latency)
 
             j = r.json()
             raw = j["choices"][0]["message"]["content"]
-            # Try to parse JSON response
             parsed = extract_json_from_text(raw)
             if parsed and isinstance(parsed, dict):
-                pred = normalize_label(str(parsed.get("subtype", "")))
-                if pred:
-                    return (pred, 200, raw, latency)
+                return (parsed, 200, raw, latency)
 
-            # fallback: try to find a label token anywhere
-            raw_l = raw.lower()
-            for lab in ALLOWED:
-                if lab in raw_l:
-                    return (lab, 200, raw, latency)
-
-            return ("ERROR", 200, raw, latency)
+            return (None, 200, raw, latency)
 
         except requests.exceptions.RequestException as e:
             last_exc = e
@@ -718,10 +777,41 @@ def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, 
                 time.sleep(RETRY_BACKOFF_S * attempt)
                 continue
             latency = time.time() - start
-            return ("ERROR", -1, f"{type(e).__name__}:{e}", latency)
+            return (None, -1, f"{type(e).__name__}:{e}", latency)
 
     latency = time.time() - start
-    return ("ERROR", -1, f"{type(last_exc).__name__}:{last_exc}", latency)
+    return (None, -1, f"{type(last_exc).__name__}:{last_exc}", latency)
+
+
+def call_model(pre_img: Path, post_img: Path, uid: str) -> Tuple[str, int, str, float]:
+    presence_prompt = build_damage_presence_prompt(uid)
+    parsed_presence, status, raw_presence, latency_presence = call_structured_model(pre_img, post_img, presence_prompt)
+    if status != 200 or not parsed_presence:
+        return ("ERROR", status, raw_presence, latency_presence)
+
+    damage_present = normalize_damage_present(parsed_presence.get("damage_present"))
+    if damage_present is not True:
+        return ("no-damage", 200, raw_presence, latency_presence)
+
+    if evidence_is_weak(parsed_presence.get("evidence")):
+        return ("no-damage", 200, raw_presence, latency_presence)
+
+    severity_prompt = build_severity_prompt(uid)
+    parsed_severity, sev_status, raw_severity, latency_severity = call_structured_model(pre_img, post_img, severity_prompt)
+    combined_latency = latency_presence + latency_severity
+    combined_raw = f"{raw_presence} || {raw_severity}"
+
+    if sev_status != 200 or not parsed_severity:
+        return ("ERROR", sev_status, combined_raw, combined_latency)
+
+    pred = normalize_label(str(parsed_severity.get("subtype", "")))
+    if not pred or pred == "no-damage":
+        return ("minor-damage", 200, combined_raw, combined_latency)
+
+    if pred == "minor-damage" and evidence_is_weak(parsed_severity.get("evidence")):
+        return ("no-damage", 200, combined_raw, combined_latency)
+
+    return (pred, 200, combined_raw, combined_latency)
 
 # =========================
 # Output writers
@@ -800,6 +890,11 @@ def main():
         action="store_true",
         help="If set, skip UIDs already present in results.csv"
     )
+    ap.add_argument(
+        "--output-suffix",
+        default="",
+        help="Optional suffix appended to results/stats/predictions filenames, e.g. '_secondary'"
+    )
     args = ap.parse_args()
 
     if not NIM_API_KEY:
@@ -814,11 +909,13 @@ def main():
         out_dir = crops_dir / "_predictions"
 
     ensure_dir(out_dir)
-    stats_file = out_dir / "stats.json"
+    output_suffix = args.output_suffix.strip()
+    stats_file = out_dir / f"stats{output_suffix}.json"
 
     # Load ground truth
     gt = load_ground_truth(labels_path)
     labels_json_obj = read_json(labels_path)
+    scene_id = scene_prefix_from_labels(labels_path)
 
     # Discover crop pairs
     ready = scan_crops_folder(crops_dir, labels_path)
@@ -832,7 +929,8 @@ def main():
     total = len(uids)
 
     # Resume support
-    csv_path = out_dir / "results.csv"
+    csv_path = out_dir / f"results{output_suffix}.csv"
+    predictions_json_path = out_dir / f"predictions{output_suffix}.json"
     done_uids: set[str] = set()
     uid_to_pred: Dict[str, str] = {}
     correct = 0
@@ -840,7 +938,10 @@ def main():
     if csv_path.exists():
         done_uids, uid_to_pred, correct, evaluated = load_existing_run_state(csv_path)
 
-    print(f"Existing cached results: {len(done_uids)} building(s), correct={correct}, evaluated={evaluated}")
+    print(
+        f"Existing cached results for {scene_id}: "
+        f"{len(done_uids)} building(s), correct={correct}, evaluated={evaluated}"
+    )
 
     # Initialize RPM limiter
     last_call_ts = 0.0
@@ -852,8 +953,11 @@ def main():
     ]
 
     # Print run info
+    print(f"Scene: {scene_id}")
     print(f"Found {total} crop pairs in: {crops_dir}")
     print(f"Writing outputs to: {out_dir}")
+    if output_suffix:
+        print(f"Using output suffix: {output_suffix}")
     print(f"RPM_LIMIT={RPM_LIMIT} => MIN_INTERVAL_S={MIN_INTERVAL_S:.3f}s")
     if args.resume:
         print(f"Resume enabled: {len(done_uids)} uid(s) already in results.csv will be skipped.")
@@ -890,11 +994,16 @@ def main():
                 correct += 1
 
         # write updated stats to file
+        scene_accuracy = f"{correct / evaluated * 100:.2f}%" if evaluated > 0 else "N/A"
         with stats_file.open("w", encoding="utf-8") as f:
             json.dump({
+                "scene_id": scene_id,
                 "correct": correct,
                 "evaluated": evaluated,
-                "accuracy": f"{correct/evaluated*100:.2f}%"
+                "accuracy": scene_accuracy,
+                "total_crop_pairs": total,
+                "completed_predictions": len(uid_to_pred) + 1,
+                "output_suffix": output_suffix,
             }, f)
 
         uid_to_pred[uid] = pred
@@ -916,26 +1025,26 @@ def main():
         tag = "OK" if status == 200 and pred != "ERROR" else "ERR"
         msg = f"[{i}/{total}] UID={uid} ... {tag} status={status} pred={pred} exp={expected} match={match}"
         if evaluated > 0:
-            msg += f" | running_acc={acc:.1f}% ({correct}/{evaluated})"
+            msg += f" | scene_acc={acc:.1f}% ({correct}/{evaluated})"
         if status == -1 and "RequestException" in raw:
             msg += f" req_exc={raw_excerpt}"
         print(msg)
 
         # Save incremental JSON every 5 buildings (record keeping)
         if i % 5 == 0 or i == total:
-            write_predicted_fema_json(out_dir / "predictions.json", labels_json_obj, uid_to_pred)
+            write_predicted_fema_json(predictions_json_path, labels_json_obj, uid_to_pred)
 
     # Final write
-    write_predicted_fema_json(out_dir / "predictions.json", labels_json_obj, uid_to_pred)
+    write_predicted_fema_json(predictions_json_path, labels_json_obj, uid_to_pred)
 
     # Summary
     print("\nDone.")
     if evaluated > 0:
-        print(f"Accuracy vs expected (where available): {correct}/{evaluated} = {correct/evaluated*100:.2f}%")
+        print(f"Scene accuracy for {scene_id}: {correct}/{evaluated} = {correct/evaluated*100:.2f}%")
     else:
-        print("No evaluated rows (expected labels missing or all predictions errored).")
+        print(f"No evaluated rows for {scene_id} (expected labels missing or all predictions errored).")
     print(f"CSV: {csv_path}")
-    print(f"Pred JSON: {out_dir / 'predictions.json'}")
+    print(f"Pred JSON: {predictions_json_path}")
 
 if __name__ == "__main__":
     main()
