@@ -24,7 +24,7 @@ const AppLayout: React.FC<{ path: string; children: React.ReactNode }> = ({ path
       <Sidebar />
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <Navbar title={meta.title} subtitle={meta.subtitle} />
-        <Box sx={{ flex: 1, overflowY: 'auto', backgroundColor: 'background.default' }}>
+        <Box sx={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', backgroundColor: 'background.default' }}>
           {children}
         </Box>
       </Box>
