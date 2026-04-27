@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, CssBaseline, Box } from '@mui/material';
 import { theme } from './theme';
 import { Sidebar } from './components/Sidebar/Sidebar';
@@ -8,13 +8,14 @@ import { EvaluationPanel } from './components/EvaluationPanel/EvaluationPanel';
 import { MapView } from './components/MapView/MapView';
 import { ChatBot } from './components/ChatBot/ChatBot';
 import { Overview } from './pages/Overview';
-import { SignIn } from './pages/SignIn';
+import { AuthPage } from './pages/SignIn';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
-  '/': { title: 'Mission Overview', subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
-  '/map': { title: 'Geospatial Map', subtitle: 'Interactive aerial imagery + damage overlays' },
-  '/evaluation': { title: 'Model Evaluation', subtitle: 'VLM predictions vs FEMA ground truth labels' },
-  '/chatbot': { title: 'Query Bot', subtitle: 'Natural language damage impact queries' },
+  '/':           { title: 'Mission Overview',  subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
+  '/map':        { title: 'Geospatial Map',     subtitle: 'Interactive aerial imagery + damage overlays' },
+  '/evaluation': { title: 'Model Evaluation',   subtitle: 'VLM predictions vs FEMA ground truth labels' },
+  '/chatbot':    { title: 'Query Bot',           subtitle: 'Natural language damage impact queries' },
 };
 
 const AppLayout: React.FC<{ path: string; children: React.ReactNode }> = ({ path, children }) => {
@@ -38,45 +39,53 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Routes>
+          {/* Public route — no layout, no auth required */}
+          <Route path="/login" element={<AuthPage />} />
+
+          {/* Protected routes — redirect to /login if not signed in */}
           <Route
             path="/"
             element={
-              <AppLayout path="/">
-                <Overview />
-              </AppLayout>
+              <ProtectedRoute>
+                <AppLayout path="/">
+                  <Overview />
+                </AppLayout>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/map"
             element={
-              <AppLayout path="/map">
-                <MapView />
-              </AppLayout>
+              <ProtectedRoute>
+                <AppLayout path="/map">
+                  <MapView />
+                </AppLayout>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/evaluation"
             element={
-              <AppLayout path="/evaluation">
-                <EvaluationPanel />
-              </AppLayout>
+              <ProtectedRoute>
+                <AppLayout path="/evaluation">
+                  <EvaluationPanel />
+                </AppLayout>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/chatbot"
             element={
-              <AppLayout path="/chatbot">
-                <ChatBot />
-              </AppLayout>
+              <ProtectedRoute>
+                <AppLayout path="/chatbot">
+                  <ChatBot />
+                </AppLayout>
+              </ProtectedRoute>
             }
-            />
-            <Route
-            path="/login" 
-            element={<AppLayout path="/login">
-                <SignIn />
-              </AppLayout>
-            } />
-          
+          />
+
+          {/* Catch-all */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
