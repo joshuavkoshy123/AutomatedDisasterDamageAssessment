@@ -10,6 +10,8 @@ import { COLORS } from '../../theme';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { ChatMessage } from '../../types';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -160,8 +162,13 @@ export const MapView: React.FC = () => {
         })
         .catch(err => console.error('Failed to load metadata:', err));
 
-      fetch(`/data/output_hurricane-harvey_${tile}_${imageMode}_disaster.geojson`)
-        .then(r => r.json())
+      const docId = `output_hurricane-harvey_${tile}_${imageMode}_disaster`;
+      const collectionName = `${imageMode}_disaster_labels`;
+      getDoc(doc(db, collectionName, docId))
+        .then(snapshot => {
+          if (!snapshot.exists()) throw new Error(`Document ${docId} not found`);
+          return JSON.parse(snapshot.data().data);
+        })
         .then(data => {
           if (!mapInstanceRef.current) return;
           const layer = L.geoJSON(data, {

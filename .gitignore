@@ -1,4 +1,5 @@
 backend/.env
+frontend/disaster-dashboard/.env
 progressNotes/
 backend/old_nemotron.py
 backend/image_urls.txt
