@@ -49,13 +49,13 @@ const getDamageColor = (subtype: string): string => ({
   'destroyed':    '#ef4444',
 }[subtype] ?? '#94a3b8');
 
-function getTextResponse(query: string): string {
-  const q = query.toLowerCase();
-  if (q.includes('almeda') || q.includes('1245')) return MOCK_RESPONSES.alameda;
-  if (q.includes('gulf') || q.includes('freeway'))  return MOCK_RESPONSES.gulf;
-  if (q.includes('destroy') || q.includes('accuracy')) return MOCK_RESPONSES.destroyed;
-  return MOCK_RESPONSES.default;
-}
+// function getTextResponse(query: string): string {
+//   const q = query.toLowerCase();
+//   if (q.includes('almeda') || q.includes('1245')) return MOCK_RESPONSES.alameda;
+//   if (q.includes('gulf') || q.includes('freeway'))  return MOCK_RESPONSES.gulf;
+//   if (q.includes('destroy') || q.includes('accuracy')) return MOCK_RESPONSES.destroyed;
+//   return MOCK_RESPONSES.default;
+// }
 
 function getBuildingResponse(props: Record<string, unknown>): string {
   const subtype = (props?.subtype as string) || 'unknown';
@@ -242,7 +242,7 @@ export const MapView: React.FC = () => {
     );
     const data = await response.json();
 
-    
+
     const modelOutput = data.response;
 
     // const botMsg: ChatMessage = {
