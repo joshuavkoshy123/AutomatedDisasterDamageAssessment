@@ -16,8 +16,8 @@ for root, dirs, files in os.walk(base_dir):
     if root == base_dir:
         continue
 
-    if "results.csv" in files:
-        file_path = os.path.join(root, "results.csv")
+    if "results_secondary_v7.csv" in files:
+        file_path = os.path.join(root, "results_secondary_v7.csv")
         
         try:
             df = pd.read_csv(file_path)
@@ -66,6 +66,9 @@ try:
 
     # Merge on uid
     final_df = final_df.merge(addr_df, on="uid", how="left")
+
+    # Remove duplicate rows based on uid
+    final_df = final_df.drop_duplicates(subset=["uid"])
 
     print("Successfully merged address data.")
 

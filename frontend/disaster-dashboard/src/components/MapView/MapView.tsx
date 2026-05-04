@@ -205,22 +205,64 @@ export const MapView: React.FC = () => {
   }, [imageMode]);
 
   // ── Chat send ──────────────────────────────────────────────────────────────
-  const sendMessage = (text: string) => {
+  const sendMessage = async (text: string) => {
     if (!text.trim()) return;
+
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
       content: text,
       timestamp: new Date(),
     };
-    const botMsg: ChatMessage = {
-      id: (Date.now() + 1).toString(),
+
+    const botMsgId = (Date.now() + 1).toString();
+
+    const loadingBotMsg: ChatMessage = {
+      id: botMsgId,
       role: 'assistant',
-      content: getTextResponse(text),
+      content: '...',
+      isLoading: true,
       timestamp: new Date(),
     };
-    setMessages(prev => [...prev, userMsg, botMsg]);
+
+    // display loading state
+    setMessages(prev => [...prev, userMsg, loadingBotMsg]);
     setInput('');
+
+    // Make API Request to GET model response
+    const params = new URLSearchParams({
+      q: text
+    });
+
+    //fetch('https://automateddisasterdamageassessmentserver.onrender.com/query');
+    const response = await fetch(`http://localhost:8000/query?${params.toString()}`,
+                                  {
+                                    method: 'GET'
+                                  }
+    );
+    const data = await response.json();
+
+    
+    const modelOutput = data.response;
+
+    // const botMsg: ChatMessage = {
+    //   id: (Date.now() + 1).toString(),
+    //   role: 'assistant',
+    //   //content: getTextResponse(text),
+    //   content: modelOutput,
+    //   timestamp: new Date(),
+    // };
+    // setMessages(prev => [...prev, userMsg, botMsg]);
+    // setInput('');
+
+    // update bot message content when finished loading
+    setMessages(prev =>
+      prev.map(msg =>
+        msg.id === botMsgId
+          ? { ...msg, content: modelOutput, isLoading: false }
+          : msg
+      )
+    );
   };
 
   // ── Render ─────────────────────────────────────────────────────────────────

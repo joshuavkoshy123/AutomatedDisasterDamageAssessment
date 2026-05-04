@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
-from backend.nemotron import answer_query
+#from backend.nemotron import answer_query
+from query_gateway import intent_detector
 
 app = FastAPI()
 
@@ -16,7 +17,9 @@ app.add_middleware(
 # returns model response to query (used by chatbot)
 @app.get("/query/")
 def query_model(q: str = ""):
-    response = answer_query(q)
+    #response = answer_query(q)
+    print("Hello!")
+    response = intent_detector(q)
     return {"response": response}
 
 # gets overall stats or stats for a specific disaster site is disaster id is provided. Will retrieve data from SQL db (don't worry about this for now, we will implement later).
