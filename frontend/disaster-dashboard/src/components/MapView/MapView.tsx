@@ -10,8 +10,9 @@ import { COLORS } from '../../theme';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { ChatMessage } from '../../types';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, DocumentData, DocumentSnapshot, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { GeoJsonObject } from 'geojson';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -70,17 +71,21 @@ export const MapView: React.FC = () => {
   // Map refs
   const mapRef             = useRef<HTMLDivElement>(null);
   const mapInstanceRef     = useRef<L.Map | null>(null);
-  const geojsonLayerRef    = useRef<L.GeoJSON | null>(null);
+  const geojsonLayerRef    = useRef<L.GeoJSON[]>([]);
   const imageLayersRef     = useRef<L.ImageOverlay[]>([]);
   const cloudinaryUrlsRef  = useRef<Record<string, string>>({});
   const chatBottomRef      = useRef<HTMLDivElement>(null);
 
   // Map state
   const [imageMode, setImageMode] = useState<'pre' | 'post'>('post');
+  const [mapLoading, setMapLoading] = useState(false);
 
   // Drawer state
   const [drawerOpen, setDrawerOpen]         = useState(false);
   const [selectedFeature, setSelectedFeature] = useState<Record<string, unknown> | null>(null);
+
+  // Drawer is never shown while the map is loading, regardless of drawerOpen state
+  const effectiveDrawerOpen = drawerOpen && !mapLoading;
 
   // Chat state
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -125,21 +130,22 @@ export const MapView: React.FC = () => {
   useEffect(() => {
     if (!mapInstanceRef.current) return;
 
-    if (geojsonLayerRef.current) {
-      geojsonLayerRef.current.remove();
-      geojsonLayerRef.current = null;
-    }
+    geojsonLayerRef.current.forEach(l => l.remove());
+    geojsonLayerRef.current = [];
 
     imageLayersRef.current.forEach(l => l.remove());
     imageLayersRef.current = [];
 
-    for (const tile of TILES) {
+    setDrawerOpen(false);
+    setMapLoading(true);
+
+    const tilePromises = TILES.map(tile => {
       const width = 1024;
       const height = 1024;
       const correctionLat = -0.00000;
       const correctionLng =  0.00000;
 
-      fetch('/data/metadata.json')
+      const imagePromise = fetch('/data/metadata.json')
         .then(r => r.json())
         .then(data => {
           if (!mapInstanceRef.current) return;
@@ -166,12 +172,13 @@ export const MapView: React.FC = () => {
       const docId = imageMode === 'post'
         ? `hurricane-harvey_${tile}`
         : `output_hurricane-harvey_${tile}_pre_disaster`;
-      getDoc(doc(db, collectionName, docId))
-        .then(snapshot => {
+
+      const geojsonPromise = getDoc(doc(db, collectionName, docId))
+        .then((snapshot: DocumentSnapshot<DocumentData>) => {
           if (!snapshot.exists()) throw new Error(`Document ${docId} not found`);
-          return JSON.parse(snapshot.data().data);
+          return JSON.parse(snapshot.data()!.data);
         })
-        .then(data => {
+        .then((data: GeoJsonObject | GeoJsonObject[] | null | undefined) => {
           if (!mapInstanceRef.current) return;
           const layer = L.geoJSON(data, {
             style: (feature) => ({
@@ -182,6 +189,7 @@ export const MapView: React.FC = () => {
             }),
             onEachFeature: (feature, layer) => {
               layer.on('click', () => {
+                if (mapLoading) return;
                 const props = feature.properties as Record<string, unknown>;
                 setSelectedFeature(props);
                 setDrawerOpen(true);
@@ -196,15 +204,19 @@ export const MapView: React.FC = () => {
             },
           }).addTo(mapInstanceRef.current!);
 
-          geojsonLayerRef.current = layer;
+          geojsonLayerRef.current.push(layer);
           const bounds = layer.getBounds();
           if (bounds.isValid()) {
             mapInstanceRef.current!.fitBounds(bounds, { padding: [40, 40] });
           }
         })
-        .catch(err => console.error('Failed to load GeoJSON for ', docId, err));
-    }
-  }, [imageMode]);
+        .catch((err: any) => console.error('Failed to load GeoJSON for ', docId, err));
+
+      return Promise.allSettled([imagePromise, geojsonPromise]);
+    });
+
+    Promise.allSettled(tilePromises).then(() => setMapLoading(false));
+  }, [imageMode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Chat send ──────────────────────────────────────────────────────────────
   const sendMessage = async (text: string) => {
@@ -323,17 +335,51 @@ export const MapView: React.FC = () => {
       {/* Map + Drawer Container */}
       <Box sx={{ position: 'relative', flex: 1, minHeight: 0, overflow: 'hidden' }}>
 
-        {/* Leaflet Map */}
+        {/* Leaflet Map — pinned to fill container so siblings can't affect its size */}
         <Box
           ref={mapRef}
           sx={{
-            height: '100%',
-            width: '100%',
+            position: 'absolute',
+            inset: 0,
             borderRadius: 2,
             border: `1px solid ${COLORS.bg.border}`,
             overflow: 'hidden',
           }}
         />
+
+        {/* Loading overlay */}
+        {mapLoading && (
+          <Box sx={{
+            position: 'absolute', inset: 0, zIndex: 998,
+            backgroundColor: '#00d4ff',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            borderRadius: 2,
+          }}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography sx={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.75rem', letterSpacing: '0.15em',
+                color: '#00151a', mb: 1,
+              }}>
+                LOADING {imageMode.toUpperCase()}-DISASTER DATA...
+              </Typography>
+              <Box sx={{
+                width: 120, height: 2, backgroundColor: 'rgba(0,0,0,0.15)',
+                borderRadius: 1, overflow: 'hidden', mx: 'auto',
+              }}>
+                <Box sx={{
+                  height: '100%', backgroundColor: '#00151a',
+                  borderRadius: 1,
+                  animation: 'slide 1.2s ease-in-out infinite',
+                  '@keyframes slide': {
+                    '0%':   { transform: 'translateX(-100%)' },
+                    '100%': { transform: 'translateX(200%)' },
+                  },
+                }} />
+              </Box>
+            </Box>
+          </Box>
+        )}
 
         {/* Legend — floating overlay bottom-left */}
         <Box sx={{
@@ -376,7 +422,7 @@ export const MapView: React.FC = () => {
           sx={{
             position: 'absolute',
             top: '50%',
-            right: drawerOpen ? DRAWER_WIDTH : 0,
+            right: effectiveDrawerOpen ? DRAWER_WIDTH : 0,
             transform: 'translateY(-50%)',
             transition: 'right 0.3s ease',
             zIndex: 1001,
@@ -400,7 +446,7 @@ export const MapView: React.FC = () => {
             sx={{
               fontSize: 16,
               color: COLORS.accent.cyan,
-              transform: drawerOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+              transform: effectiveDrawerOpen ? 'rotate(0deg)' : 'rotate(180deg)',
               transition: 'transform 0.3s ease',
             }}
           />
@@ -414,7 +460,7 @@ export const MapView: React.FC = () => {
             right: 0,
             height: '100%',
             width: DRAWER_WIDTH,
-            transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
+            transform: effectiveDrawerOpen ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.3s ease',
             zIndex: 1000,
             display: 'flex',
