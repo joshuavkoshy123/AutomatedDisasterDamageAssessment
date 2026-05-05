@@ -25,11 +25,11 @@ export const mockBuildings: Building[] = [
 ];
 
 export const mockMetrics: EvaluationMetrics = {
-  accuracy: 0.7850,
+  accuracy: 0.6284,
   precision: 0.7612,
   recall: 0.7850,
   f1Score: 0.7665,
-  totalBuildings: 1247,
+  totalBuildings: 7715,
   byClass: {
     'no-damage': { precision: 0.91, recall: 0.94, f1: 0.925, support: 412, correct: 388 },
     'minor-damage': { precision: 0.68, recall: 0.61, f1: 0.643, support: 298, correct: 182 },
@@ -57,12 +57,12 @@ export const mockDisasterEvent: DisasterEvent = {
   location: 'Houston, TX',
   centerLat: 29.7604,
   centerLng: -95.3698,
-  totalBuildings: 1247,
+  totalBuildings: 7715,
   damageSummary: {
-    'no-damage': 412,
-    'minor-damage': 298,
-    'major-damage': 334,
-    'destroyed': 203,
+    'no-damage': 4167,
+    'minor-damage': 871,
+    'major-damage': 2371,
+    'destroyed': 196,
     'un-classified': 0,
   }
 };

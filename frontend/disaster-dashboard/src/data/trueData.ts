@@ -1,0 +1,26 @@
+import type { Building, EvaluationMetrics, ConfusionMatrixData, DisasterEvent } from '../types';
+
+export const mockMetrics: EvaluationMetrics = {
+  accuracy: 0.6284,
+  precision: 0.7612,
+  recall: 0.7850,
+  f1Score: 0.7665,
+  totalBuildings: 1247,
+  byClass: {
+    'no-damage': { precision: 0.91, recall: 0.94, f1: 0.925, support: 412, correct: 388 },
+    'minor-damage': { precision: 0.68, recall: 0.61, f1: 0.643, support: 298, correct: 182 },
+    'major-damage': { precision: 0.74, recall: 0.79, f1: 0.764, support: 334, correct: 264 },
+    'destroyed': { precision: 0.88, recall: 0.85, f1: 0.865, support: 203, correct: 173 },
+    'un-classified': { precision: 0.00, recall: 0.00, f1: 0.00, support: 0, correct: 0 },
+  }
+};
+
+export const mockConfusionMatrix: ConfusionMatrixData = {
+  labels: ['no-damage', 'minor-damage', 'major-damage', 'destroyed'],
+  matrix: [
+    [3642,  259,   266,   0],
+    [ 716, 51,  104,  0],
+    [ 1123,  93, 1155,  0],
+    [  69,  10,  117, 0],
+  ]
+};

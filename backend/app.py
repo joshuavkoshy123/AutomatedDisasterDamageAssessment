@@ -3,7 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
 #from backend.nemotron import answer_query
-from backend.query_gateway import intent_detector
+#from backend.query_gateway import intent_detector
+from query_gateway import intent_detector
 
 app = FastAPI()
 

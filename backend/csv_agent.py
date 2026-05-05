@@ -5,9 +5,11 @@ from langchain_experimental.agents import create_csv_agent
 from langchain_experimental.agents import create_pandas_dataframe_agent
 from dotenv import load_dotenv
 import pandas as pd
+from pathlib import Path
 
 load_dotenv()
 
+#csv_path = Path.cwd() / "building_crops" / "_predictions" / "final_results.csv"
 csv_path = "../building_crops/_predictions/final_results.csv"
 df = pd.read_csv(csv_path)
 

@@ -6,8 +6,10 @@ import sys
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
-from backend.csv_agent import query_csv_agent
-from backend.general_query import general_chat
+# from backend.csv_agent import query_csv_agent
+# from backend.general_query import general_chat
+from csv_agent import query_csv_agent
+from general_query import general_chat
 import re
 
 load_dotenv()
