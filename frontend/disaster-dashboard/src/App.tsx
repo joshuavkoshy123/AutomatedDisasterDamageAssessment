@@ -9,12 +9,14 @@ import { MapView } from './components/MapView/MapView';
 import { ChatBot } from './components/ChatBot/ChatBot';
 import { Overview } from './pages/Overview';
 import { SignIn } from './pages/SignIn';
+import { UploadPage } from './pages/upload';
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   '/': { title: 'Mission Overview', subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
   '/map': { title: 'Geospatial Map', subtitle: 'Interactive aerial imagery + damage overlays' },
   '/evaluation': { title: 'Model Evaluation', subtitle: 'VLM predictions vs FEMA ground truth labels' },
   '/chatbot': { title: 'Query Bot', subtitle: 'Natural language damage impact queries' },
+  '/upload': { title: 'Damage Assessment', subtitle: 'Pre/post imagery comparison' },
 };
 
 const AppLayout: React.FC<{ path: string; children: React.ReactNode }> = ({ path, children }) => {
@@ -75,7 +77,17 @@ function App() {
             element={<AppLayout path="/login">
                 <SignIn />
               </AppLayout>
-            } />
+            }
+	    />
+	    
+	    <Route
+	    path="/upload"
+	    element={
+	    <AppLayout path="/upload">
+	    <UploadPage />
+	    </AppLayout>
+	    }
+	    />
           
         </Routes>
       </BrowserRouter>
