@@ -162,8 +162,10 @@ export const MapView: React.FC = () => {
         })
         .catch(err => console.error('Failed to load metadata:', err));
 
-      const docId = `output_hurricane-harvey_${tile}_${imageMode}_disaster`;
-      const collectionName = `${imageMode}_disaster_labels`;
+      const collectionName = imageMode === 'post' ? 'prediction_labels' : 'pre_disaster_labels';
+      const docId = imageMode === 'post'
+        ? `hurricane-harvey_${tile}`
+        : `output_hurricane-harvey_${tile}_pre_disaster`;
       getDoc(doc(db, collectionName, docId))
         .then(snapshot => {
           if (!snapshot.exists()) throw new Error(`Document ${docId} not found`);
