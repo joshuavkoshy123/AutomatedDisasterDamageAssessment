@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from typing import Annotated
 import uvicorn
 #from backend.nemotron import answer_query
 #from backend.query_gateway import intent_detector
@@ -22,6 +23,16 @@ def query_model(q: str = ""):
     print("Hello!")
     response = intent_detector(q)
     return {"response": response}
+
+# returns result of pre and post disaster image analysis (for Upload Page)
+@app.post("/evaluate/")
+def evaluate(
+    pre: Annotated[UploadFile, File()],
+    post: Annotated[UploadFile, File()]
+):
+    summary = ""
+    #summary = mini_nemotron(pre, post)
+    return { "summary": summary }
 
 # gets overall stats or stats for a specific disaster site is disaster id is provided. Will retrieve data from SQL db (don't worry about this for now, we will implement later).
 @app.get("/stats/")
