@@ -22,7 +22,9 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { COLORS } from '../../theme';
-import { mockMetrics, mockConfusionMatrix, mockBuildings } from '../../data/mockData';
+//import { mockMetrics, mockConfusionMatrix, mockBuildings } from '../../data/mockData';
+import { mockMetrics, mockBuildings } from '../../data/mockData';
+import { mockConfusionMatrix } from '../../data/trueData';
 import type { DamageLevel } from '../../types';
 
 // ── Damage color map ──────────────────────────────────────────────────────────

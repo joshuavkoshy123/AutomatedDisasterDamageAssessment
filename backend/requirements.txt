@@ -9,3 +9,8 @@ google-genai
 cloudinary
 openai
 pillow
+langchain
+pydantic
+langchain_experimental
+langchain_nvidia_ai_endpoints
+pandas

@@ -1,0 +1,7 @@
+Query Bot Pipeline:
+
+- User provides query to model.
+- Model processes the query and returns a SQL query to answer the query.
+- Endpoint will validate the SQL query and execute it (not model).
+- The SQL query response will then be provided back to the model along with the original user query.
+- The model will then use the data provided to return an adequate response to the user.

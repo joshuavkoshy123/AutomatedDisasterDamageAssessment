@@ -54,10 +54,10 @@ const NAV_ITEMS: NavItem[] = [
     description: 'Ask about damage impacts',
   },
   {
-  path: '/upload',
-  label: 'Upload',
-  icon: <ChatBubbleOutlineIcon />,
-  description: 'Upload Pre and Post Disatser Images',
+    path: '/upload',
+    label: 'Upload',
+    icon: <ChatBubbleOutlineIcon />,
+    description: 'Upload Pre and Post Disaster',
   },
 ];
 
