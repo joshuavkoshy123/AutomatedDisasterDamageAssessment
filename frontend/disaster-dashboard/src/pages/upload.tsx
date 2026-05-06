@@ -7,7 +7,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-import { COLORS } from './theme';
+import { COLORS } from '../theme';
 
 /**
  * Damage assessment — pre/post imagery comparison.
@@ -452,7 +452,7 @@ export function UploadPage() {
                 MODULE / DAMAGE_ASSESS
               </Typography>
               <Typography variant="h4" sx={{ color: COLORS.text.primary }}>
-                PRE_POST_COMPARISON
+                PRE AND POST COMPARISON
               </Typography>
             </Box>
           </Box>

@@ -17,7 +17,7 @@ const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   '/map':        { title: 'Geospatial Map',     subtitle: 'Interactive aerial imagery + damage overlays' },
   '/evaluation': { title: 'Model Evaluation',   subtitle: 'VLM predictions vs FEMA ground truth labels' },
   '/chatbot':    { title: 'Query Bot',           subtitle: 'Natural language damage impact queries' },
-  '/upload':    { title: 'Query Bot',           subtitle: 'Tears but no Joy' },
+  '/upload':    { title: 'Upload',           subtitle: 'Tears but no Joy' },
 };
 
 const AppLayout: React.FC<{ path: string; children: React.ReactNode }> = ({ path, children }) => {
@@ -90,7 +90,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <AppLayout path="/upload">
-                  <ChatBot />
+                  <UploadPage />
                 </AppLayout>
               </ProtectedRoute>
             }
