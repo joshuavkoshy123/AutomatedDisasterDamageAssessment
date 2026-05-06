@@ -9,6 +9,7 @@ import { MapView } from './components/MapView/MapView';
 import { ChatBot } from './components/ChatBot/ChatBot';
 import { Overview } from './pages/Overview';
 import { AuthPage } from './pages/SignIn';
+import { UploadPage } from './pages/upload';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
@@ -16,6 +17,7 @@ const PAGE_META: Record<string, { title: string; subtitle: string }> = {
   '/map':        { title: 'Geospatial Map',     subtitle: 'Interactive aerial imagery + damage overlays' },
   '/evaluation': { title: 'Model Evaluation',   subtitle: 'VLM predictions vs FEMA ground truth labels' },
   '/chatbot':    { title: 'Query Bot',           subtitle: 'Natural language damage impact queries' },
+  '/upload':    { title: 'Upload',           subtitle: 'Upload Pre and Post Disaster Images' },
 };
 
 const AppLayout: React.FC<{ path: string; children: React.ReactNode }> = ({ path, children }) => {
@@ -79,6 +81,16 @@ function App() {
               <ProtectedRoute>
                 <AppLayout path="/chatbot">
                   <ChatBot />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+	  <Route
+            path="/upload"
+            element={
+              <ProtectedRoute>
+                <AppLayout path="/upload">
+                  <UploadPage />
                 </AppLayout>
               </ProtectedRoute>
             }
