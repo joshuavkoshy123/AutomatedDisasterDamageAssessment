@@ -7,8 +7,8 @@ export const mockMetrics: EvaluationMetrics = {
   f1Score: 0.7665,
   totalBuildings: 1247,
   byClass: {
-    'no-damage': { precision: 0.91, recall: 0.94, f1: 0.925, support: 412, correct: 388 },
-    'minor-damage': { precision: 0.68, recall: 0.61, f1: 0.643, support: 298, correct: 182 },
+    'no-damage': { precision: 0.66, recall: 0.87, f1: 0.751, support: 412, correct: 388 },
+    'minor-damage': { precision: 0.12, recall: 0.06, f1: 0.08, support: 298, correct: 182 },
     'major-damage': { precision: 0.74, recall: 0.79, f1: 0.764, support: 334, correct: 264 },
     'destroyed': { precision: 0.88, recall: 0.85, f1: 0.865, support: 203, correct: 173 },
     'un-classified': { precision: 0.00, recall: 0.00, f1: 0.00, support: 0, correct: 0 },

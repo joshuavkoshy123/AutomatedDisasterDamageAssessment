@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 # from backend.csv_agent import query_csv_agent
 # from backend.general_query import general_chat
 from csv_agent import query_csv_agent
-from general_query import general_chat
+#from general_query import general_chat
+from RAG import general_query
 import re
 
 load_dotenv()
@@ -58,7 +59,7 @@ def intent_detector(query: str):
 
     Rules:
     - CSV/Data_Related = Requires structured dataset lookup (buildings, damage, addresses, stats)
-    - General = The query is specifically about Hurricane Harvey, but does not require dataset lookup
+    - General = The query is specifically about Hurricane Harvey.
     - Unrelated = Not related to hurricane harvey or the dataset, including queries about other hurricanes or hurricanes in general.
 
     Return ONLY valid JSON.
@@ -132,7 +133,7 @@ def intent_detector(query: str):
     if (parsed.intent == "Hurricane_Harvey_CSV/Data_Related" and parsed.confidence >= 0.3):
         return query_csv_agent(query)
     if (parsed.intent == "HurricaneHarveyGeneral" and parsed.confidence >= 0.3):
-        return general_chat(query)
+        return general_query(query)
     return "Sorry, I can't answer any unrelated queries. Please try again with a query related to Hurricane Harvey or the map."
 
 # Generate prompt
