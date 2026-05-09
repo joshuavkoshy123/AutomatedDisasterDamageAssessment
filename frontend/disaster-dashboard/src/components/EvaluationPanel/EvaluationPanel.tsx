@@ -23,8 +23,8 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { COLORS } from '../../theme';
 //import { mockMetrics, mockConfusionMatrix, mockBuildings } from '../../data/mockData';
-import { mockMetrics, mockBuildings } from '../../data/mockData';
-import { mockConfusionMatrix } from '../../data/trueData';
+import { mockBuildings } from '../../data/mockData';
+import { mockMetrics, mockConfusionMatrix } from '../../data/trueData';
 import type { DamageLevel } from '../../types';
 
 // ── Damage color map ──────────────────────────────────────────────────────────
@@ -557,8 +557,12 @@ const PredictionsTable: React.FC = () => {
 export const EvaluationPanel: React.FC = () => {
   const [tab, setTab] = useState(0);
 
-  const correctCount = mockBuildings.filter((b) => b.modelPrediction === b.femaLabel).length;
-  const incorrectCount = mockBuildings.length - correctCount;
+  //const correctCount = mockBuildings.filter((b) => b.modelPrediction === b.femaLabel).length;
+  //const incorrectCount = mockBuildings.length - correctCount;
+
+  const correctCount = 3642 + 51 + 1155;
+  const incorrectCount = 7715 - correctCount;
+  const total = 7715;
 
   return (
     <Box sx={{ p: 3, height: '100%', overflowY: 'auto' }}>
@@ -582,7 +586,7 @@ export const EvaluationPanel: React.FC = () => {
           Hurricane Harvey — Houston, TX
         </Typography>
         <Typography sx={{ fontSize: '0.78rem', color: COLORS.text.secondary, mt: 0.5 }}>
-          VLM predictions vs FEMA Validated Damage Assessments · Dataset: 1,247 buildings
+          VLM predictions vs FEMA Validated Damage Assessments · Dataset: {total} buildings
         </Typography>
       </Box>
 
@@ -609,7 +613,7 @@ export const EvaluationPanel: React.FC = () => {
           <StatCard
             label="Correct"
             value={String(correctCount)}
-            subtext={`of ${mockBuildings.length} samples`}
+            subtext={`of ${total} samples`}
             color={COLORS.accent.green}
           />
         </Grid>
@@ -617,7 +621,7 @@ export const EvaluationPanel: React.FC = () => {
           <StatCard
             label="Misclassified"
             value={String(incorrectCount)}
-            subtext={`${((incorrectCount / mockBuildings.length) * 100).toFixed(1)}% error rate`}
+            subtext={`${((incorrectCount / total) * 100).toFixed(1)}% error rate`}
             color={COLORS.accent.red}
           />
         </Grid>
