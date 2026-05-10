@@ -1,8 +1,6 @@
 
 import requests
 import os
-import base64
-import sys
 from dotenv import load_dotenv
 
 invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
@@ -13,12 +11,10 @@ load_dotenv()
 
 kApiKey = os.getenv("NVIDIA_API_KEY")
 
-def general_chat(query: str):
+def general_chat(query: str, history: list[dict] | None = None):
     
     infer_url = invoke_url
 
-    content = query
-    
     headers = {
         "Authorization": f"Bearer {kApiKey}",
         "Content-Type": "application/json",
@@ -28,19 +24,32 @@ def general_chat(query: str):
     # Add system message with appropriate prompt
     # Videos only support /no_think, images support both
     
-    system_prompt = "Answer consisely and to the point, without providing more information than is necessary to answer the query."
-    
-    
+    system_prompt = (
+        "Answer concisely and to the point. "
+        "Use prior conversation only when it is relevant to the user's current Hurricane Harvey question. "
+        "Refuse anything outside Hurricane Harvey or the disaster assessment dataset."
+    )
+
     messages = [
         {
             "role": "system",
             "content": system_prompt,
-        },
-        {
-            "role": "user",
-            "content": content,
         }
     ]
+
+    for turn in history or []:
+        role = turn.get("role")
+        content = turn.get("content", "")
+        if role in {"user", "assistant"} and content:
+            messages.append({"role": role, "content": content})
+
+    messages.append(
+        {
+            "role": "user",
+            "content": query,
+        }
+    )
+
     payload = {
         "max_tokens": 1024,
         "temperature": 1,

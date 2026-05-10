@@ -9,6 +9,10 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 import { COLORS } from '../theme';
 
+const API_BASE_URL =
+  (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_API_BASE_URL ??
+  'http://127.0.0.1:8000';
+
 /**
  * Damage assessment — pre/post imagery comparison.
  * Two upload slots, then dispatches both images to a backend for analysis.
@@ -378,7 +382,7 @@ export function UploadPage() {
       //
       // Example (POST to your VPS / FastAPI / Express endpoint):
       //
-      const res = await fetch("/api/analyze", {
+      const res = await fetch(`${API_BASE_URL}/evaluate/`, {
         method: "POST",
         body: formData,
       });
@@ -390,11 +394,6 @@ export function UploadPage() {
       // ("pre" and "post") and return JSON of the form { summary: string }.
       // ─────────────────────────────────────────────────────────────────────
 
-      // Simulated response (remove when wiring to a backend):
-      //await new Promise((r) => setTimeout(r, 1200));
-      const fakeSummary =
-        'Detected moderate structural damage across ~32% of the surveyed area.';
-      setStatus({ kind: 'done', summary: fakeSummary });
     } catch (err) {
       setStatus({
         kind: 'error',
