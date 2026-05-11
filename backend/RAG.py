@@ -43,14 +43,22 @@ prompt = (
 )
 agent = create_agent(model, tools, system_prompt=prompt)
 
-def general_query(query: str):
+def general_query(query: str, history: list[dict] | None = None):
     query = (
         f"{query}\n\n"
         "Be brief. Only answer the question and do not include any unrelated information."
     )
 
+    messages = []
+    for turn in history or []:
+        role = turn.get("role")
+        content = turn.get("content", "")
+        if role in {"user", "assistant"} and content:
+            messages.append({"role": role, "content": content})
+    messages.append({"role": "user", "content": query})
+
     for event in agent.stream(
-        {"messages": [{"role": "user", "content": query}]},
+        {"messages": messages},
         stream_mode="values",
     ):
         #event["messages"][-1].pretty_print()

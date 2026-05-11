@@ -1,54 +1,65 @@
 import json
-import requests
 import os
-import base64
-import sys
-from langchain_core.prompts import ChatPromptTemplate
-from pydantic import BaseModel, Field
-from dotenv import load_dotenv
-# from backend.csv_agent import query_csv_agent
-# from backend.general_query import general_chat
-from csv_agent import query_csv_agent
-#from general_query import general_chat
-from RAG import general_query
 import re
+from collections import defaultdict, deque
+
+import requests
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
+from backend.RAG import general_query
+from backend.csv_agent import query_csv_agent_with_history
 
 load_dotenv()
 
 invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
 stream = False
-query = "Tell me about Hurricane Harvey"
-
 kApiKey = os.getenv("NVIDIA_API_KEY")
+MAX_HISTORY_TURNS = 8
+conversation_store: dict[str, deque] = defaultdict(lambda: deque(maxlen=MAX_HISTORY_TURNS * 2))
+
 
 def clean_json(text: str) -> str:
     text = text.strip()
-
-    # remove ```json or ``` fences
     text = re.sub(r"^```(json)?", "", text)
     text = re.sub(r"```$", "", text)
-
     return text.strip()
 
+
+def get_session_history(session_id: str | None) -> list[dict]:
+    if not session_id:
+        return []
+    return list(conversation_store[session_id])
+
+
+def append_session_turn(session_id: str | None, role: str, content: str) -> None:
+    if not session_id or not content:
+        return
+    conversation_store[session_id].append({"role": role, "content": content})
+
+
+def build_response_payload(response: str, coordinates: dict | None = None) -> dict:
+    return {
+        "response": response,
+        "coordinates": coordinates,
+    }
+
+
 class IntentDetection(BaseModel):
-    intent: str = Field(description="The identified intent of the user query. Default to 'Unrelated' if you don't find a suitable enum for it.", enum=["HurricaneHarveyGeneral", "Hurricane_Harvey_CSV/Data_Related", "Unrelated"])
+    intent: str = Field(
+        description="The identified intent of the user query. Default to 'Unrelated' if no suitable enum is found.",
+        enum=["HurricaneHarveyGeneral", "Hurricane_Harvey_CSV/Data_Related", "Unrelated"],
+    )
     confidence: float = Field(description="Confidence level of the intent detection (0-1).")
 
-def intent_detector(query: str):
-    
-    infer_url = invoke_url
 
-    #content = "Extract the desired information from the following query." + "\n\n" + "Only extract the properties mentioned in the 'IntentDetection' function." + "\n\n" + f"Query: {query}"
-    
+def intent_detector(query: str, session_id: str | None = None):
     headers = {
         "Authorization": f"Bearer {kApiKey}",
         "Content-Type": "application/json",
         "Accept": "application/json",
     }
 
-    # Add system message with appropriate prompt
-    # Videos only support /no_think, images support both
-    
     system_prompt = """
     You are an intent classification system.
 
@@ -60,7 +71,7 @@ def intent_detector(query: str):
     Rules:
     - CSV/Data_Related = Requires structured dataset lookup (buildings, damage, addresses, stats)
     - General = The query is specifically about Hurricane Harvey.
-    - Unrelated = Not related to hurricane harvey or the dataset, including queries about other hurricanes or hurricanes in general.
+    - Unrelated = Not related to Hurricane Harvey or the dataset, including queries about other hurricanes or hurricanes in general.
 
     Return ONLY valid JSON.
     """
@@ -72,20 +83,27 @@ def intent_detector(query: str):
     Columns:
     - address: building address
     - expected: actual damage severity
-    - predicted: models predicted damage severity
+    - predicted: model predicted damage severity
     - latitude, longitude: location coordinates
     - match: true if expected = predicted
     """
-    
+
+    history = get_session_history(session_id)
+    history_text = "\n".join(
+        f"{turn['role']}: {turn['content']}"
+        for turn in history[-6:]
+        if turn.get("content")
+    ) or "No prior conversation."
+
     messages = [
-        {
-            "role": "system",
-            "content": system_prompt,
-        },
+        {"role": "system", "content": system_prompt},
         {
             "role": "user",
             "content": f"""
             {csv_context}
+
+            Prior conversation:
+            {history_text}
 
             Return ONLY raw JSON. No markdown. No code fences.
 
@@ -94,9 +112,10 @@ def intent_detector(query: str):
 
             Query:
             {query}
-            """
-        }
+            """,
+        },
     ]
+
     payload = {
         "max_tokens": 1024,
         "temperature": 1,
@@ -106,50 +125,34 @@ def intent_detector(query: str):
         "messages": messages,
         "stream": stream,
         "model": "nvidia/nemotron-nano-12b-v2-vl",
-        "nvext": {
-            "guided_json": IntentDetection.model_json_schema()
-        }
+        "nvext": {"guided_json": IntentDetection.model_json_schema()},
     }
 
-    response = requests.post(infer_url, headers=headers, json=payload, stream=stream)
-    
+    response = requests.post(invoke_url, headers=headers, json=payload, stream=stream)
     data = response.json()
-
-    content = data['choices'][0]['message']['content']
-
-    # make sure response is in proper json format
+    content = data["choices"][0]["message"]["content"]
     content = clean_json(content)
-
-    parsed = None
 
     try:
         parsed = IntentDetection.model_validate_json(content)
-        print(parsed.intent, parsed.confidence)
     except Exception:
         fixed = content.replace("'", '"')
         parsed = IntentDetection.model_validate(json.loads(fixed))
-        print("Fixed clanker syntax")
 
-    if (parsed.intent == "Hurricane_Harvey_CSV/Data_Related" and parsed.confidence >= 0.3):
-        return query_csv_agent(query)
-    if (parsed.intent == "HurricaneHarveyGeneral" and parsed.confidence >= 0.3):
-        return general_query(query)
-    return "Sorry, I can't answer any unrelated queries. Please try again with a query related to Hurricane Harvey or the map."
+    if parsed.intent == "Hurricane_Harvey_CSV/Data_Related" and parsed.confidence >= 0.3:
+        response_payload = query_csv_agent_with_history(query, history)
+        response_text = response_payload["response"]
+        append_session_turn(session_id, "user", query)
+        append_session_turn(session_id, "assistant", response_text)
+        return response_payload
 
-# Generate prompt
-# prompt = ChatPromptTemplate.from_template(
-# """
-# Extract the desired information from the following query.
+    if parsed.intent == "HurricaneHarveyGeneral" and parsed.confidence >= 0.3:
+        response_text = general_query(query, history)
+        append_session_turn(session_id, "user", query)
+        append_session_turn(session_id, "assistant", response_text)
+        return build_response_payload(response_text, None)
 
-# Only extract the properties mentioned in the 'IntentDetection' function.
-
-# Query:
-# {input}
-# """
-# )
-
-# Query the model to determine intent
-# q = "How many buildings had predicted no-damage?"
-# p = prompt.invoke({"input": q})
-# response = llm.invoke(p)
-# print(response)
+    refusal = "Sorry, I can only answer questions about the disaster assessment dataset or Hurricane Harvey."
+    append_session_turn(session_id, "user", query)
+    append_session_turn(session_id, "assistant", refusal)
+    return build_response_payload(refusal, None)

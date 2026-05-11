@@ -1,11 +1,15 @@
-from fastapi import FastAPI, File, UploadFile
+import shutil
+import tempfile
+from pathlib import Path
+from typing import Annotated
+
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from typing import Annotated
 import uvicorn
-#from backend.nemotron import answer_query
-#from backend.query_gateway import intent_detector
-from query_gateway import intent_detector
+
+from backend.nemotron import call_model
+from backend.query_gateway import intent_detector
 
 app = FastAPI()
 
@@ -18,11 +22,10 @@ app.add_middleware(
 
 # returns model response to query (used by chatbot)
 @app.get("/query/")
-def query_model(q: str = ""):
+def query_model(q: str = "", session_id: str | None = None):
     #response = answer_query(q)
     print("Hello!")
-    response = intent_detector(q)
-    return {"response": response}
+    return intent_detector(q, session_id=session_id)
 
 # returns result of pre and post disaster image analysis (for Upload Page)
 @app.post("/evaluate/")
@@ -30,9 +33,37 @@ def evaluate(
     pre: Annotated[UploadFile, File()],
     post: Annotated[UploadFile, File()]
 ):
-    summary = ""
-    #summary = mini_nemotron(pre, post)
-    return { "summary": summary }
+    if not pre.filename or not post.filename:
+        raise HTTPException(status_code=400, detail="Both pre and post images are required.")
+
+    pre_suffix = Path(pre.filename).suffix or ".png"
+    post_suffix = Path(post.filename).suffix or ".png"
+
+    with tempfile.TemporaryDirectory(prefix="damage_eval_") as tmp_dir:
+        tmp_root = Path(tmp_dir)
+        pre_path = tmp_root / f"pre{pre_suffix}"
+        post_path = tmp_root / f"post{post_suffix}"
+
+        with pre_path.open("wb") as f:
+            shutil.copyfileobj(pre.file, f)
+        with post_path.open("wb") as f:
+            shutil.copyfileobj(post.file, f)
+
+        predicted, status, raw, latency = call_model(pre_path, post_path, "uploaded-eval")
+
+    if predicted == "ERROR":
+        raise HTTPException(
+            status_code=502,
+            detail=f"Model evaluation failed (status={status}). Raw response: {raw[:300]}",
+        )
+
+    summary = f"Predicted damage classification: {predicted}."
+    return {
+        "summary": summary,
+        "predicted": predicted,
+        "status": status,
+        "latency_s": round(latency, 3),
+    }
 
 # gets overall stats or stats for a specific disaster site is disaster id is provided. Will retrieve data from SQL db (don't worry about this for now, we will implement later).
 @app.get("/stats/")
