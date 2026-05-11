@@ -1,23 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-<<<<<<< HEAD
-
-import {
-  CloudUploadOutlined as CloudUploadOutlinedIcon,
-  RestartAlt as RestartAltIcon,
-  PlayArrow as PlayArrowIcon,
-  CheckCircleOutlined as CheckCircleOutlineIcon,
-  ErrorOutlined as ErrorOutlineIcon,
-  FiberManualRecord as FiberManualRecordIcon,
-} from '@mui/icons-material';
-=======
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
->>>>>>> morepain
 
 import { COLORS } from '../theme';
 
@@ -464,11 +452,7 @@ export function UploadPage() {
                 MODULE / DAMAGE_ASSESS
               </Typography>
               <Typography variant="h4" sx={{ color: COLORS.text.primary }}>
-<<<<<<< HEAD
-                PRE_POST_COMPARISON
-=======
                 PRE AND POST COMPARISON
->>>>>>> morepain
               </Typography>
             </Box>
           </Box>
