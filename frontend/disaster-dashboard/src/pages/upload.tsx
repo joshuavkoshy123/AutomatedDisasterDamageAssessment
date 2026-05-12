@@ -9,9 +9,9 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 import { COLORS } from '../theme';
 
-const API_BASE_URL =
-  (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_API_BASE_URL ??
-  'http://127.0.0.1:8000';
+// const API_BASE_URL =
+//   (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_API_BASE_URL ??
+//   'http://127.0.0.1:8000';
 
 /**
  * Damage assessment — pre/post imagery comparison.
