@@ -82,6 +82,7 @@ export const MapView: React.FC = () => {
   const cloudinaryUrlsRef  = useRef<Record<string, string>>({});
   const chatBottomRef      = useRef<HTMLDivElement>(null);
   const sessionIdRef       = useRef<string>(createSessionId());
+  const circleRef          = useRef<L.Circle | null>(null);
 
   // Map state
   const [imageMode, setImageMode] = useState<'pre' | 'post'>('post');
@@ -266,6 +267,33 @@ export const MapView: React.FC = () => {
 
 
     const modelOutput = data.response;
+
+    const coordinates = data.coordinates;
+
+    if (coordinates && mapInstanceRef.current) {
+      const latitude = coordinates.latitude;
+      const longitude = coordinates.longitude;
+
+      // Remove old circle
+      if (circleRef.current) {
+        mapInstanceRef.current.removeLayer(circleRef.current);
+      }
+
+      // Add circle (radius in meters)
+      circleRef.current = L.circle([latitude, longitude], {
+        radius: 100, // adjust: 100–300 works well for streets
+        color: "#3388ff",
+        fillColor: "#3388ff",
+        fillOpacity: 0.2,
+        weight: 2,
+        interactive: false,
+      }).addTo(mapInstanceRef.current);
+
+      mapInstanceRef.current.flyTo([latitude, longitude], 18);
+      
+      // L.marker([latitude, longitude])
+      // .addTo(mapInstanceRef.current)
+    }
 
     // const botMsg: ChatMessage = {
     //   id: (Date.now() + 1).toString(),

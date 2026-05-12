@@ -7,8 +7,6 @@ load_dotenv()
 url = os.getenv("CLOUDINARY_URL")
 print("ENV:", url)
 
-#cloudinary.config(cloudinary_url=url)  # 👈 FORCE it
-
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
     api_key=os.getenv("CLOUDINARY_API_KEY"),

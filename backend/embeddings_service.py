@@ -1,9 +1,10 @@
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
 import os
 from dotenv import load_dotenv
 from langchain_community.vectorstores import PGVector
+from bs4 import SoupStrainer
 
 load_dotenv()
 
@@ -16,13 +17,24 @@ vector_store = PGVector(
     pre_delete_collection=False
 )
 
-file_path = "./Harvey1.pdf"
-loader = PyPDFLoader(
-    file_path,
-    mode="single",
-    pages_delimiter="\n-------THIS IS A CUSTOM END OF PAGE-------\n",
+# file_path = "./noaa_Harvey.pdf"
+# loader = PyPDFLoader(
+#     file_path,
+#     mode="single",
+#     pages_delimiter="\n-------THIS IS A CUSTOM END OF PAGE-------\n",
+# )
+# docs = loader.load()
+
+# Only keep post title, headers, and content from the full HTML.
+bs4_strainer = SoupStrainer(["p", "h1"])
+loader = WebBaseLoader(
+    web_paths=("https://www.nesdis.noaa.gov/news/hurricane-harvey-look-back-seven-years-later",),
+    bs_kwargs={"parse_only": bs4_strainer},
 )
 docs = loader.load()
+
+assert len(docs) == 1
+print(f"Total characters: {len(docs[0].page_content)}")
 print(len(docs))
 print(docs[0].page_content[:5780])
 

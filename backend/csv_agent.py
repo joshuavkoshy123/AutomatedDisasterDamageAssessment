@@ -3,8 +3,6 @@ from pathlib import Path
 import re
 from typing import Optional
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
-#from langchain_openrouter import ChatOpenRouter
-from langchain_experimental.agents import create_csv_agent
 from langchain_experimental.agents import create_pandas_dataframe_agent
 from dotenv import load_dotenv
 import pandas as pd
@@ -260,7 +258,9 @@ def _rewrite_followup_query(query: str, history: list[dict] | None = None) -> st
 
 def query_csv_agent_with_history(query: str, history: list[dict] | None = None):
     rewritten_query = _rewrite_followup_query(query, history)
+    print(rewritten_query)
     deterministic = _resolve_structured_count_query(rewritten_query)
+    print(deterministic)
     if deterministic is not None:
         return deterministic
     return {

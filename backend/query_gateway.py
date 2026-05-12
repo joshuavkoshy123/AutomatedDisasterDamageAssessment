@@ -246,6 +246,8 @@ def intent_detector(query: str, session_id: str | None = None):
         if turn.get("content")
     ) or "No prior conversation."
 
+    print(history_text)
+
     messages = [
         {"role": "system", "content": system_prompt},
         {
