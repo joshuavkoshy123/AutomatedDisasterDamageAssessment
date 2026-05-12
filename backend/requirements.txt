@@ -13,3 +13,4 @@ pandas
 langchain_community
 langchain_text_splitters
 beautifulsoup4
+pgvector
