@@ -258,7 +258,7 @@ export const MapView: React.FC = () => {
     });
 
     //fetch('https://automateddisasterdamageassessmentserver.onrender.com/query');
-    const response = await fetch(`http://localhost:8000/query?${params.toString()}`,
+    const response = await fetch(`https://automateddisasterdamageassessmentserver.onrender.com/query?${params.toString()}`,
                                   {
                                     method: 'GET'
                                   }
