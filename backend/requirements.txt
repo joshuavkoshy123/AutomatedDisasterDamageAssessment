@@ -17,3 +17,4 @@ pandas
 langchain_community
 langchain_text_splitters
 bs4
+pgvector
