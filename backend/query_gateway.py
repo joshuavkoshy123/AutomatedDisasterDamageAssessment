@@ -95,6 +95,8 @@ def intent_detector(query: str, session_id: str | None = None):
         if turn.get("content")
     ) or "No prior conversation."
 
+    print(history_text)
+
     messages = [
         {"role": "system", "content": system_prompt},
         {
@@ -138,6 +140,8 @@ def intent_detector(query: str, session_id: str | None = None):
     except Exception:
         fixed = content.replace("'", '"')
         parsed = IntentDetection.model_validate(json.loads(fixed))
+
+    print(parsed)
 
     if parsed.intent == "Hurricane_Harvey_CSV/Data_Related" and parsed.confidence >= 0.3:
         response_payload = query_csv_agent_with_history(query, history)

@@ -14,3 +14,4 @@ pydantic
 langchain_experimental
 langchain_nvidia_ai_endpoints
 pandas
+langchain_community

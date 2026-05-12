@@ -115,7 +115,7 @@ def _target_damage_column(text: str) -> str:
 
 
 def _extract_location_phrase(text: str) -> str | None:
-    match = re.search(r"\b(?:on|in|at|for)\s+([a-z0-9 ,.'-]+)$", text.strip(), re.IGNORECASE)
+    match = re.search(r"\b(?:on|in|at|for)\s+([a-z0-9 ,.'-]+)[?.!]*$", text.strip(), re.IGNORECASE)
     if not match:
         return None
     return match.group(1).strip(" ?.")
@@ -241,7 +241,9 @@ def _rewrite_followup_query(query: str, history: list[dict] | None = None) -> st
 
 def query_csv_agent_with_history(query: str, history: list[dict] | None = None):
     rewritten_query = _rewrite_followup_query(query, history)
+    print(rewritten_query)
     deterministic = _resolve_structured_count_query(rewritten_query)
+    print(deterministic)
     if deterministic is not None:
         return deterministic
     return {

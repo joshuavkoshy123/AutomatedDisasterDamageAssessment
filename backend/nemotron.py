@@ -16,7 +16,7 @@ import requests
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = ""
+NIM_API_KEY = "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"
 
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
