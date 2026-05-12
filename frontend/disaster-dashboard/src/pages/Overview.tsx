@@ -8,13 +8,17 @@ import {
   LinearProgress,
   Chip,
   Divider,
+  Tooltip,
 } from '@mui/material';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { COLORS } from '../theme';
 import { mockMetrics, mockDisasterEvent } from '../data/mockData';
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const DAMAGE_COLORS = {
   'no-damage': COLORS.accent.green,
@@ -35,6 +39,17 @@ const DAMAGE_LABELS = {
 export const Overview: React.FC = () => {
   const event = mockDisasterEvent;
   const total = event.totalBuildings;
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/auth');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
 
   return (
     <Box sx={{ p: 3, height: '100%', overflowY: 'auto' }}>
@@ -79,6 +94,41 @@ export const Overview: React.FC = () => {
             border: `1px solid ${COLORS.accent.orange}44`,
           }}
         />
+
+        {/* Logout button */}
+        <Tooltip title="Sign out" placement="left">
+          <Box
+            component="button"
+            onClick={handleLogout}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.75,
+              px: 1.5,
+              py: 0.75,
+              border: '1px solid',
+              borderColor: `${COLORS.text.muted}44`,
+              borderRadius: 1,
+              backgroundColor: 'transparent',
+              color: COLORS.text.muted,
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.6rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              flexShrink: 0,
+              transition: 'all 0.2s',
+              '&:hover': {
+                borderColor: COLORS.accent.red,
+                color: COLORS.accent.red,
+                backgroundColor: `${COLORS.accent.red}0f`,
+              },
+            }}
+          >
+            <LogoutIcon sx={{ fontSize: '0.85rem' }} />
+            Sign Out
+          </Box>
+        </Tooltip>
       </Box>
 
       {/* KPI Cards */}

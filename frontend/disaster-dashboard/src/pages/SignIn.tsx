@@ -468,10 +468,6 @@ export const AuthPage: React.FC = () => {
                 </div>
 
                 <div className="auth-field">
-                  <div className="auth-field-row">
-                    <label>Access Code</label>
-                    <a href="#" className="auth-forgot">Reset code →</a>
-                  </div>
                   <div className="auth-input-wrap">
                     <IconLock />
                     <input
@@ -497,13 +493,9 @@ export const AuthPage: React.FC = () => {
 
                 <div className="auth-divider">
                   <div className="auth-divider-line" />
-                  <div className="auth-divider-text">or</div>
+                  <div className="auth-divider-text">if forgot password: email support@agency.gov</div>
                   <div className="auth-divider-line" />
                 </div>
-
-                <button type="button" className="auth-btn-ghost sso">
-                  <IconSSO /> Continue with Agency SSO
-                </button>
               </form>
             )}
 
@@ -511,7 +503,8 @@ export const AuthPage: React.FC = () => {
             {mode === 'signup' && (
               <>
                 <div className="auth-steps">
-                  <div className="auth-step">
+                  <div
+                     className="auth-step">
                     <div className={`auth-step-num ${signupStep === 1 ? 'active' : 'done'}`}>
                       {signupStep > 1 ? '✓' : '1'}
                     </div>
