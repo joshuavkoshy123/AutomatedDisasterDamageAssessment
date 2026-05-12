@@ -15,9 +15,6 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 csv_path = REPO_ROOT / "building_crops" / "_predictions" / "final_results.csv"
 df = pd.read_csv(csv_path)
 
-# remove expected column from df
-df = df.drop(columns=["expected"])
-
 # Initialize the Nemotron model (use a text-capable one)
 llm = ChatNVIDIA(
     model="nvidia/nemotron-nano-12b-v2-vl",   # or another supported Nemotron instruct model
@@ -96,11 +93,26 @@ def _extract_coordinates_for_location(location_phrase: str | None) -> Optional[d
 
 def _canonical_damage_label(text: str) -> str | None:
     q = text.lower()
-    if "no damage" in q or "no-damage" in q:
+    if (
+        "no damage" in q
+        or "no-damage" in q
+        or "no damages" in q
+        or "no-damages" in q
+    ):
         return "no-damage"
-    if "minor damage" in q or "minor-damage" in q:
+    if (
+        "minor damage" in q
+        or "minor-damage" in q
+        or "minor damages" in q
+        or "minor-damages" in q
+    ):
         return "minor-damage"
-    if "major damage" in q or "major-damage" in q:
+    if (
+        "major damage" in q
+        or "major-damage" in q
+        or "major damages" in q
+        or "major-damages" in q
+    ):
         return "major-damage"
     if "destroyed" in q:
         return "destroyed"
@@ -115,7 +127,8 @@ def _target_damage_column(text: str) -> str:
 
 
 def _extract_location_phrase(text: str) -> str | None:
-    match = re.search(r"\b(?:on|in|at|for)\s+([a-z0-9 ,.'-]+)$", text.strip(), re.IGNORECASE)
+    normalized = text.strip().rstrip("?.!,;:")
+    match = re.search(r"\b(?:on|in|at|for)\s+([a-z0-9 ,.'-]+)$", normalized, re.IGNORECASE)
     if not match:
         return None
     return match.group(1).strip(" ?.")
@@ -190,10 +203,16 @@ def _rewrite_followup_query(query: str, history: list[dict] | None = None) -> st
     damage_terms = {
         "no damage": "no-damage",
         "no-damage": "no-damage",
+        "no damages": "no-damage",
+        "no-damages": "no-damage",
         "minor damage": "minor-damage",
         "minor-damage": "minor-damage",
+        "minor damages": "minor-damage",
+        "minor-damages": "minor-damage",
         "major damage": "major-damage",
         "major-damage": "major-damage",
+        "major damages": "major-damage",
+        "major-damages": "major-damage",
         "destroyed": "destroyed",
     }
 

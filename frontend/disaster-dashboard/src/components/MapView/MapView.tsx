@@ -13,6 +13,12 @@ import type { ChatMessage } from '../../types';
 import { doc, DocumentData, DocumentSnapshot, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { GeoJsonObject } from 'geojson';
+function createSessionId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -75,6 +81,7 @@ export const MapView: React.FC = () => {
   const imageLayersRef     = useRef<L.ImageOverlay[]>([]);
   const cloudinaryUrlsRef  = useRef<Record<string, string>>({});
   const chatBottomRef      = useRef<HTMLDivElement>(null);
+  const sessionIdRef       = useRef<string>(createSessionId());
 
   // Map state
   const [imageMode, setImageMode] = useState<'pre' | 'post'>('post');
@@ -245,7 +252,8 @@ export const MapView: React.FC = () => {
 
     // Make API Request to GET model response
     const params = new URLSearchParams({
-      q: text
+      q: text,
+      session_id: sessionIdRef.current,
     });
 
     //fetch('https://automateddisasterdamageassessmentserver.onrender.com/query');
