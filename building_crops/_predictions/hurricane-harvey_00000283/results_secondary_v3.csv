@@ -1,2 +1,0 @@
-uid,expected,predicted,match,status,latency_s,pre_path,post_path,raw_excerpt
-4d1259b8-3c6d-44d7-a160-ab56a01e500f,destroyed,no-damage,False,200,1.382,building_crops\hurricane-harvey_00000283_pre_disaster\building_0.png,building_crops\hurricane-harvey_00000283_post_disaster\building_0.png,"{""uid"":""4d1259b8-3c6d-44d7-a160-ab56a01e500f"",""damage_present"":""no"",""evidence"":""No visible new damage""}"

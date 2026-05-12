@@ -1,4 +1,0 @@
-uid,expected,predicted,match,status,latency_s,pre_path,post_path,raw_excerpt
-1c3a70b2-eefa-43f0-937b-21791e3870d2,no-damage,no-damage,True,200,1.199,building_crops\hurricane-harvey_00000161_pre_disaster\building_2.png,building_crops\hurricane-harvey_00000161_post_disaster\building_2.png,"```json {""uid"":""1c3a70b2-eefa-43f0-937b-21791e3870d2"",""subtype"":""no-damage""} ```"
-658037fe-57ef-4eb2-b07e-0d0414a7a03a,no-damage,no-damage,True,200,2.270,building_crops\hurricane-harvey_00000161_pre_disaster\building_1.png,building_crops\hurricane-harvey_00000161_post_disaster\building_1.png,"```json {""uid"":""658037fe-57ef-4eb2-b07e-0d0414a7a03a"",""subtype"":""no-damage""} ```"
-be0a40a6-e14e-4c82-8a54-360364dce89f,no-damage,no-damage,True,200,1.949,building_crops\hurricane-harvey_00000161_pre_disaster\building_0.png,building_crops\hurricane-harvey_00000161_post_disaster\building_0.png,"{""uid"":""be0a40a6-e14e-4c82-8a54-360364dce89f"",""subtype"":""no-damage""}"
