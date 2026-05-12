@@ -1,14 +1,10 @@
 fastapi
 uvicorn[standard]
 psycopg2-binary
-opencv-python
 numpy
 requests
 python-dotenv
-google-genai
 cloudinary
-openai
-pillow
 langchain
 pydantic
 langchain_experimental
