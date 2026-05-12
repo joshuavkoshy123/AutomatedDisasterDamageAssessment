@@ -382,7 +382,7 @@ export function UploadPage() {
       //
       // Example (POST to your VPS / FastAPI / Express endpoint):
       //
-      const res = await fetch("https://automateddisasterdamageassessmentserver.onrender.com/query/evaluate/", {
+      const res = await fetch("https://automateddisasterdamageassessmentserver.onrender.com/evaluate/", {
         method: "POST",
         body: formData,
       });
