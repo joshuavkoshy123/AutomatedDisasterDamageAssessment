@@ -12,11 +12,14 @@ from collections import Counter
 from typing import Dict, Tuple, Optional, List, NamedTuple, Any
 
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # =========================
 # USER CONFIG (hardcode)
 # =========================
-NIM_API_KEY = ""
+NIM_API_KEY = os.getenv("NVIDIA_API_KEY", "")
 
 
 INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
