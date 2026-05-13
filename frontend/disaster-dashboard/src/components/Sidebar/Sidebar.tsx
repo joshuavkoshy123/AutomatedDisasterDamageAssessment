@@ -15,7 +15,6 @@ import {
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { COLORS } from '../../theme';
 
@@ -31,12 +30,6 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   {
     path: '/',
-    label: 'Overview',
-    icon: <HomeOutlinedIcon />,
-    description: 'Mission summary',
-  },
-  {
-    path: '/map',
     label: 'Geo Map',
     icon: <MapOutlinedIcon />,
     description: 'Aerial imagery & overlays',
@@ -46,12 +39,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Evaluation',
     icon: <AssessmentOutlinedIcon />,
     description: 'Model vs FEMA metrics',
-  },
-  {
-    path: '/chatbot',
-    label: 'Query Bot',
-    icon: <ChatBubbleOutlineIcon />,
-    description: 'Ask about damage impacts',
   },
   {
     path: '/upload',
@@ -251,13 +238,13 @@ export const Sidebar: React.FC = () => {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
           <Typography sx={{ fontSize: '0.7rem', color: COLORS.text.label }}>Buildings</Typography>
           <Typography sx={{ fontSize: '0.7rem', color: COLORS.text.primary, fontFamily: '"Space Mono", monospace' }}>
-            1,247
+            7,715
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
           <Typography sx={{ fontSize: '0.7rem', color: COLORS.text.label }}>Model Acc.</Typography>
           <Typography sx={{ fontSize: '0.7rem', color: COLORS.accent.green, fontFamily: '"Space Mono", monospace' }}>
-            78.5%
+            62.8%
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -6,15 +6,13 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Navbar } from './components/Navbar/Navbar';
 import { EvaluationPanel } from './components/EvaluationPanel/EvaluationPanel';
 import { MapView } from './components/MapView/MapView';
-import { ChatBot } from './components/ChatBot/ChatBot';
-import { Overview } from './pages/Overview';
 import { AuthPage } from './pages/SignIn';
 import { UploadPage } from './pages/upload';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const PAGE_META: Record<string, { title: string; subtitle: string }> = {
-  '/':           { title: 'Mission Overview',  subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
-  '/map':        { title: 'Geospatial Map',     subtitle: 'Interactive aerial imagery + damage overlays' },
+  // '/':           { title: 'Mission Overview',  subtitle: 'Hurricane Harvey · Houston, TX · 2017' },
+  '/':        { title: 'Geospatial Map',     subtitle: 'Interactive aerial imagery + damage overlays' },
   '/evaluation': { title: 'Model Evaluation',   subtitle: 'VLM predictions vs FEMA ground truth labels' },
   '/chatbot':    { title: 'Query Bot',           subtitle: 'Natural language damage impact queries' },
   '/upload':    { title: 'Upload',           subtitle: 'Upload Pre and Post Disaster Images' },
@@ -45,7 +43,7 @@ function App() {
           <Route path="/login" element={<AuthPage />} />
 
           {/* Protected routes — redirect to /login if not signed in */}
-          <Route
+          {/* <Route
             path="/"
             element={
               <ProtectedRoute>
@@ -54,12 +52,12 @@ function App() {
                 </AppLayout>
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
-            path="/map"
+            path="/"
             element={
               <ProtectedRoute>
-                <AppLayout path="/map">
+                <AppLayout path="/">
                   <MapView />
                 </AppLayout>
               </ProtectedRoute>
@@ -75,7 +73,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/chatbot"
             element={
               <ProtectedRoute>
@@ -84,7 +82,7 @@ function App() {
                 </AppLayout>
               </ProtectedRoute>
             }
-          />
+          /> */}
 	  <Route
             path="/upload"
             element={
