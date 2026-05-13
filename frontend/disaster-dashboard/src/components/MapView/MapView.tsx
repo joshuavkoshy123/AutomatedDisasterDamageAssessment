@@ -242,20 +242,43 @@ export const MapView: React.FC = () => {
     setMessages(prev => [...prev, userMsg, loadingBotMsg]);
     setInput('');
 
+    let data;
+
     // Make API Request to GET model response
     const params = new URLSearchParams({
       q: text,
       session_id: sessionIdRef.current,
     });
 
-    //fetch('https://automateddisasterdamageassessmentserver.onrender.com/query');
-    const response = await fetch(`https://automateddisasterdamageassessmentserver.onrender.com/query?${params.toString()}`,
-                                  {
-                                    method: 'GET'
-                                  }
-    );
-    const data = await response.json();
-
+    try {
+      const response = await fetch(`https://automateddisasterdamageassessmentserver.onrender.com/query?${params.toString()}`,
+                                    {
+                                      method: 'GET'
+                                    }
+      );
+      if (!response.ok){
+        throw new Error();
+      }
+      data = await response.json();
+    } catch {
+      // retry once
+      try {
+        const response = await fetch(`https://automateddisasterdamageassessmentserver.onrender.com/query?${params.toString()}`,
+                                    {
+                                      method: 'GET'
+                                    }
+        );
+        if (!response.ok){
+          throw new Error();
+        }
+        data = await response.json();
+      } catch {
+        data = {
+          response: "An error occurred. Please try again.",
+          coordinates: null
+        };
+      }
+    }
 
     const modelOutput = data.response;
 
