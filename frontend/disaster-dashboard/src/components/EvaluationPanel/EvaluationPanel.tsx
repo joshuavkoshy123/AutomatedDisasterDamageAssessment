@@ -18,12 +18,9 @@ import {
   Tooltip,
   Paper,
 } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { COLORS } from '../../theme';
-//import { mockMetrics, mockConfusionMatrix, mockBuildings } from '../../data/mockData';
-import { mockBuildings } from '../../data/mockData';
 import { mockMetrics, mockConfusionMatrix } from '../../data/trueData';
 import type { DamageLevel } from '../../types';
 
@@ -410,155 +407,9 @@ const PerClassTable: React.FC = () => {
   );
 };
 
-// ── Sample Predictions Table ──────────────────────────────────────────────────
-const PredictionsTable: React.FC = () => {
-  const [filter, setFilter] = useState<'all' | 'correct' | 'wrong'>('all');
-
-  const filtered = mockBuildings.filter((b) => {
-    if (filter === 'correct') return b.modelPrediction === b.femaLabel;
-    if (filter === 'wrong') return b.modelPrediction !== b.femaLabel;
-    return true;
-  });
-
-  return (
-    <Box>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-        {(['all', 'correct', 'wrong'] as const).map((f) => (
-          <Chip
-            key={f}
-            label={f.toUpperCase()}
-            size="small"
-            onClick={() => setFilter(f)}
-            sx={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.62rem',
-              cursor: 'pointer',
-              backgroundColor:
-                filter === f
-                  ? f === 'correct'
-                    ? `${COLORS.accent.green}22`
-                    : f === 'wrong'
-                    ? `${COLORS.accent.red}22`
-                    : `${COLORS.accent.cyan}22`
-                  : COLORS.bg.dark,
-              color:
-                filter === f
-                  ? f === 'correct'
-                    ? COLORS.accent.green
-                    : f === 'wrong'
-                    ? COLORS.accent.red
-                    : COLORS.accent.cyan
-                  : COLORS.text.secondary,
-              border: `1px solid ${
-                filter === f
-                  ? f === 'correct'
-                    ? COLORS.accent.green
-                    : f === 'wrong'
-                    ? COLORS.accent.red
-                    : COLORS.accent.cyan
-                  : COLORS.bg.border
-              }44`,
-            }}
-          />
-        ))}
-        <Typography sx={{ fontSize: '0.72rem', color: COLORS.text.muted, alignSelf: 'center', ml: 1 }}>
-          {filtered.length} records
-        </Typography>
-      </Box>
-
-      <TableContainer component={Paper} elevation={0} sx={{ backgroundColor: 'transparent', maxHeight: 360 }}>
-        <Table size="small" stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>Address</TableCell>
-              <TableCell align="center">Model Prediction</TableCell>
-              <TableCell align="center">FEMA Label</TableCell>
-              <TableCell align="center">Match</TableCell>
-              <TableCell align="right">Confidence</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filtered.map((b) => {
-              const isCorrect = b.modelPrediction === b.femaLabel;
-              return (
-                <TableRow
-                  key={b.id}
-                  sx={{ '&:hover': { backgroundColor: `${COLORS.bg.elevated}80` } }}
-                >
-                  <TableCell>
-                    <Typography sx={{ fontSize: '0.72rem', color: COLORS.text.secondary, maxWidth: 260 }} noWrap>
-                      {b.address}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Chip
-                      label={DAMAGE_LABELS[b.modelPrediction]}
-                      size="small"
-                      sx={{
-                        height: 20,
-                        fontSize: '0.6rem',
-                        fontFamily: '"Space Mono", monospace',
-                        backgroundColor: `${DAMAGE_COLORS[b.modelPrediction]}18`,
-                        color: DAMAGE_COLORS[b.modelPrediction],
-                        '& .MuiChip-label': { px: 0.8 },
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell align="center">
-                    <Chip
-                      label={DAMAGE_LABELS[b.femaLabel]}
-                      size="small"
-                      sx={{
-                        height: 20,
-                        fontSize: '0.6rem',
-                        fontFamily: '"Space Mono", monospace',
-                        backgroundColor: `${DAMAGE_COLORS[b.femaLabel]}18`,
-                        color: DAMAGE_COLORS[b.femaLabel],
-                        '& .MuiChip-label': { px: 0.8 },
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell align="center">
-                    {isCorrect ? (
-                      <CheckCircleOutlineIcon sx={{ fontSize: 16, color: COLORS.accent.green }} />
-                    ) : (
-                      <Box sx={{ width: 16, height: 16, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Box sx={{ width: 12, height: 2, backgroundColor: COLORS.accent.red, borderRadius: 1 }} />
-                      </Box>
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      sx={{
-                        fontFamily: '"Space Mono", monospace',
-                        fontSize: '0.72rem',
-                        color:
-                          b.confidence >= 0.8
-                            ? COLORS.accent.green
-                            : b.confidence >= 0.55
-                            ? COLORS.accent.yellow
-                            : COLORS.accent.red,
-                      }}
-                    >
-                      {(b.confidence * 100).toFixed(0)}%
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
-  );
-};
-
 // ── Main Evaluation Panel ─────────────────────────────────────────────────────
 export const EvaluationPanel: React.FC = () => {
   const [tab, setTab] = useState(0);
-
-  //const correctCount = mockBuildings.filter((b) => b.modelPrediction === b.femaLabel).length;
-  //const incorrectCount = mockBuildings.length - correctCount;
 
   const correctCount = 3642 + 51 + 1155;
   const incorrectCount = 7715 - correctCount;
@@ -652,14 +503,12 @@ export const EvaluationPanel: React.FC = () => {
           >
             <Tab icon={<GridViewIcon sx={{ fontSize: 14 }} />} iconPosition="start" label="Confusion Matrix" />
             <Tab icon={<TimelineIcon sx={{ fontSize: 14 }} />} iconPosition="start" label="Per-Class Metrics" />
-            <Tab icon={<CheckCircleOutlineIcon sx={{ fontSize: 14 }} />} iconPosition="start" label="Sample Predictions" />
           </Tabs>
         </Box>
 
         <CardContent sx={{ p: 3 }}>
           {tab === 0 && <ConfusionMatrix />}
           {tab === 1 && <PerClassTable />}
-          {tab === 2 && <PredictionsTable />}
         </CardContent>
       </Card>
 
