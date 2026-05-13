@@ -10,7 +10,10 @@ import {
 } from '@mui/material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { COLORS } from '../../theme';
+import { useAuth } from '../../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   title: string;
@@ -18,6 +21,9 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', {
     hour12: false,
@@ -25,6 +31,15 @@ export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
     minute: '2-digit',
     second: '2-digit',
   });
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/auth');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
 
   return (
     <AppBar
@@ -57,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
           )}
         </Box>
 
-        {/* Status badges */}
+        {/* Right-side cluster */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Chip
             label="VLM: ONLINE"
@@ -85,7 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
               '& .MuiChip-label': { px: 1 },
             }}
           />
-
           <Typography
             sx={{
               fontFamily: '"Space Mono", monospace',
@@ -97,7 +111,6 @@ export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
           >
             {timeStr}
           </Typography>
-
           <Tooltip title="Notifications">
             <IconButton size="small" sx={{ color: COLORS.text.secondary }}>
               <NotificationsOutlinedIcon fontSize="small" />
@@ -107,6 +120,41 @@ export const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
             <IconButton size="small" sx={{ color: COLORS.text.secondary }}>
               <HelpOutlineIcon fontSize="small" />
             </IconButton>
+          </Tooltip>
+
+          {/* Logout */}
+          <Tooltip title="Sign out" placement="bottom">
+            <Box
+              component="button"
+              onClick={handleLogout}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0.75,
+                px: 1.5,
+                py: 0.75,
+                border: '1px solid',
+                borderColor: `${COLORS.text.muted}44`,
+                borderRadius: 1,
+                backgroundColor: 'transparent',
+                color: COLORS.text.muted,
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.6rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                flexShrink: 0,
+                transition: 'all 0.2s',
+                '&:hover': {
+                  borderColor: COLORS.accent.red,
+                  color: COLORS.accent.red,
+                  backgroundColor: `${COLORS.accent.red}0f`,
+                },
+              }}
+            >
+              <LogoutIcon sx={{ fontSize: '0.85rem' }} />
+              Sign Out
+            </Box>
           </Tooltip>
         </Box>
       </Toolbar>
