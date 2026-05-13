@@ -301,12 +301,6 @@ const IconBadge = () => (
     <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
   </svg>
 );
-const IconSSO = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-  </svg>
-);
 
 /* ── Helpers ── */
 function pwStrength(pw: string) {
@@ -468,10 +462,6 @@ export const AuthPage: React.FC = () => {
                 </div>
 
                 <div className="auth-field">
-                  <div className="auth-field-row">
-                    <label>Access Code</label>
-                    <a href="#" className="auth-forgot">Reset code →</a>
-                  </div>
                   <div className="auth-input-wrap">
                     <IconLock />
                     <input
@@ -497,13 +487,9 @@ export const AuthPage: React.FC = () => {
 
                 <div className="auth-divider">
                   <div className="auth-divider-line" />
-                  <div className="auth-divider-text">or</div>
+                  <div className="auth-divider-text">if forgot password: email support@agency.gov</div>
                   <div className="auth-divider-line" />
                 </div>
-
-                <button type="button" className="auth-btn-ghost sso">
-                  <IconSSO /> Continue with Agency SSO
-                </button>
               </form>
             )}
 
@@ -511,7 +497,8 @@ export const AuthPage: React.FC = () => {
             {mode === 'signup' && (
               <>
                 <div className="auth-steps">
-                  <div className="auth-step">
+                  <div
+                     className="auth-step">
                     <div className={`auth-step-num ${signupStep === 1 ? 'active' : 'done'}`}>
                       {signupStep > 1 ? '✓' : '1'}
                     </div>
